@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>svn2svn: Replaying SVN History - Nynim.org</title>
+  <meta name="author" content="Tony Duckles">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  <meta name="keywords" content="svn2svn, subversion replay, svn replay, subversion replay filter, svn replay filter, subversion replicate, svn replicate, subversion replicate filter, svn replicate filter">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6748678-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Nynim.org</a></h1>
+  
+    <h2>Tony Duckles on programming, photography, and general geekery</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:nynim.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+Svn2svn: Replaying SVN History
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-01T21:00:00-06:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/blog/2012/02/01/svn2svn-replaying-svn-history/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>I&#8217;ve found myself in a (potentially unique) situation where we have a
+<em>gi-normous</em> <a href="http://subversion.apache.org/">Subversion</a> repository at work and
+we&#8217;ve been exploring ways on how to trim off some of the fat but still keep all
+the logical history so that we could still use things like <code>svn blame</code> to
+drill-down into code-history. Our central SVN repository is some 4-5 years old
+and a whopping 300GB+ on-disk. (Yowza!) What we&#8217;d really like to do is dump
+just the <code>/trunk</code> history out to a new repo and roll forward with that, ditching
+any historical baggage from old topic branches (<code>/branches</code>). The trouble is,
+I haven&#8217;t been able to find any tools to do this.</p>
+
+<p>So, I ended-up writing my own tool to do this. But, first, some back-story&#8230;</p>
+
+<!-- more -->
+
+
+<h2>Existing Tools</h2>
+
+<p>In doing some searches for variations around &#8221;<em>svn repo filter</em>&#8221;, I found a lot
+of people pointing to the &#8221;<a href="http://svnbook.red-bean.com/en/1.7/svn.ref.svndumpfilter.html">svndumpfilter</a>&#8221;
+utility as the tool-of-choice. Sadly, it doesn&#8217;t seem to be quite &#8220;smart&#8221; enough
+to do what I&#8217;d like it to do. It seems to be aimed at (namely) filtering an
+<code>svnadmin dump</code> stream, taking only certain paths in the SVN &#8220;filesystem&#8221;. That
+works fine if you&#8217;re trying to take an isolated folder/project from the repository,
+but if that folder/project has ever been merged into from any paths <em>outside</em> of
+the target filter path, then things fall apart. The &#8220;trouble&#8221; are the copy-from&#8217;s&#8230;</p>
+
+<p>For example, say that you have a repo with a typical trunk/tags/branches setup.
+Say you create a new topic branch (e.g. <code>svn copy /trunk /branches/my-fix &amp;&amp; svn co /branches/my-fix</code>)
+and happily work on your sandboxed branch. Say that you decide to rename some of
+the pre-existing files/folders, so you run the appropriate <code>svn move</code> commands and
+happily commit those changes to your branch. Once everything is working happily,
+you go to merge these changes into <code>/trunk</code> and that all works great. After the
+commmit, if you run a <code>svn log -v -l1 /trunk</code> to look at the details of the most
+recent commit to trunk, you&#8217;ll see something like this:</p>
+
+<pre><code>A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
+</code></pre>
+
+<p>&#8230;which only describes the (top-level) folder rename, not any add/modifications/renames/etc
+that might have happened <em>inside</em> that folder on the branch. At the full repo-level,
+SVN can get away with just doing a &#8221;<code>svn copy</code>&#8221; from the branch to trunk, so that
+when you do an &#8221;<code>svn log</code>&#8221; on the new &#8220;RenamedFolder&#8221; path it will walk from trunk
+back into that originating topic branch and follow the rename (copy or move) that
+happened within.</p>
+
+<p>The <code>svnadmin dump</code> will show the same &#8220;copy-from&#8221; action as <code>svn log -v</code> did,
+since the dump stream will need to be able to recreate that same ancestry. When
+<code>svndumpfilter</code> sees this, it throws up its hands and returns an error because
+it doesn&#8217;t know how to <em>recreate</em> the logical history that happened between
+when that branch originally forked from trunk versus the final state of that branch.
+That is, assuming the copy-from path even has any ancestry back to trunk&#8230;</p>
+
+<h2>If You Want Something Done Right&#8230;</h2>
+
+<p>In my searches, I had found a few folks that had hacked together there own
+solutions. None of those quite fit my problem at hand, so naturally I decided
+to start working on my own solution.</p>
+
+<p>The closest fit I found was a project named &#8221;<a href="http://code.google.com/p/svn2svn/">svn2svn</a>&#8221;
+hosted on Google Code. It had copied parts of the &#8221;<a href="https://bitbucket.org/andialbrecht/hgsvn/overview">hgsvn</a>&#8221;
+project (<em>sychronizing between Mercurial and Subversion repositories</em>) and
+slapped them together in a way that worked for the original author&#8217;s needs.
+It used &#8221;<code>svn log</code>&#8221; to walk the entire history of a given path in a source
+repository and then manually replayed those changes to a working-copy of
+some path in a target repository. Revision by revision, it would replay
+the delta, recreating the history of just the source path in the target repo.
+This was <em>oh-so-close</em> to what I wanted, except that it also didn&#8217;t correctly
+handle the copy-from case. And the repository I really wanted to replay was
+<em>littered</em> with copy-from&#8217;s, since I&#8217;m trying to replay just the history from
+<code>/trunk</code> and we create topic-branches for <em>everything</em>.</p>
+
+<h2>Enter svn2svn</h2>
+
+<p>So, I started with the <a href="http://code.google.com/p/svn2svn/">svn2svn</a> project,
+got familiar with the code, and started hacking to extend the code to solve my
+problem at hand.</p>
+
+<p>The net-result is my own (nearly completely rewritten) take on the problem,
+a project which I&#8217;m also calling <strong><a href="/projects/svn2svn/">svn2svn</a></strong>.</p>
+
+<p>I&#8217;ve made several enhancements to the original script:</p>
+
+<ul>
+<li><p><strong>Full ancestry (copy-from) support.</strong> This was the tricky part. It took
+several different iterations/rewrites to get something which worked for all
+the different edge-cases. The general idea here is that we can use <code>svn log</code>
+to walk backwards through the ancestry on a copy-from case: if we can trace
+back our ancestry to same source path we&#8217;re replaying, then we can do an <code>svn
+copy</code> from that original parent and then do <code>svn export</code> to update the
+contents of all the files to match the final copy-from verison. There&#8217;s also
+some extra recursion that needs to happen here, to handle cases where child
+files got renamed inside of a parent-renamed folder. There are other
+edge-cases like files getting replaced inside a parent-renamed folder.</p></li>
+<li><p><strong>Use revprops for source-tracking and resume support.</strong> Subversion has
+revision properties, key+value pairs that are associated with a particular
+revision/commit. I&#8217;m setting some <code>svn2svn:*</code> rev-props to track the source
+URL, source repository UUID (i.e. in case source URL now points at a
+physically different repo), and source revision #. This is all needed for
+proper resume support, since for the ancestry support we have to maintain a
+mapping-table of source_rev -> target_rev, so that when we find a copy-from
+from some revision # in the source repo, we can map this to the equivalent
+revision # in the target repo so we can do an equivalent <code>svn copy</code> command.</p></li>
+<li><p><strong>Better verbosity output, and optional debug output.</strong> As I was playing with
+the rewrite, I quickly found I needed better debug output, to see which shell
+commands were being run and ot display just general debug/status messages as
+we do all this new complicate ancestry-walking logic. Bonus: the debugging
+messages have colored output, using <a href="http://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes">ANSI escape
+codes</a> which all
+self-respecting terminal emulators should respect.</p></li>
+<li><p><strong>All commits (including initial import) go through the same central
+code-path, which means we could run a (client-side) pre-commit script to
+scrub the contents of the target working-copy before each commit.</strong> This is
+where the power of doing the manual replay of changes really starts to shine.
+We have full control over the pending changes, which means that if your
+original trunk history had some files which you didn&#8217;t want to transition
+into the new replayed repo then you could easily <code>svn rm</code> those files from
+the working-copy before the commit happens. That could be as simple as
+excluding certain fixed paths, but it could be a lot more flexible like
+searching the entire working-copy tree and removing any files which match
+a certain file-name. Heck, you could even modify the working-copy
+file-contents at this point&#8230;or add brand-new files if you want. We&#8217;re
+<em>replaying</em> the SVN history here will full control of the target content,
+so this opens a lot of interesting options.</p></li>
+</ul>
+
+
+<p>Check-out the <a href="/projects/svn2svn/">svn2svn project page</a> for more details.</p>
+
+<p>Also, I have the project mirrored on <a href="https://github.com/tonyduckles/svn2svn">Github</a>
+so please feel free to fork the project, send me issues/enhancements, or
+send me pull-requests for any tweaks you&#8217;ve made.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-01T21:00:00-06:00" pubdate data-updated="true">Feb 1<span>st</span>, 2012</time>
+
+
+<span class="categories">
+  Categories:
+  
+    <a class='category' href='/blog/categories/coding/'>Coding</a>
+  
+</span>
+
+
+
+
+<span class="tags">
+  Tags:
+  
+    <a class='tag' href='/blog/tags/python/'>python</a>, <a class='tag' href='/blog/tags/svn/'>svn</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/" target="_blank">+1</a>
+    
+  
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/12/20/home-sweet-home/" title="Previous Post: Home Sweet $HOME">&laquo; Home Sweet $HOME</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/" title="Next Post: All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
+</section>
+
+<section>
+  <h1>Follow Me</h1>
+  <p id='followme'>
+    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
+    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
+    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
+    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
+    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
+    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
+    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
+    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
+    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
+    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
+    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
+    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
+    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
+    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
+  </p>
+</section>
+
+<section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/blog/2011/12/20/home-sweet-home/">Home Sweet $HOME</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/19/hello-octopress/">Hello Octopress!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2007/05/19/del-icio-us-director/">del.icio.us director</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/05/zfs-the-last-word-in-filesystems/">ZFS: The Last Word in Filesystems</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>On GitHub</h1>
+  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+
+
+
+<section class="tag-cloud">
+  <h1>Tags</h1>
+  <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> 
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tony Duckles -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nynim';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/';
+        var disqus_url = 'http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+</body>
+</html>

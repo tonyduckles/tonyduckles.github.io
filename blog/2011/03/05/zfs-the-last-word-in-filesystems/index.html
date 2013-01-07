@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ZFS: The Last Word in Filesystems - Nynim.org</title>
+  <meta name="author" content="Tony Duckles">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  <meta name="keywords" content="zfs, filesystems, raid, hardware, hard drives, checksums, snapshots">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6748678-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Nynim.org</a></h1>
+  
+    <h2>Tony Duckles on programming, photography, and general geekery</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:nynim.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+ZFS: The Last Word in Filesystems
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-05T18:56:01-06:00" pubdate data-updated="true">Mar 5<span>th</span>, 2011</time>
+         &bull; <a rel="bookmark" href="/blog/2011/03/05/zfs-the-last-word-in-filesystems/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>I&#8217;ve been spending a lot of time lately reading-up on different options since
+my current home file-server setup is slowly running out of disk-space. Sure, I
+could just throw some new HDD&#8217;s in there, but the inner-geek in me really
+wants to setup a new system that has both redundancy and scalability &#8211;
+something more robust and future-proof.</p>
+
+<p>In reading through different online forums, the topic of ZFS-based systems
+kept coming-up again and again. I had heard the term &#8220;ZFS&#8221; thrown around
+before but I had never really spent the time to read-up on it. It&#8217;s just
+another filesystem, right? How fancy can it be?</p>
+
+<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &#8221;<em>just another
+filesystem</em>&#8220;&#8230;</p>
+
+<!-- more -->
+
+
+<ul>
+<li>It&#8217;s a
+<a href="http://blogs.sun.com/bonwick/entry/rampant_layering_violation">filesystem, logical volume manager, and software RAID subsystem</a>
+all wrapped-up into one end-to-end system.</li>
+<li>It does <a href="http://blogs.sun.com/bonwick/entry/zfs_end_to_end_data">end-to-end checksums</a>,
+making sure the raw data read off the physical disk matches the same data
+that was previously written to disk.</li>
+<li>It is a transactional file system, which guarantees a consistent on-disk
+data-state even with catastrophic failures like a power loss.</li>
+<li>You can do data scrubbing online, as opposed to the normal Linux solution
+of ext2/ext3/ext4 where you can only &#8220;fsck&#8221; a filesystem offline.</li>
+<li>It uses a copy-on-write strategy which makes doing filesystem snapshot&#8217;ing
+a breeze. For example, you could setup a cronjob to take nightly snapshots
+of your filesystem to facilitate incremental backups, i.e. allowing you to
+go back in time and recover old-states of files.</li>
+<li>It has <a href="http://blogs.sun.com/bonwick/entry/raid_z">RAID-Z support</a>, which
+is similar to RAID-5/RAID-6 except without the potentially-fatal
+&#8221;<em>RAID-5 write hole</em>&#8221; problem, in part thanks to the copy-on-write strategy.</li>
+<li>You can <a href="http://dlc.sun.com/osol/docs/content/ZFSADMIN/gbchx.html">replicate ZFS filesystems</a>
+(<code>zfs send</code> and <code>zfs receive</code>), snapshots and all, making it dead-easy to
+backup ZFS filesystems to remote machines.</li>
+</ul>
+
+
+<p>Very, very cool stuff! The more I read about it, the more I wanted it for my
+next-generation file-server solution. In particular, I really love the idea of
+end-to-end checksums. I want to make darn sure that the OS can realize when
+the disks are serving up garbage-data or if somehow bits have mysteriously
+been corrupted on-disk (as unlikely as that might be).</p>
+
+<p>In reading about all these various historical problems that ZFS sets out to
+address, I&#8217;m really surprised that more OSes haven&#8217;t tried to adopt superior
+filesystem technology. The classic problem for so many Windows-users seems to
+be that their installs get &#8220;corrupt&#8221;, likely usually due to folks forcibly
+powering-off their computers before the hard-drives have a chance to flush
+their write-buffer to disk. And then folks get to cope with BSOD&#8217;s or broken
+Windows installs. Sad times for everyone. Filesystems seem like such a
+foundational part of the OS that you&#8217;d expect companies would spend the time
+to make them as robust as possible. I read some rumors that Apple was planning
+to incorporate ZFS into OSX a few years back, but apparently that fell apart
+for some reason. Sad&#8230;</p>
+
+<p>Kudos to the Sun folks for designing such a fantastic filesystem and then
+open-sourcing it!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-05T18:56:01-06:00" pubdate data-updated="true">Mar 5<span>th</span>, 2011</time>
+
+
+<span class="categories">
+  Categories:
+  
+    <a class='category' href='/blog/categories/storage/'>Storage</a>, <a class='category' href='/blog/categories/unix/'>UNIX</a>
+  
+</span>
+
+
+
+
+<span class="tags">
+  Tags:
+  
+    <a class='tag' href='/blog/tags/storage/'>storage</a>, <a class='tag' href='/blog/tags/zfs/'>zfs</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/" target="_blank">+1</a>
+    
+  
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/" title="Previous Post: Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync">&laquo; Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/12/19/hello-octopress/" title="Next Post: Hello Octopress!">Hello Octopress! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
+</section>
+
+<section>
+  <h1>Follow Me</h1>
+  <p id='followme'>
+    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
+    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
+    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
+    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
+    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
+    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
+    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
+    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
+    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
+    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
+    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
+    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
+    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
+    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
+  </p>
+</section>
+
+<section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/19/hello-octopress/">Hello Octopress!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2007/09/11/simple-off-site-backups/">Simple Off-Site Backups...?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/20/home-sweet-home/">Home Sweet $HOME</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>On GitHub</h1>
+  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+
+
+
+<section class="tag-cloud">
+  <h1>Tags</h1>
+  <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> 
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tony Duckles -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nynim';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/';
+        var disqus_url = 'http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+</body>
+</html>

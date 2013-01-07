@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows - Nynim.org</title>
+  <meta name="author" content="Tony Duckles">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  <meta name="keywords" content="cygwin kerberos, cygwin kerberos ssh, cygwin heimdal ssh">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6748678-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Nynim.org</a></h1>
+  
+    <h2>Tony Duckles on programming, photography, and general geekery</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:nynim.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+Using Kerberos (GSSAPI) Auth With OpenSSH in Cygwin on Windows
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-25T17:19:00-05:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+         &bull; <a rel="bookmark" href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>On my Windows machines at both work and home, I like to run <a href="http://www.cygwin.com/">Cygwin</a>
+to get a UNIX-like environment on Windows: <code>screen</code>, <code>ssh</code>, <code>grep</code>, etc.
+I use SSH&#8217;s <a href="https://hkn.eecs.berkeley.edu/~dhsu/ssh_public_key_howto.html">public key authentication</a>
+pretty extensively to get password-less authentication to make it dead-easy
+(and quick!) to SSH around to different machines.</p>
+
+<p>On some of the non-UNIX machines at work, I couldn&#8217;t get SSH public-key auth
+working, but those machines <em>do</em> support Kerberos auth (binding to Active
+Directory). Based on my Google searches, all I could find were articles talking
+about compiling OpenSSH from source to get a working Kerberos-enabled version
+of OpenSSH on Cygwin. So, that made it sound like it would be a pain to get
+this working.  But, after doing some more playing around, I found this was
+actually easy to setup once you understand the various pieces. Since I couldn&#8217;t
+find any helpful information online when I first tried to get this working, I
+figured I&#8217;d write up what worked for me in case that helps other people.</p>
+
+<!-- more -->
+
+
+<h2>Installation</h2>
+
+<ol>
+<li>Install the <code>openssh</code> package.</li>
+<li>Install the <code>heimdal</code> package, which supplies an implementation of the
+   Kerberos tools. This gets you things like <code>kinit</code>, <code>klist</code>, etc.</li>
+<li>You may want to configure your <code>/etc/krb5.conf</code> file to list a default realm
+   so that you don&#8217;t need to specify it when doing the <code>kinit</code> later on:
+   
+<figure class='code'><figcaption>/etc/krb5.conf </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="o">[</span>libdefaults<span class="o">]</span>
+</div><div class='line'>       <span class="nv">default_realm</span> <span class="o">=</span> REALM_NAME
+</div></pre></td></tr></table></div></figure>
+
+   Alternatively, rather than fiddling with <code>/etc/krb5.conf</code> on my Cygwin
+   install, I opted to use the <code>KRB5&#95;CONFIG</code> environment variable (see the
+   <code>kinit</code> manpage) to point to a <code>~/.krb5.conf</code> file instead to keep my
+   Kerberos config confined to my <code>$HOME</code> directory (since I <a href="/blog/2011/12/20/home-sweet-home">keepmy $HOME directory under version control</a>).</li>
+<li>Modify your <code>~/.ssh/config</code> file to enable GSSAPI authentication:
+   
+<figure class='code'><figcaption>~/.ssh/config </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>GSSAPIAuthentication yes</div></pre></td></tr></table></div></figure>
+</li>
+</ol>
+
+
+<h2>Usage</h2>
+
+<ul>
+<li>Before you <code>ssh</code> to a remote machine where you want to use Kerberized credentials,
+simply run <code>kinit</code> to acquire a new Kerberos ticket. (Pro tip: you can run <code>klist</code> to
+list all your active Kerberos tickets and their expiration dates.)</li>
+<li>With the <code>GSSAPIAuthentication</code> directive in your <code>.ssh/config</code> file, that should
+enable GSSAPI authentication for free. There&#8217;s also a <code>-K</code> param to the <code>ssh</code> command
+which talks about enabling GSSAPI auth and forwarding, which I&#8217;m not entirely sure
+what that controls, but my guess is that it&#8217;s for opting into GSSAPI auth mode if
+you <strong>don&#8217;t</strong> have that directive in your <code>.ssh/config</code> file.</li>
+</ul>
+
+
+<p>I hope this helps someone else who&#8217;s trying to get Kerberized SSH working on Cygwin.
+Happy SSH&#8217;ing!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-25T17:19:00-05:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+
+
+<span class="categories">
+  Categories:
+  
+    <a class='category' href='/blog/categories/unix/'>UNIX</a>
+  
+</span>
+
+
+
+
+<span class="tags">
+  Tags:
+  
+    <a class='tag' href='/blog/tags/cygwin/'>cygwin</a>, <a class='tag' href='/blog/tags/kerberos/'>kerberos</a>, <a class='tag' href='/blog/tags/ssh/'>ssh</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/" target="_blank">+1</a>
+    
+  
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/" title="Previous Post: All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS">&laquo; All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
+</section>
+
+<section>
+  <h1>Follow Me</h1>
+  <p id='followme'>
+    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
+    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
+    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
+    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
+    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
+    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
+    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
+    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
+    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
+    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
+    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
+    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
+    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
+    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
+  </p>
+</section>
+
+<section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/20/home-sweet-home/">Home Sweet $HOME</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/19/hello-octopress/">Hello Octopress!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>On GitHub</h1>
+  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+
+
+
+<section class="tag-cloud">
+  <h1>Tags</h1>
+  <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> 
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tony Duckles -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nynim';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/';
+        var disqus_url = 'http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+</body>
+</html>

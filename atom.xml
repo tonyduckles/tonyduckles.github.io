@@ -1,0 +1,1287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Nynim.org]]></title>
+  <link href="http://nynim.org/atom.xml" rel="self"/>
+  <link href="http://nynim.org/"/>
+  <updated>2013-01-05T13:11:27-06:00</updated>
+  <id>http://nynim.org/</id>
+  <author>
+    <name><![CDATA[Tony Duckles]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows]]></title>
+<link href="http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/"/>
+<updated>2012-08-25T17:19:00-05:00</updated>
+<id>http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows</id>
+<category term="UNIX" />
+
+      <content type="html"><![CDATA[<p>On my Windows machines at both work and home, I like to run <a href="http://www.cygwin.com/">Cygwin</a>
+to get a UNIX-like environment on Windows: <code>screen</code>, <code>ssh</code>, <code>grep</code>, etc.
+I use SSH&#8217;s <a href="https://hkn.eecs.berkeley.edu/~dhsu/ssh_public_key_howto.html">public key authentication</a>
+pretty extensively to get password-less authentication to make it dead-easy
+(and quick!) to SSH around to different machines.</p>
+
+<p>On some of the non-UNIX machines at work, I couldn&#8217;t get SSH public-key auth
+working, but those machines <em>do</em> support Kerberos auth (binding to Active
+Directory). Based on my Google searches, all I could find were articles talking
+about compiling OpenSSH from source to get a working Kerberos-enabled version
+of OpenSSH on Cygwin. So, that made it sound like it would be a pain to get
+this working.  But, after doing some more playing around, I found this was
+actually easy to setup once you understand the various pieces. Since I couldn&#8217;t
+find any helpful information online when I first tried to get this working, I
+figured I&#8217;d write up what worked for me in case that helps other people.</p>
+
+<!-- more -->
+
+
+<h2>Installation</h2>
+
+<ol>
+<li>Install the <code>openssh</code> package.</li>
+<li>Install the <code>heimdal</code> package, which supplies an implementation of the
+   Kerberos tools. This gets you things like <code>kinit</code>, <code>klist</code>, etc.</li>
+<li>You may want to configure your <code>/etc/krb5.conf</code> file to list a default realm
+   so that you don&#8217;t need to specify it when doing the <code>kinit</code> later on:
+   
+<figure class='code'><figcaption>/etc/krb5.conf </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="o">[</span>libdefaults<span class="o">]</span>
+</div><div class='line'>       <span class="nv">default_realm</span> <span class="o">=</span> REALM_NAME
+</div></pre></td></tr></table></div></figure>
+
+   Alternatively, rather than fiddling with <code>/etc/krb5.conf</code> on my Cygwin
+   install, I opted to use the <code>KRB5&#95;CONFIG</code> environment variable (see the
+   <code>kinit</code> manpage) to point to a <code>~/.krb5.conf</code> file instead to keep my
+   Kerberos config confined to my <code>$HOME</code> directory (since I <a href="http://nynim.org/blog/2011/12/20/home-sweet-home">keepmy $HOME directory under version control</a>).</li>
+<li>Modify your <code>~/.ssh/config</code> file to enable GSSAPI authentication:
+   
+<figure class='code'><figcaption>~/.ssh/config </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>GSSAPIAuthentication yes</div></pre></td></tr></table></div></figure>
+</li>
+</ol>
+
+
+<h2>Usage</h2>
+
+<ul>
+<li>Before you <code>ssh</code> to a remote machine where you want to use Kerberized credentials,
+simply run <code>kinit</code> to acquire a new Kerberos ticket. (Pro tip: you can run <code>klist</code> to
+list all your active Kerberos tickets and their expiration dates.)</li>
+<li>With the <code>GSSAPIAuthentication</code> directive in your <code>.ssh/config</code> file, that should
+enable GSSAPI authentication for free. There&#8217;s also a <code>-K</code> param to the <code>ssh</code> command
+which talks about enabling GSSAPI auth and forwarding, which I&#8217;m not entirely sure
+what that controls, but my guess is that it&#8217;s for opting into GSSAPI auth mode if
+you <strong>don&#8217;t</strong> have that directive in your <code>.ssh/config</code> file.</li>
+</ul>
+
+
+<p>I hope this helps someone else who&#8217;s trying to get Kerberized SSH working on Cygwin.
+Happy SSH&#8217;ing!</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS]]></title>
+<link href="http://nynim.org/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/"/>
+<updated>2012-06-04T21:25:00-05:00</updated>
+<id>http://nynim.org/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs</id>
+<category term="Hardware" /><category term="Storage" />
+
+      <content type="html"><![CDATA[<p>Just over a year ago, I built a new home file-server since I was quickly
+outgrowing my existing storage capacity. Rather than just dropping more HDD&#8217;s
+into the existing hardware I had running, I succumbed to geek techno-lust and
+opted to explore new technologies: <strong>ZFS</strong> and <strong>VMWare ESXi</strong>.</p>
+
+<!-- more -->
+
+
+<h2>Going Virtualized</h2>
+
+<p>Virtualization is huge in the enterprise-space these days. After talking with
+some friends from work about what kind of virtualization strategies we&#8217;re using
+for our in-house datacenter, I became enticed by the idea of running a &#8220;bare metal&#8221;
+<a href="http://en.wikipedia.org/wiki/Hypervisor">hypervisor</a>: install virtualization
+software as the primary OS on the physical hardware and spinning up VM&#8217;s for
+different logical needs.</p>
+
+<p>Over the years, I&#8217;ve accumulated a fair amount of old computers. Back in the day,
+those extra computers gave me an opportunity to try-out new OSes/software: playing
+with different Ubuntu configurations, tinkering with different *BSD flavors, etc.
+But once my spare-time dried up, all that old computer hardware just became <em>clutter</em>
+taking-up space and it seemed like such a pain to fire up an old computer just to
+tinker with some new configuration.</p>
+
+<p>So, going virtualizations held a lot of (obvious) appeal to me: minimize my physical
+hardware (less power consumed, less physical space, etc) while letting me easily
+tinker with new configurations.</p>
+
+<h2>ZFS-Powered</h2>
+
+<p>Based on <a href="http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/">previous research</a>,
+I knew that I really wanted to move to some kind of <strong>ZFS-backed</strong> storage solution,
+to protect/maintain the integrity of my ever-increasing digital collection.</p>
+
+<p>After following the &#8220;zfs-discuss&#8221; mailing list for a few months, given my simple
+home-needs a simple mirrored configuration (along with proper backups) seemed like
+the <a href="http://constantin.glez.de/blog/2010/01/home-server-raid-greed-and-why-mirroring-still-best">best solution</a>.
+If I need more space, I can expand horizontally: add another pair of drives (of
+whatever size is appropriate) to expand my pool. It was this easy expansion
+which pushed me towards a mirrored configuration rather than a RAID-Z style
+configuration. The trouble with RAID-Z is that you can&#8217;t add new devices to a
+vdev after you&#8217;ve initially created it; the only way to &#8220;grow&#8221; a RAID-Z vdev is
+by replacing <strong>all</strong> of the individual drives (<em>one at a time, waiting for each
+to resilver</em>) and setting the &#8220;autoexpand&#8221; property on the pool so that ZFS
+will auto-expand the pool based on the new common maximum size of each of the
+individual drives. But, that&#8217;s a whole lot of moving parts (<em>pun intended</em>) and
+replacing all the drives in the pool isn&#8217;t quite my idea of easy expansion.
+Mirroring just seems easier, given that I don&#8217;t need lots of individual drives
+for raw performance reasons.</p>
+
+<h2>All-in-One Solution</h2>
+
+<p>Somewhere along the line in my research, I stumbled upon <a href="http://www.napp-it.org/napp-it/all-in-one/index_en.html"><strong>napp-it</strong></a>,
+which introduced me to this idea of an &#8220;all-in-one&#8221; fileserver: using VMWare
+ESXi as a bare-metal hypervisor, having a Solaris-based VM running on the ESXi
+datastore which will control the mass-storage ZFS pool, and then exporting an
+NFS share back out to ESXi so that you can store the bulk of the VMs on
+ZFS-backed storage. It&#8217;s a bit complicated at first glance, but it performs
+great (thanks to hardware-passthrough) and lets me easily manage the bulk of my
+VMs on ZFS-backed storage.</p>
+
+<p>To make use of ESXi&#8217;s hardware-passthrough support, you need to run server-grade
+hardware. For me, that meant going with an Xeon-based CPU with appropriate motherboard
+chipset. But that also gave other server-grade wins like using ECC memory and IPMI
+(easy remote-control of the console, which is <em>awesome</em>).</p>
+
+<h2>Shopping List</h2>
+
+<p>Here is the hardware I ended-up going with:</p>
+
+<ul>
+<li><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16819117225">Intel Xeon X3440 Lynfield 2.53GHz</a></li>
+<li><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16813182211">Supermicro X8SIL-F-O</a></li>
+<li>2x <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16820139077">Kingston 4GB DDR3 ECC Unbuffered</a></li>
+<li><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16816117157">Intel SASUC8I (LSI 1068E) SATA/SAS card</a></li>
+<li><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16817151088">SeaSonic X650 Gold PSU</a></li>
+<li><a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16811352004">Fractal Design Define R3 Mid-Tower Case</a></li>
+<li>2x <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16822145475">2TB Hitachi Deskstar 5K3000</a> (primary pool)</li>
+<li>2x <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16822145475">2TB Hitachi Deskstar 5K3000</a> (backup pool)</li>
+<li>2x <a href="http://www.newegg.com/Product/Product.aspx?Item=N82E16822145475">2TB Hitachi Deskstar 5K3000</a> (off-site backup pool)</li>
+</ul>
+
+
+<p>The Xeon chipset was needed for some of the hardware passthrough features in
+ESXi, e.g. passing through the HBA card directly to the Solaris-based VM so
+that ZFS can have direct access to the physical drives.</p>
+
+<p>The 650W power-supply ended-up being way more than I needed. The server uses
+less than 100W when idle, though that PSU is still quite efficient even with
+such low power draw.</p>
+
+<h2>Looking Back</h2>
+
+<p>The setup has been awesome so far. Even just getting to play around with
+server-grade hardware has been an eye-opening experience. Being able to
+remote-control the server, e.g. mounting an ISO remotely over the Java-based
+client and installing the OS on the computer all without needing to hook-up a
+keyboard or monitor, has been a revelation.  (<em>Goodbye old CRT monitor that I
+used to keep around for my server closet!</em>)</p>
+
+<p>I love the flexibility of ESXi. I have an Ubuntu VM for development/testing, a
+FreeBSD VM for running Mediatomb (PS3 media-server), etc. It even let me play
+around with different Solaris flavors while trying to figure out what OS I
+wanted to use for the ZFS back-end. It&#8217;s just so easy to spin-up new VMs to
+test an idea or just to play around.</p>
+
+<p>I started out using Solaris 11 Edition (free), which ran fine for the better
+part of a year. I tried upgrading to Solaris 11/11 earlier this year only to
+find that Solaris 11 apparently doesn&#8217;t play nicely with ESXi. From there, I
+jumped over to using <a href="http://openindiana.org/">OpenIndiana</a>, the open-source
+spin-off from the now-defunct OpenSolaris lineage.</p>
+
+<p>ZFS has been a huge win too. Taking nightly snapshots makes it dead-easy to
+look back in time to see how day was several months ago. The snapshots also
+make it easy to send the incremental differences to a backup pool. The built-in
+CIFS server makes it dead-easy to mount the shares on Windows, and the
+filesystem snapshots are easily accessible via the &#8220;Previous Versions&#8221; tab in
+Windows Explorer. I also really love the idea of the &#8220;pool&#8221;. I can create
+different filesystems to group/organize my data (e.g. photos vs. music vs.
+backups), enable compression on a per-filesystem basis, set quotas per
+filesystem, etc.</p>
+
+<p>I really love the &#8220;all-in-one&#8221; idea: ZFS reliability combined with the
+flexibility of VMWare ESXi.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[svn2svn: Replaying SVN History]]></title>
+<link href="http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/"/>
+<updated>2012-02-01T21:00:00-06:00</updated>
+<id>http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history</id>
+<category term="Coding" />
+
+      <content type="html"><![CDATA[<p>I&#8217;ve found myself in a (potentially unique) situation where we have a
+<em>gi-normous</em> <a href="http://subversion.apache.org/">Subversion</a> repository at work and
+we&#8217;ve been exploring ways on how to trim off some of the fat but still keep all
+the logical history so that we could still use things like <code>svn blame</code> to
+drill-down into code-history. Our central SVN repository is some 4-5 years old
+and a whopping 300GB+ on-disk. (Yowza!) What we&#8217;d really like to do is dump
+just the <code>/trunk</code> history out to a new repo and roll forward with that, ditching
+any historical baggage from old topic branches (<code>/branches</code>). The trouble is,
+I haven&#8217;t been able to find any tools to do this.</p>
+
+<p>So, I ended-up writing my own tool to do this. But, first, some back-story&#8230;</p>
+
+<!-- more -->
+
+
+<h2>Existing Tools</h2>
+
+<p>In doing some searches for variations around &#8221;<em>svn repo filter</em>&#8221;, I found a lot
+of people pointing to the &#8221;<a href="http://svnbook.red-bean.com/en/1.7/svn.ref.svndumpfilter.html">svndumpfilter</a>&#8221;
+utility as the tool-of-choice. Sadly, it doesn&#8217;t seem to be quite &#8220;smart&#8221; enough
+to do what I&#8217;d like it to do. It seems to be aimed at (namely) filtering an
+<code>svnadmin dump</code> stream, taking only certain paths in the SVN &#8220;filesystem&#8221;. That
+works fine if you&#8217;re trying to take an isolated folder/project from the repository,
+but if that folder/project has ever been merged into from any paths <em>outside</em> of
+the target filter path, then things fall apart. The &#8220;trouble&#8221; are the copy-from&#8217;s&#8230;</p>
+
+<p>For example, say that you have a repo with a typical trunk/tags/branches setup.
+Say you create a new topic branch (e.g. <code>svn copy /trunk /branches/my-fix &amp;&amp; svn co /branches/my-fix</code>)
+and happily work on your sandboxed branch. Say that you decide to rename some of
+the pre-existing files/folders, so you run the appropriate <code>svn move</code> commands and
+happily commit those changes to your branch. Once everything is working happily,
+you go to merge these changes into <code>/trunk</code> and that all works great. After the
+commmit, if you run a <code>svn log -v -l1 /trunk</code> to look at the details of the most
+recent commit to trunk, you&#8217;ll see something like this:</p>
+
+<pre><code>A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
+</code></pre>
+
+<p>&#8230;which only describes the (top-level) folder rename, not any add/modifications/renames/etc
+that might have happened <em>inside</em> that folder on the branch. At the full repo-level,
+SVN can get away with just doing a &#8221;<code>svn copy</code>&#8221; from the branch to trunk, so that
+when you do an &#8221;<code>svn log</code>&#8221; on the new &#8220;RenamedFolder&#8221; path it will walk from trunk
+back into that originating topic branch and follow the rename (copy or move) that
+happened within.</p>
+
+<p>The <code>svnadmin dump</code> will show the same &#8220;copy-from&#8221; action as <code>svn log -v</code> did,
+since the dump stream will need to be able to recreate that same ancestry. When
+<code>svndumpfilter</code> sees this, it throws up its hands and returns an error because
+it doesn&#8217;t know how to <em>recreate</em> the logical history that happened between
+when that branch originally forked from trunk versus the final state of that branch.
+That is, assuming the copy-from path even has any ancestry back to trunk&#8230;</p>
+
+<h2>If You Want Something Done Right&#8230;</h2>
+
+<p>In my searches, I had found a few folks that had hacked together there own
+solutions. None of those quite fit my problem at hand, so naturally I decided
+to start working on my own solution.</p>
+
+<p>The closest fit I found was a project named &#8221;<a href="http://code.google.com/p/svn2svn/">svn2svn</a>&#8221;
+hosted on Google Code. It had copied parts of the &#8221;<a href="https://bitbucket.org/andialbrecht/hgsvn/overview">hgsvn</a>&#8221;
+project (<em>sychronizing between Mercurial and Subversion repositories</em>) and
+slapped them together in a way that worked for the original author&#8217;s needs.
+It used &#8221;<code>svn log</code>&#8221; to walk the entire history of a given path in a source
+repository and then manually replayed those changes to a working-copy of
+some path in a target repository. Revision by revision, it would replay
+the delta, recreating the history of just the source path in the target repo.
+This was <em>oh-so-close</em> to what I wanted, except that it also didn&#8217;t correctly
+handle the copy-from case. And the repository I really wanted to replay was
+<em>littered</em> with copy-from&#8217;s, since I&#8217;m trying to replay just the history from
+<code>/trunk</code> and we create topic-branches for <em>everything</em>.</p>
+
+<h2>Enter svn2svn</h2>
+
+<p>So, I started with the <a href="http://code.google.com/p/svn2svn/">svn2svn</a> project,
+got familiar with the code, and started hacking to extend the code to solve my
+problem at hand.</p>
+
+<p>The net-result is my own (nearly completely rewritten) take on the problem,
+a project which I&#8217;m also calling <strong><a href="http://nynim.org/projects/svn2svn/">svn2svn</a></strong>.</p>
+
+<p>I&#8217;ve made several enhancements to the original script:</p>
+
+<ul>
+<li><p><strong>Full ancestry (copy-from) support.</strong> This was the tricky part. It took
+several different iterations/rewrites to get something which worked for all
+the different edge-cases. The general idea here is that we can use <code>svn log</code>
+to walk backwards through the ancestry on a copy-from case: if we can trace
+back our ancestry to same source path we&#8217;re replaying, then we can do an <code>svn
+copy</code> from that original parent and then do <code>svn export</code> to update the
+contents of all the files to match the final copy-from verison. There&#8217;s also
+some extra recursion that needs to happen here, to handle cases where child
+files got renamed inside of a parent-renamed folder. There are other
+edge-cases like files getting replaced inside a parent-renamed folder.</p></li>
+<li><p><strong>Use revprops for source-tracking and resume support.</strong> Subversion has
+revision properties, key+value pairs that are associated with a particular
+revision/commit. I&#8217;m setting some <code>svn2svn:*</code> rev-props to track the source
+URL, source repository UUID (i.e. in case source URL now points at a
+physically different repo), and source revision #. This is all needed for
+proper resume support, since for the ancestry support we have to maintain a
+mapping-table of source_rev -> target_rev, so that when we find a copy-from
+from some revision # in the source repo, we can map this to the equivalent
+revision # in the target repo so we can do an equivalent <code>svn copy</code> command.</p></li>
+<li><p><strong>Better verbosity output, and optional debug output.</strong> As I was playing with
+the rewrite, I quickly found I needed better debug output, to see which shell
+commands were being run and ot display just general debug/status messages as
+we do all this new complicate ancestry-walking logic. Bonus: the debugging
+messages have colored output, using <a href="http://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes">ANSI escape
+codes</a> which all
+self-respecting terminal emulators should respect.</p></li>
+<li><p><strong>All commits (including initial import) go through the same central
+code-path, which means we could run a (client-side) pre-commit script to
+scrub the contents of the target working-copy before each commit.</strong> This is
+where the power of doing the manual replay of changes really starts to shine.
+We have full control over the pending changes, which means that if your
+original trunk history had some files which you didn&#8217;t want to transition
+into the new replayed repo then you could easily <code>svn rm</code> those files from
+the working-copy before the commit happens. That could be as simple as
+excluding certain fixed paths, but it could be a lot more flexible like
+searching the entire working-copy tree and removing any files which match
+a certain file-name. Heck, you could even modify the working-copy
+file-contents at this point&#8230;or add brand-new files if you want. We&#8217;re
+<em>replaying</em> the SVN history here will full control of the target content,
+so this opens a lot of interesting options.</p></li>
+</ul>
+
+
+<p>Check-out the <a href="http://nynim.org/projects/svn2svn/">svn2svn project page</a> for more details.</p>
+
+<p>Also, I have the project mirrored on <a href="https://github.com/tonyduckles/svn2svn">Github</a>
+so please feel free to fork the project, send me issues/enhancements, or
+send me pull-requests for any tweaks you&#8217;ve made.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Home Sweet $HOME]]></title>
+<link href="http://nynim.org/blog/2011/12/20/home-sweet-home/"/>
+<updated>2011-12-20T19:35:00-06:00</updated>
+<id>http://nynim.org/blog/2011/12/20/home-sweet-home</id>
+<category term="UNIX" />
+
+      <content type="html"><![CDATA[<p><img class="right" src="http://nynim.org/images/2011/12/img_Terminal.png" width="180" height="180">
+About a year and a half ago, I stumbled upon Ryan Tomayko&#8217;s &#8221;<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>&#8221;
+repository on Github. The moment I saw it, I thought it was a <em>great</em> idea:
+the idea of managing all your <code>$HOME</code> directory &#8220;dot-files&#8221; in a Git repository.
+That single idea led me on a personal crusade to better understand all the
+different configuration files that live in your UNIX (<em>Linux, Mac OSX, etc.</em>)
+home directory, and the end-result was creating my own &#8221;<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>&#8221;
+Git repository for synchronizing/tracking/deploying my dot-files between the
+various machines I work upon.</p>
+
+<p>I learned a lot of neat stuff along the way, including some config options
+which I never knew were there and some tricks which really optimized my
+command-line shell experience.</p>
+
+<!-- more -->
+
+
+<h2>Using Git</h2>
+
+<p>I found it to be a very natural fit to use Git to track the edits to my dot-files.
+It makes it dead-easy to see what changes I&#8217;ve made since the last commit and
+easy to commit those changes and push them to a central Git repository.</p>
+
+<p>Git also makes it dead-easy to &#8220;bootstrap&#8221; my dot-files environment into a
+brand-new home directory:</p>
+
+<figure class='code'><figcaption>Dotfiles bootstrap </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c"># Clone the repo into ~/dotfiles/</span>
+</div><div class='line'>git clone git://github.com/tonyduckles/dotfiles.git dotfiles
+</div><div class='line'><span class="c"># Move all the contents (including .git, but excluding the specal &quot;.&quot; and &quot;..&quot; directories)</span>
+</div><div class='line'><span class="c"># into ~, overwriting any pre-existing files</span>
+</div><div class='line'>mv dotfiles/.??* .
+</div><div class='line'><span class="c"># Clean-up the now-orphaned ~/dotfiles/ directory</span>
+</div><div class='line'>rm -rf dotfiles
+</div></pre></td></tr></table></div></figure>
+
+
+<h2>~/bin/</h2>
+
+<p>Ryan has a <code>~/bin/</code> directory in his dot-files repo with all kinds of nifty
+little utilities.</p>
+
+<p>There&#8217;s a bunch of great Git-related utilities in there, e.g.:</p>
+
+<ul>
+<li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-up">git-up</a> - Like <code>git-pull</code> but show a short and sexy log of changes immediately after merging (git-up) or rebasing (git-reup).</li>
+<li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-incoming">git-incoming</a>/<a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-outgoing">git-outgoing</a> - Shows difference between the current branch vs. the upstream branch.</li>
+</ul>
+
+
+<p>And there&#8217;s also some great general-purpose utilities in there, e.g.:</p>
+
+<ul>
+<li><a href="http://betterthangrep.com/">ack</a> - A tool like <code>grep</code>, designed for programmers with large trees of heterogeneous source code. Very handy for recursive file-searching.</li>
+</ul>
+
+
+<h2>~/.gitconfig</h2>
+
+<p>Ryan has lots of nifty tricks in his <code>.gitconfig</code> file, tying in short-cuts for
+calling the helper utilities in <code>~/bin/</code>. Also, you can setup Git to use ANSI
+colors for various sub-commands (diff, status), which is <em>very</em> handy.</p>
+
+<h2>~/.inputrc</h2>
+
+<p>There&#8217;s a lot of neat options in the <code>.inputrc</code> file, for binding key-sequences
+to various command-line options. For example:</p>
+
+<figure class='code'><figcaption>.inputrc snippet </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'>C-n: <span class="nb">history</span>-search-forward
+</div><div class='line'>C-p: <span class="nb">history</span>-search-backward
+</div></pre></td></tr></table></div></figure>
+
+
+<p>&#8230;are the <strong>two single-most time-saving key-bindings</strong> that I stumbled upon. This
+lets you type a partial command and then use <code>Ctrl-n</code> and <code>Ctrl-p</code> to
+completion-match the rest of the line based on your command history. Awesome!</p>
+
+<p>I find this incredibly useful to completion-match hostnames for <code>ssh</code> commands or other
+longer commands which I often type. Completion-matching for-the-win!</p>
+
+<h2>Vim: .vimrc and .vim/</h2>
+
+<p>Before setting out on this project, I had used Vi some but hadn&#8217;t really explored
+(or understood) the full-power that was <a href="http://www.vim.org/">Vim</a>. Digging
+into the <code>.vimrc</code> file, reading-up on all the various config options, and
+digging into all the <code>~/.vim/</code> plugins which Ryan had was an eye-opening
+experience. I came to realize just how much you could extend and customize
+Vim to meet your needs. Simple things like getting syntax-highlighting
+and color-schemes set by default made for an oh-so-much more pleasant
+Vim experience.</p>
+
+<p>This all led me to learning a lot more about Vim and becoming much more proficent
+using Vim. It&#8217;s now my text-based editor of choice. Once you get to know the
+key-bindings and the various commands, the command-chaining that you can do
+in Vim is incredibly powerful.</p>
+
+<h2>Sharing is Fun!</h2>
+
+<p>If you&#8217;re at all interesting in learning more about customizing your Unix
+shell environment, looking at other people&#8217;s dot-files is a great learning
+experience. And publishing your dot-files on Github is a great way to
+share your shell-environment with the world so that others can learn
+and explore.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Hello Octopress!]]></title>
+<link href="http://nynim.org/blog/2011/12/19/hello-octopress/"/>
+<updated>2011-12-19T21:53:00-06:00</updated>
+<id>http://nynim.org/blog/2011/12/19/hello-octopress</id>
+<category term="Blog" />
+
+      <content type="html"><![CDATA[<p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:</p>
+
+<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p><footer><strong>Octopress</strong> <cite><a href='https://github.com/imathis/octopress'>github.com/imathis/octopress/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Sweet indeed! The more I read about it, the more intrigued I became. After a
+few hours spent exploring the code, importing the posts/pages from my Wordpress
+install into Octopress, and tweaking the default theme to my taste, I&#8217;ve taken
+the jump and moved my site over to using the Octopress platform.</p>
+
+<!-- more -->
+
+
+<p>Octopress is a simple blogging platform aimed at hackers. It&#8217;s built around the
+<a href="http://github.com/mojombo/jekyll">Jekyll</a> engine, which is the blog-aware static
+site generator that powers <a href="http://pages.github.com/">Github Pages</a>.  The &#8220;database&#8221;
+for the site is simply a collection of flat text files using
+<a href="http://daringfireball.net/projects/markdown/">Markdown</a> (or Textile) mark-up. You
+can setup either &#8220;posts&#8221; or &#8220;pages&#8221;, all as you&#8217;d expect. When you&#8217;re ready to
+deploy, you use <code>Rakefile</code> automation to &#8220;generate&#8221; the static site files.</p>
+
+<p>It also has a great default theme (IMHO) &#8211; very clean and simple &#8211; which was
+actually my original attraction. It was only after reading more about the project
+that I realized it had huge appeal to my geek-side too.</p>
+
+<h2>Why Octopress?</h2>
+
+<p>It was Matt Gemmell&#8217;s &#8221;<a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a>&#8221;
+post which resonated the most with me:</p>
+
+<blockquote><p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.</p><footer><strong>Matt Gemmell</strong></footer></blockquote>
+
+
+<p>For what I do with my website, Wordpress was overkill. It ended-up being
+<em>Yet-Another-Thing-I-Needed-To-Maintain-Security-Patches-On&trade;</em>.</p>
+
+<p>I was immediately attracted to the simplicity which Octopress provides: editing
+pages and posts as plain-text text-files, all static files so no security-patches
+or vulnerabilities to worry about, and easily portable and backup-able. It combines
+a lot of things which I have grown to love: I can keep all my content in a Git
+repository so that I can publish from multiple locations (<em>if need be</em>), I can
+work on the site entirely in text (<code>vim</code> + <code>screen</code>), and it&#8217;s dead easy to
+deploy and backup.</p>
+
+<h2>Migrating from Wordpress</h2>
+
+<p>It really didn&#8217;t take that long to migrate everything over to Octopress.</p>
+
+<p>It took a few hours to get a cleaned-up import of my old Wordpress content.
+Based on the recommendation of others, I used <a href="https://github.com/thomasf/exitwp">exitwp</a>
+to create Jekyll-style posts based on my Wordpress content. This went fine for
+the most part, but there were some parts in the Wordpress export file that I
+needed to fiddle to keep the <code>exitwp</code> script from crashing. The end result
+was that I had a directory full of simple <code>*.markdown</code> files which represented
+all the content from my Wordpress site. I spent a few hours going through those
+files and cleaning up the Markdown syntax until it matched what I wanted. Some
+of my original Wordpress posts were a mixture of Wordpress mark-up and raw HTML,
+and that threw the <code>exitwp</code> parser for a loop in some places. It did a great
+job overall though.</p>
+
+<p>From there, I spent some time looking through the guts of the Octopress source
+code getting acquainted with things and seeing how I might be able to fiddle
+with some of its inner fiddly-bits. It&#8217;s written with native support for
+customization, trying to keep a clear separation between the core &#8220;code&#8221; of
+the site (<em>which can be overwritten during a future upgrade</em>) versus any
+&#8220;customization&#8221; files which the user might make changes too. It&#8217;s a fantastic
+paradigm and one that you don&#8217;t often see too much of in projects.</p>
+
+<p>Last but not least, I spent some time tweaking the theme to my tasting (<em>&#8230;a
+bit of pepper here, a bit of salt there&#8230;</em>). As I mentioned above, it natively
+carves out files which are earmarked for user-customizations, where you can
+tweak the CSS (SASS), colors, page/sidebar dimensions, etc. It&#8217;s all just
+extremely well-thought-out and a joy to use and extend.</p>
+
+<h2>Ending Thoughts</h2>
+
+<p>This has been a fun pet project for me.  It&#8217;s the first time I&#8217;ve used a Ruby environment.
+It&#8217;s also the first time I&#8217;ve played with <a href="http://sass-lang.com/">SASS</a> (<code>*.scss</code>),
+and boy is it going to be hard to go back to writing plain-old CSS.
+SASS&#8217;s <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">color functions</a>
+are ridiculously slick: being able to do things like <code>desaturate(lighten($nav-bg, 8), 15)</code>
+in a <code>*.scss</code> file is <em>awesome</em> and makes tweaking a site&#8217;s color-scheme
+oh-so-much easier.</p>
+
+<p>I&#8217;m a bit sad to have lost the lifestream (<a href="https://github.com/dcramer/wp-lifestream/">wp-lifestream</a>)
+functionality from my old Wordpress site. But then again I&#8217;m already doing
+full exports of most of my lifestream&#8217;d websites (Google Reader, Delicious),
+so it might not be too hard to generate static lifestream pages using a
+<code>cronjob</code> or something. That&#8217;s a project for another day&#8230;</p>
+
+<h2>Useful Links</h2>
+
+<ul>
+<li><a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a> -
+A fantastic and well-thought-out introduction and overview of Octopress.</li>
+<li><a href="http://zanshin.net/2011/08/11/switching-to-octopress/">Switching to Octopress</a> -
+A great end-to-end summary of the Wordpress-to-Octopress transition process.</li>
+<li><a href="http://www.meatleasing.com/octopress-hidden-features/index.html">Octopress Hidden Features</a> -
+Pointing out some of subtle features of Octopress.</li>
+<li><a href="https://github.com/thomasf/exitwp">exitwp</a> -
+Tool for converting Wordpress export XML to the Jekyll blog engine.</li>
+<li><a href="http://www.vim.org/scripts/script.php?script_id=3835">vim-octopress</a> -
+Vim syntax highlighting mode for Octopress-flavored <code>*.markdown</code> files.</li>
+</ul>
+
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[ZFS: The Last Word in Filesystems]]></title>
+<link href="http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/"/>
+<updated>2011-03-05T18:56:01-06:00</updated>
+<id>http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems</id>
+<category term="Storage" /><category term="UNIX" />
+
+      <content type="html"><![CDATA[<p>I&#8217;ve been spending a lot of time lately reading-up on different options since
+my current home file-server setup is slowly running out of disk-space. Sure, I
+could just throw some new HDD&#8217;s in there, but the inner-geek in me really
+wants to setup a new system that has both redundancy and scalability &#8211;
+something more robust and future-proof.</p>
+
+<p>In reading through different online forums, the topic of ZFS-based systems
+kept coming-up again and again. I had heard the term &#8220;ZFS&#8221; thrown around
+before but I had never really spent the time to read-up on it. It&#8217;s just
+another filesystem, right? How fancy can it be?</p>
+
+<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &#8221;<em>just another
+filesystem</em>&#8220;&#8230;</p>
+
+<!-- more -->
+
+
+<ul>
+<li>It&#8217;s a
+<a href="http://blogs.sun.com/bonwick/entry/rampant_layering_violation">filesystem, logical volume manager, and software RAID subsystem</a>
+all wrapped-up into one end-to-end system.</li>
+<li>It does <a href="http://blogs.sun.com/bonwick/entry/zfs_end_to_end_data">end-to-end checksums</a>,
+making sure the raw data read off the physical disk matches the same data
+that was previously written to disk.</li>
+<li>It is a transactional file system, which guarantees a consistent on-disk
+data-state even with catastrophic failures like a power loss.</li>
+<li>You can do data scrubbing online, as opposed to the normal Linux solution
+of ext2/ext3/ext4 where you can only &#8220;fsck&#8221; a filesystem offline.</li>
+<li>It uses a copy-on-write strategy which makes doing filesystem snapshot&#8217;ing
+a breeze. For example, you could setup a cronjob to take nightly snapshots
+of your filesystem to facilitate incremental backups, i.e. allowing you to
+go back in time and recover old-states of files.</li>
+<li>It has <a href="http://blogs.sun.com/bonwick/entry/raid_z">RAID-Z support</a>, which
+is similar to RAID-5/RAID-6 except without the potentially-fatal
+&#8221;<em>RAID-5 write hole</em>&#8221; problem, in part thanks to the copy-on-write strategy.</li>
+<li>You can <a href="http://dlc.sun.com/osol/docs/content/ZFSADMIN/gbchx.html">replicate ZFS filesystems</a>
+(<code>zfs send</code> and <code>zfs receive</code>), snapshots and all, making it dead-easy to
+backup ZFS filesystems to remote machines.</li>
+</ul>
+
+
+<p>Very, very cool stuff! The more I read about it, the more I wanted it for my
+next-generation file-server solution. In particular, I really love the idea of
+end-to-end checksums. I want to make darn sure that the OS can realize when
+the disks are serving up garbage-data or if somehow bits have mysteriously
+been corrupted on-disk (as unlikely as that might be).</p>
+
+<p>In reading about all these various historical problems that ZFS sets out to
+address, I&#8217;m really surprised that more OSes haven&#8217;t tried to adopt superior
+filesystem technology. The classic problem for so many Windows-users seems to
+be that their installs get &#8220;corrupt&#8221;, likely usually due to folks forcibly
+powering-off their computers before the hard-drives have a chance to flush
+their write-buffer to disk. And then folks get to cope with BSOD&#8217;s or broken
+Windows installs. Sad times for everyone. Filesystems seem like such a
+foundational part of the OS that you&#8217;d expect companies would spend the time
+to make them as robust as possible. I read some rumors that Apple was planning
+to incorporate ZFS into OSX a few years back, but apparently that fell apart
+for some reason. Sad&#8230;</p>
+
+<p>Kudos to the Sun folks for designing such a fantastic filesystem and then
+open-sourcing it!</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync]]></title>
+<link href="http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/"/>
+<updated>2010-08-08T00:35:18-05:00</updated>
+<id>http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync</id>
+<category term="E-mail" /><category term="Storage" /><category term="UNIX" />
+
+      <content type="html"><![CDATA[<p>I have confidence in Google&#8217;s ability to keep their e-mail service up-and-
+running and keep proper backups of data, but my e-mail history is <em>my</em> data
+and I like to have my own copy of it. Since Google provides access to your
+Google Apps (and Gmail) e-mail over IMAP, you can do all kinds of things using
+standard tools, e.g. synchronize your Gmail e-mail to a local mailbox using
+IMAP.</p>
+
+<p>I run an Ubuntu box at home and it was easy to install the <code>dovecot-imapd</code>
+package to get an IMAP server installed. Since my box is behind my
+router/firewall, I&#8217;m wasn&#8217;t that concerned with tweaking Dovecot&#8217;s default
+configuration, but I&#8217;m sure you could fiddle with the config to ensure that
+Dovecot only binds to <code>127.0.0.1</code>.</p>
+
+<p>From there, it&#8217;s just a matter of using <code>imapsync</code>, just like I ended-up
+using previously to
+<a href="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
+
+<!-- more -->
+
+
+<p>Here&#8217;s the script:</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c"># Sync e-mail from &quot;username@yourdomain.com&quot; to localhost, using IMAP</span>
+</div><div class='line'> imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
+</div><div class='line'>          --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
+</div><div class='line'>          --host2 localhost --user2 username
+</div><div class='line'>          --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
+</div><div class='line'>          --ssl1 <span class="se">\</span>
+</div><div class='line'>          --useheader <span class="s1">&#39;Message-Id&#39;</span> --skipsize --allowsizemismatch <span class="se">\</span>
+</div><div class='line'>          --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
+</div><div class='line'>          --split1 100 --split2 100 <span class="se">\</span>
+</div><div class='line'>          --regextrans2 <span class="s1">&#39;s/\[Gmail\]/username\@somedomain/&#39;</span> <span class="se">\</span>
+</div><div class='line'>          --include <span class="s2">&quot;All Mail|Sent Mail&quot;</span> --delete2 --expunge2
+</div></pre></td></tr></table></div></figure>
+
+
+<p>The <code>--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
+local IMAP folder structure can be different than the structure on Gmail&#8217;s
+server. For example, the top Gmail IMAP folder is <code>[Gmail]</code> which wasn&#8217;t all
+that useful for me, so instead I rewrote that top-level folder to be
+<code>username@somedomain</code> so that the local folder name (e.g. in <code>~/mail/</code>) would
+match the source e-mail address.</p>
+
+<p>You can also use the <code>--include</code> option to decide which IMAP folders to copy.
+I opted to just copy &#8220;All Mail&#8221; and &#8220;Sent Mail&#8221;, which gives me a copy of all
+my mail but doesn&#8217;t preserve any information about the labels I might have had
+assigned to those messages in Gmail.</p>
+
+<p>The initial copy will definitely take a few hours (or more), depending on how
+much e-mail you have in your Gmail account. But this works great for me and
+stores the mail in &#8220;mbox&#8221; format locally so I can even access the mail locally
+via mutt/alpine/etc.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Moving E-Mail from Gmail to Google Apps over IMAP using imapsync]]></title>
+<link href="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/"/>
+<updated>2010-08-07T23:31:49-05:00</updated>
+<id>http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync</id>
+<category term="E-mail" /><category term="Storage" /><category term="UNIX" />
+
+      <content type="html"><![CDATA[<p>Two years ago, I transitioned from using regular Gmail (i.e. &#8220;&#8230;@gmail.com&#8221;)
+to setting up Google Apps for &#8220;nynim.org&#8221; (i.e. &#8220;&#8230;@nynim.org&#8221;). I had found
+the following article back then which gave me helpful hints on how to use
+<code>imapsync</code> to push data to my new Google Apps e-mail address:</p>
+
+<p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
+
+<p>I adapted that script for my own needs, and I was able to successfully copy
+all the mail from my regular Gmail account to my new Google Apps account.</p>
+
+<!-- more -->
+
+
+<p>Here is the final script I ended-up with:</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c">#!/bin/sh</span>
+</div><div class='line'> <span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
+</div><div class='line'> imapsync <span class="se">\</span>
+</div><div class='line'>   --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
+</div><div class='line'>   --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
+</div><div class='line'>   --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
+</div><div class='line'>   --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
+</div><div class='line'>   --useheader <span class="s1">&#39;Message-Id&#39;</span> --skipsize <span class="se">\</span>
+</div><div class='line'>   --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
+</div><div class='line'>   --split1 100 --split2 100 <span class="se">\</span>
+</div><div class='line'>   --maxage 50 <span class="se">\</span>
+</div><div class='line'>   --regexmess <span class="s1">&#39;s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g&#39;</span>
+</div></pre></td></tr></table></div></figure>
+
+
+<p>The <code>--syncinternaldates</code>, <code>--useheader 'Message-Id'</code>,
+and <code>--skipsize</code> options are all recommended by the imapsync FAQ
+(search for &#8220;Gmail&#8221;):</p>
+
+<p><strong><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></strong></p>
+
+<p>I opted to use the <code>--passfile1/passfile2</code> options rather than passing in a
+plain-text password in via a command-line param for two reasons: first because
+anyone with access to your system can use <code>ps</code> to view active processes and
+hence would see your password plain-as-day; second because it just better
+abstracts the script-logic from the password-text, and we can control the
+file-permissions of those password files.</p>
+
+<p>All your Gmail labels should sync-over <em>automagically</em>. Since this is going
+Google-to-Google, because Google presents labels as separate IMAP folders in
+their Gmail IMAP implementation, the process above should sync and preserve
+all your Gmail labels for free.</p>
+
+<p>It&#8217;s been a two years since I&#8217;ve used this script, but I seem to remember it
+working pretty painlessly. I wanted to share it here for anyone else who might
+be looking to do this same thing.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[What to Wear-a?]]></title>
+<link href="http://nynim.org/blog/2009/12/28/what-to-wear-a/"/>
+<updated>2009-12-28T23:20:00-06:00</updated>
+<id>http://nynim.org/blog/2009/12/28/what-to-wear-a</id>
+<category term="Quick Notes" />
+
+      <content type="html"><![CDATA[<p><a href="http://kotaku.com/5430723/what-to-wear+a"><img class="" src="http://nynim.org/images/2010/08/500x_marioscloset.jpg"></a></p>
+
+<p>(<em>via <a href="http://kotaku.com/5430723/what-to-wear+a">kotaku.com</a></em>)</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Autocomplete Me]]></title>
+<link href="http://nynim.org/blog/2009/11/22/autocomplete-me/"/>
+<updated>2009-11-22T23:21:00-06:00</updated>
+<id>http://nynim.org/blog/2009/11/22/autocomplete-me</id>
+<category term="Quick Notes" />
+
+      <content type="html"><![CDATA[<p><a href="http://autocompleteme.com/"><img class="" src="http://nynim.org/images/2010/08/autocompletemecom-howtoraise.jpg"></a></p>
+
+<p>(<em>via <a href="http://autocompleteme.com/">autocompleteme.com</a></em>)</p>
+
+<p>Google auto-complete hilarity.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[GeoDefense]]></title>
+<link href="http://nynim.org/blog/2009/11/13/geodefense/"/>
+<updated>2009-11-13T19:57:00-06:00</updated>
+<id>http://nynim.org/blog/2009/11/13/geodefense</id>
+<category term="Quick Notes" />
+
+      <content type="html"><![CDATA[<p><a href="http://www.appolicio%20us.com/games/apps/24846-geodefense-lite-critical-thought-games"><img class="" src="http://nynim.org/images/2010/08/geodefense_1250610916.jpg"></a></p>
+
+<p>(<em>via <a href="http://www.appolicious.com/games/apps/24846-geodefense-lite-critical-thought-games">appolicious.com</a></em>)</p>
+
+<p>After hearing some rave-reviews from various places over the past few days,
+I picked-up GeoDefense for the iPhone this evening. Wow, it’s a blast! Nice
+balanced game-play, good amount of challenge, great graphics. Well worth
+the $2.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Nynim.org: New & Improved]]></title>
+<link href="http://nynim.org/blog/2008/12/20/nynim-org-new-improved/"/>
+<updated>2008-12-20T12:04:51-06:00</updated>
+<id>http://nynim.org/blog/2008/12/20/nynim-org-new-improved</id>
+<category term="Blog" />
+
+      <content type="html"><![CDATA[<p>I&#8217;ve resurrected my nearly abandoned website and breathed new life into it!
+I&#8217;m now running <strong><a href="http://www.sweetcron.com/">SweetCron</a></strong>, an open-source
+project for rolling you own personalized lifestream.</p>
+
+<!-- more -->
+
+
+<p>I find that I don&#8217;t always have the inspiration or motivation to write blog
+posts that often, but I do have a Web 2.0 foot-print that other people might
+want to watch, whether it be sharing interesting news tidbits on
+<a href="http://www.google.com/reader/shared/09011817463293213634">Google Reader</a> to
+bookmarking useful webpages on <a href="http://delicious.com/tduckles">Del.icio.us</a>,
+to what songs I love on <a href="http://www.last.fm/user/tonyduckles">Last.fm</a>.</p>
+
+<p>Hence, the birth of this lifestream: all my various online activities
+aggregated and presenting in a unified &#8220;lifestream&#8221;. This gives others an easy
+way to check-out what I&#8217;m up to. If you have any comments or feedback, drop me
+an e-mail!</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Maintaining Online Identities]]></title>
+<link href="http://nynim.org/blog/2007/09/11/maintaining-online-identities/"/>
+<updated>2007-09-11T20:47:44-05:00</updated>
+<id>http://nynim.org/blog/2007/09/11/maintaining-online-identities</id>
+<category term="Security" />
+
+      <content type="html"><![CDATA[<p>I stumbled across this neat site called <a href="http://www.clipperz.com/">Clipperz</a> a
+few weeks back. On the surface, it&#8217;s &#8221;<em>a free and anonymous online password
+manager</em>&#8221;. This was immediately interesting to me because I&#8217;d really like to
+find a (secure!) web-based password manager.</p>
+
+<!-- more -->
+
+
+<p>More and more lately, I&#8217;ve been
+trying to find web apps that can replace the desktop applications I use on a
+daily basis. It&#8217;s just so incredibly convenient to have the portability to be
+able to do everything you need from inside a web-browser, and more importantly
+to have the persistent-state data stored on the server-side rather than on
+each individual machine I use throughout the day. I&#8217;m already a huge fan of
+webapps like <a href="http://del.icio.us/tduckles">del.icio.us</a> (<em>for tracking all my
+bookmarks</em>) and <a href="http://www.google.com/reader/">Google Reader</a> (<em>for all my
+RSS aggregation and reading needs</em>), and finding a web-based password manager
+would be ideal. It really becomes a chore remembering what username or e-mail
+address I registered with at various websites: Amazon, eBay, Newegg, Google,
+Yahoo, credit cards, travel sites, online bill pay, banks, etc. (Oy!) It&#8217;s
+just a lot of identities to juggle. I&#8217;ve thought about using
+<a href="http://keepass.info/">KeePass</a> or something, but that&#8217;s a desktop app and I&#8217;d
+have to keep my database in-sync between work and home.</p>
+
+<p>What really interested me about Clipperz is their claim at being a &#8220;zero-
+knowledge&#8221; web-application: they only store encrypted data on their server-
+side, and use Javascript to decrypt the data client-side based on the username
+and password which you supply. Your password is never sent to the server at
+all; it&#8217;s merely used to decrypt the data locally. That&#8217;s a pretty slick idea,
+IMO. But, I&#8217;m also a little nervous about trusting some third-party website
+will all my personal sensitive online account information. So, I&#8217;m tempted to
+sit down and write my own webapp to recreate that wheel, except that it&#8217;s all
+code I can vouch for and know that it&#8217;s not secretly sending my data off to
+some third-party site. You can already find open-source Javascript-based
+implementations of the various crypto algorithms that I&#8217;d need to use. And it
+seems like a simple AJAX-based webapp to save/load data from the server.</p>
+
+<p>Also really intriguing is Clipperz&#8217; one-click-sign-in feature. They have a
+Javascript bookmark which pulls HTML FORM information off a given login page
+and then allows you to link the various FORM INPUT fields with the appropriate
+data-fields on the &#8220;card&#8221; for that website (e.g. username, password). The one-
+click sign-in then just has to do a HTTP POST to the desired web-address with
+the correct FORM data to act just like the real login page. It&#8217;s simple
+enough, but that seems like the real time-saver here. Not only could you have
+a webapp which stores all your personal data, but it also provides a quick
+launchpad to login any site you need. That just takes it a step further and
+makes the webapp almost a blackbox: you don&#8217;t really <em>need</em> to know what your
+username and password is anymore because the webapp database knows it and can
+feed it to the target website&#8217;s login form for you.</p>
+
+<p>This just seems like a really awesome idea, and I&#8217;m really tempted to just use
+Clipperz natively so that I don&#8217;t have to re-invent the wheel, but I&#8217;m still
+just nervous about using someone else&#8217;s website as a database to store all my
+personal sensitive data. It&#8217;s basically just a trust issue, and I don&#8217;t think
+I have any good reason to trust that their Javascript code will never do
+anything malicious. I&#8217;d much rather control the data myself on my private
+webserver. If only Clipperz was a SourceForge project&#8230; ;)</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Simple Off-Site Backups...?]]></title>
+<link href="http://nynim.org/blog/2007/09/11/simple-off-site-backups/"/>
+<updated>2007-09-11T20:23:38-05:00</updated>
+<id>http://nynim.org/blog/2007/09/11/simple-off-site-backups</id>
+<category term="Storage" />
+
+      <content type="html"><![CDATA[<p>Lately I&#8217;ve been consumed with the idea of getting more serious about backing-
+up all the data I have. I tend to be a digital pack-rat: my music collection,
+digital photos I&#8217;ve taken, all the songs I&#8217;ve ever recorded, various tarballs
+filled with code-stuffs for college projects I did, etc. There&#8217;s a wealth of
+nostalgia there, and I realized that I really wouldn&#8217;t want to lose a lot of
+that stuff.</p>
+
+<!-- more -->
+
+
+<p>I already use a quasi-RAID system: I have two identical hdd&#8217;s in my file-
+server box and I rsync the &#8220;master&#8221; drive to the &#8220;slave&#8221; drive every so often.
+Not only does this provide me some amount of rollback-ness (i.e. because I
+only rsync so often), but the decision to not RAID-mirror the drives was
+intentional: if the filesystem or partition table on the RAID somehow became
+corrupted, all my data could be lost.</p>
+
+<p>But&#8230;what if my house burns down? (*gasp* Oh noes!!) Yes, that would be sad
+indeed! So, rather than just providing a single layer of redundancy locally,
+if I really want to invest in the survival of my important data, I really need
+to spread that data around; I need to diversify.</p>
+
+<p>I&#8217;ve looked around at various web-based back-up solutions like
+<a href="http://aws.amazon.com/s3">Amazon&#8217;s S3 service</a>, but those don&#8217;t seem very optimal for me
+because of the amount of data I want to backup (~150GB) and because it seems
+like it would be a PITA to do a full restore over my home cable internet pipe.
+Not to mention the monthly fees, paying someone else to store my data safe and
+sound. But, dare I trust my important (and partially sensitive) data to a
+stranger?</p>
+
+<p>Currently, I&#8217;m tempted by a seemingly simple solution: just get an external
+USB hdd, mirror my data once locally, and then throw it at a friend&#8217;s house
+and use rsync to keep it up-to-date. The main cost involved is the cost of the
+new hdd; there&#8217;s no monthly fee because I already need to pay for my internet-
+access. And I can even return the favor by hosting drives on my end too. And
+this could even be expanded to a multiple people, if you wanted to back-up
+your data in multiple off-sites. This seems almost too easy to me, but it
+seems perfectly effective. Anything, it&#8217;s making use of the hidden geek-
+factor: you&#8217;re a geek and you have geek friends, so why not make the most of
+it and use them for geeky endeavors like helping each other backup each
+other&#8217;s data? ;)</p>
+
+<p>The main problem I have with this plan is that my data wouldn&#8217;t be encrypted
+at all. I&#8217;m not sure how paranoid I really need to be about my friends
+snooping around my data. Though, I think this is basically the general idea
+as: what would happen if someone stole your computer? So, that&#8217;s really more
+an argument that I should be locally encrypting my data so that even if prying
+eyes were to get at my local/master copy, they still wouldn&#8217;t be able to do
+much with it.</p>
+
+<p>Has anyone else given thought to getting more serious about backing up their
+data?</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Minesweeper: The Movie]]></title>
+<link href="http://kotaku.com/gaming/clips/minesweeper-the-movie-286639.php"/>
+<updated>2007-08-06T22:03:31-05:00</updated>
+<id>http://nynim.org/blog/2007/08/06/minesweeper-the-movie</id>
+<category term="Quick Notes" />
+
+      <content type="html"><![CDATA[<p>The guys over at College Humor have done it again, creating a faux movie
+trailer for
+<a href="http://kotaku.com/gaming/clips/minesweeper-the-movie-286639.php">Minesweeper: The Movie</a>.
+It&#8217;s a hilarious mishmash of awful action-movie stereotypes.</p>
+<p><a rel="bookmark" href="http://nynim.org/blog/2007/08/06/minesweeper-the-movie/">&#9875; Permalink</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[del.icio.us director]]></title>
+<link href="http://nynim.org/blog/2007/05/19/del-icio-us-director/"/>
+<updated>2007-05-19T23:23:24-05:00</updated>
+<id>http://nynim.org/blog/2007/05/19/del-icio-us-director</id>
+<category term="Web" />
+
+      <content type="html"><![CDATA[<p>Yes, somewhere along the line&#8230;I became a geek. I started using multiple
+computers, not just between home/work/school/etc., but even multiple computers
+at home. (<em>Though, I mainly use my MacBook for all my casual web-surfing needs
+these days at home&#8230;</em>) I was always annoyed by having different bookmarks on
+the different computers I used, which meant frustration when I had to remember
+which computer I bookmarked that useful such-and-such on. I wanted a way to
+have a centralized webpage for my bookmarks and hence could access from
+wherever I was. So, inspired by
+<a href="http://24ways.org/2005/edit-in-place-with-ajax">an entry on 24ways.org</a>, I created one. It
+was my little pet project, and it was good&#8230;</p>
+
+<p>Then I found out that someone else had already done the same thing and they
+had done it better. Enter <a href="http://del.icio.us/tduckles">del.icio.us</a>. (<em>Ooh,
+the pretty pretty tag-clouds! Yes, my tag-cloud is quite delicious indeed&#8230;</em>)
+Tags are such a simple concept, but oh-so effective. It just makes so much
+sense to have a webapp where you save bookmarks and can assign arbitrary tags
+to each entry. del.icio.us then makes it very easy to navigate around your
+list of links by tags, even providing nifty &#8220;easy&#8221; URLs like
+<a href="http://del.icio.us/tduckles/madison">http://del.icio.us/tduckles/madison</a>,
+which shows me everything I&#8217;ve tagged with &#8220;madison&#8221;.</p>
+
+<p>Even better, people out there have written even slicker tools to access and
+navigate around your del.icio.us bookmarks.</p>
+
+<!-- more -->
+
+
+<p>John Vey wrote this amazingly cool
+tool called <a href="http://johnvey.com/features/deliciousdirector/">del.icio.us direc.tor</a>.
+In it&#8217;s native form, it&#8217;s meant to be a bookmarklet which you use at api.del.icio.us after
+you&#8217;ve done all your HTTP-Auth stuff, so that the JavaScript code doesn&#8217;t need
+to worry about auth when trying to access your bookmarks.</p>
+
+<p>Not only is this a uber-slick UI for navigating around your tag-tree and for
+quickly finding a link based on (real-time!) searching, but the page itself
+also goes into the design and architecture of direc.tor. This was a really
+fascinating read for me, from a web-dev perspective. What really blew my mind
+about this is the whole concept of using AJAX methods to grab the del.icio.us
+XML DOM, and then use XSLT and XPath features which are built-in to most
+modern browsers to do all the searching in real-time on the client-side. So,
+really, the whole bottom pane of direc.tor is the output of an XSTL on the
+del.icio.us XML DOM of your bookmarks. I had never realized that you could do
+XSLT and XPath operations via Javascript before. This was a watershed moment
+for me, because a whole new perspective on web-development opened up for me:
+you could use XMLHttpRequest to grab an XML document, and then use Javascript
+to do an XSLT to transform that XML data into HTML or whatever presentation-
+layer you wanted. In the past, I had always only thought of AJAX calls
+returning some chunk of HTML which you could then insert somewhere into the
+document DOM.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Google Reader]]></title>
+<link href="http://nynim.org/blog/2007/05/19/google-reader/"/>
+<updated>2007-05-19T21:46:18-05:00</updated>
+<id>http://nynim.org/blog/2007/05/19/google-reader</id>
+<category term="Web" />
+
+      <content type="html"><![CDATA[<p>I really dig the whole web-based RSS aggregator/reader thing. For the past
+year or so, I&#8217;ve been using <a href="http://www.reblog.org/">reBlog</a> on my Linux box
+at home. It had it&#8217;s quirks, but it was great to use.</p>
+
+<p>Enter <strong><a href="http://www.google.com/reader/">Google Reader</a></strong>. Being the show-off&#8217;s
+they are, Google has created a fantastic RSS reader web-app. I&#8217;ve ditched my
+home-based reBlog setup for using Google Reader for all my RSS feed reading
+needs. Here are the things which really won me over:</p>
+
+<!-- more -->
+
+
+<ul>
+<li>Super-slick UI, with fantastic keyboard navigation support.</li>
+<li>Nifty AJAX tricks, like only loading enough items into the ListView to fit
+on screen initially and then fetching more as you scroll down. (<em>Of course,
+they do this for performance reasons, but it&#8217;s still implemented very cleanly
+and just &#8220;feels&#8221; nice.</em>)</li>
+<li>You can &#8220;star&#8221;/flag entries that are useful, and then go back and look at
+all the articles you&#8217;ve flagged. It remembers the timestamp of when you
+flagged the entry, which I find handy. (<em>Though most useful links I consume
+in a <a href="http://del.icio.us/tduckles">del.icio.us</a>-fashion these days&#8230;</em>)</li>
+<li>You can easily sort either by Oldest or Newest, and it saves that preference
+on each &#8220;view&#8221; (i.e. viewing entries from just one feed vs all entries) you have.</li>
+<li>Has an &#8220;infinite&#8221; scrollback feature, to allow you to scroll backwards through
+all the posts which Google has ever fetched for that feed.</li>
+<li>It&#8217;s free. ;)</li>
+</ul>
+
+
+<p>I would definitely recommend Google Reader to anyone that uses a fat-client
+RSS reader/aggregator, especially if you want something that does the
+aggregating 24-7 for you and is accessible from any computer.</p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Street Fighter: The Later Years]]></title>
+<link href="http://www.collegehumor.com/tag:streetfighterthelateryears"/>
+<updated>2006-11-27T22:43:12-06:00</updated>
+<id>http://nynim.org/blog/2006/11/27/street-fighter-the-later-years</id>
+<category term="Quick Notes" />
+
+      <content type="html"><![CDATA[<p>I don&#8217;t know about you, but I remember playing a fair amount of
+<a href="http://en.wikipedia.org/wiki/Street_fighter#Street_Fighter_II">Street Fighter 2</a> back
+in the day. College Humor is running this hilarious
+<a href="http://www.collegehumor.com/tag:streetfighterthelateryears">series</a>, looking
+into the lives of the Street Fighter combatants&#8230;10 years later. *insert
+suspenseful music here!*</p>
+<p><a rel="bookmark" href="http://nynim.org/blog/2006/11/27/street-fighter-the-later-years/">&#9875; Permalink</a></p>]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Firefly & Fan Documentary DVD]]></title>
+<link href="http://nynim.org/blog/2006/07/19/firefly-fan-documentary-dvd/"/>
+<updated>2006-07-19T21:17:05-05:00</updated>
+<id>http://nynim.org/blog/2006/07/19/firefly-fan-documentary-dvd</id>
+<category term="Entertainment" />
+
+      <content type="html"><![CDATA[<p>I finally succumbed to recommendations of friends and picked-up the Firefly TV
+series on DVD&#8230;and it definitely didn&#8217;t fail to impress. It&#8217;s the best sci-fi
+show I&#8217;ve seen in a long time. It reminds me of ST:TNG in some ways, in so
+much as it&#8217;s very character-driven, with engaging characters who are developed
+very nicely. I would certainly recommend it to any sci-fi fans who haven&#8217;t had
+a chance to see it yet.</p>
+
+<p>The fan community for Firefly seems to be alive and strong, and it looks like
+a <a href="http://www.donetheimpossible.com/">fan-compiled Firefly documentary</a> is on
+the verge of being released. I&#8217;m still debating picking it up&#8230; I know I can
+get fanatical about some things, but I&#8217;m not sure if I&#8217;m too that point with
+Firefly yet. I certainly wish that the TV series hadn&#8217;t been cancel mid-1st-
+season.</p>
+
+<p><strong><a href="http://www.donetheimpossible.com/">http://www.donetheimpossible.com/</a></strong></p>
+]]></content>
+    </entry>
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[reBlog - Web-Based, Server-Side RSS Aggregator]]></title>
+<link href="http://nynim.org/blog/2006/03/21/reblog-web-based-server-side-rss-aggregator/"/>
+<updated>2006-03-21T22:08:58-06:00</updated>
+<id>http://nynim.org/blog/2006/03/21/reblog-web-based-server-side-rss-aggregator</id>
+<category term="Web" />
+
+      <content type="html"><![CDATA[<p>Like many people these days, I use RSS feeds to keep up on news from various
+feeds. But, with some of the higher traffic sites, since the RSS XML file only
+keeps the last 40 headlines or so, if I don&#8217;t update the feed every ~12 hours,
+then I&#8217;ll miss some posts. Since my iBook has been on the fritz lately, I&#8217;ve
+just been leaving it on 24-7, so I was able to have it auto-refresh every few
+hours.</p>
+
+<p>This weekend, I was suddenly struck with the idea that it would be cool to
+have an RSS reader with a web-interface, and the RSS fetcher could run as a
+crontab job. This has the benefits of being able to be accessed anywhere, and
+to fetch new posts automagically, without needing some desktop computer
+somewhere to handle that.</p>
+
+<!-- more -->
+
+
+<p>At first, I thought it might be a cool home project to write up. Using some
+AJAX techniques, I could come up with a pretty slick interface. But, surely
+someone else must have had this same idea too, so I did some searching for
+existing open-source projects like this. And, sure enough, enter
+<a href="http://www.reblog.org/">reBlog</a>.
+<a href="http://www.lifehacker.com/software/feature/how-to-set-up-reblog-killer-server-side-feed-reader-160825.php">This article</a>
+gives a good overview of the
+feature-set, and also has a Google Video giving a short workflow run-through.</p>
+
+<p>It uses a lot of AJAX tricks, and it even has full keyboard navigation
+shortcuts. It uses &#8220;,&#8221; and &#8220;.&#8221; as the default row up/down, but I was able to
+fiddle with the source code to map &#8220;j&#8221; and &#8220;k&#8221; to these same functions, so I
+could use it vi-style. ;) So, it&#8217;s really easy to scroll through posts, mark
+them as read or flag them for follow-up. All the posts you flag (or &#8220;Publish&#8221;
+in reBlog terminology) go to a different bucket, which can be rendered to a
+RSS feed itself, I guess so you can point some other RSS reader to the list.</p>
+
+<p>I&#8217;m just very impressed with the project. It&#8217;s really just what I was looking
+for. The 2.0 version is still in beta, and I&#8217;m hoping by the final version
+they offer more flexibility/customizing. So, if you&#8217;ve ever wanted a web-based
+RSS reading solution, check out reBlog.</p>
+]]></content>
+    </entry>
+  
+</feed>

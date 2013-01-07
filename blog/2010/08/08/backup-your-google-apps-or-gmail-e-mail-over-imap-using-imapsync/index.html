@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync - Nynim.org</title>
+  <meta name="author" content="Tony Duckles">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  <meta name="keywords" content="backup email, backup mail, backup google email, backup google mail, backup google apps email, backup google apps mail, backup email imap, backup mail imap, backup email imapsync, backup mail imapsync">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6748678-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Nynim.org</a></h1>
+  
+    <h2>Tony Duckles on programming, photography, and general geekery</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:nynim.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+Backup Your Google Apps (or Gmail) E-mail Over IMAP Using Imapsync
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-08T00:35:18-05:00" pubdate data-updated="true">Aug 8<span>th</span>, 2010</time>
+         &bull; <a rel="bookmark" href="/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>I have confidence in Google&#8217;s ability to keep their e-mail service up-and-
+running and keep proper backups of data, but my e-mail history is <em>my</em> data
+and I like to have my own copy of it. Since Google provides access to your
+Google Apps (and Gmail) e-mail over IMAP, you can do all kinds of things using
+standard tools, e.g. synchronize your Gmail e-mail to a local mailbox using
+IMAP.</p>
+
+<p>I run an Ubuntu box at home and it was easy to install the <code>dovecot-imapd</code>
+package to get an IMAP server installed. Since my box is behind my
+router/firewall, I&#8217;m wasn&#8217;t that concerned with tweaking Dovecot&#8217;s default
+configuration, but I&#8217;m sure you could fiddle with the config to ensure that
+Dovecot only binds to <code>127.0.0.1</code>.</p>
+
+<p>From there, it&#8217;s just a matter of using <code>imapsync</code>, just like I ended-up
+using previously to
+<a href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
+
+<!-- more -->
+
+
+<p>Here&#8217;s the script:</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c"># Sync e-mail from &quot;username@yourdomain.com&quot; to localhost, using IMAP</span>
+</div><div class='line'> imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
+</div><div class='line'>          --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
+</div><div class='line'>          --host2 localhost --user2 username
+</div><div class='line'>          --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
+</div><div class='line'>          --ssl1 <span class="se">\</span>
+</div><div class='line'>          --useheader <span class="s1">&#39;Message-Id&#39;</span> --skipsize --allowsizemismatch <span class="se">\</span>
+</div><div class='line'>          --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
+</div><div class='line'>          --split1 100 --split2 100 <span class="se">\</span>
+</div><div class='line'>          --regextrans2 <span class="s1">&#39;s/\[Gmail\]/username\@somedomain/&#39;</span> <span class="se">\</span>
+</div><div class='line'>          --include <span class="s2">&quot;All Mail|Sent Mail&quot;</span> --delete2 --expunge2
+</div></pre></td></tr></table></div></figure>
+
+
+<p>The <code>--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
+local IMAP folder structure can be different than the structure on Gmail&#8217;s
+server. For example, the top Gmail IMAP folder is <code>[Gmail]</code> which wasn&#8217;t all
+that useful for me, so instead I rewrote that top-level folder to be
+<code>username@somedomain</code> so that the local folder name (e.g. in <code>~/mail/</code>) would
+match the source e-mail address.</p>
+
+<p>You can also use the <code>--include</code> option to decide which IMAP folders to copy.
+I opted to just copy &#8220;All Mail&#8221; and &#8220;Sent Mail&#8221;, which gives me a copy of all
+my mail but doesn&#8217;t preserve any information about the labels I might have had
+assigned to those messages in Gmail.</p>
+
+<p>The initial copy will definitely take a few hours (or more), depending on how
+much e-mail you have in your Gmail account. But this works great for me and
+stores the mail in &#8220;mbox&#8221; format locally so I can even access the mail locally
+via mutt/alpine/etc.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-08T00:35:18-05:00" pubdate data-updated="true">Aug 8<span>th</span>, 2010</time>
+
+
+<span class="categories">
+  Categories:
+  
+    <a class='category' href='/blog/categories/e-mail/'>E-mail</a>, <a class='category' href='/blog/categories/storage/'>Storage</a>, <a class='category' href='/blog/categories/unix/'>UNIX</a>
+  
+</span>
+
+
+
+
+<span class="tags">
+  Tags:
+  
+    <a class='tag' href='/blog/tags/backups/'>backups</a>, <a class='tag' href='/blog/tags/email/'>email</a>, <a class='tag' href='/blog/tags/gmail/'>gmail</a>, <a class='tag' href='/blog/tags/google/'>google</a>, <a class='tag' href='/blog/tags/imap/'>imap</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/" target="_blank">+1</a>
+    
+  
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/" title="Previous Post: Moving E-Mail from Gmail to Google Apps over IMAP using imapsync">&laquo; Moving E-Mail from Gmail to Google Apps over IMAP using imapsync</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/03/05/zfs-the-last-word-in-filesystems/" title="Next Post: ZFS: The Last Word in Filesystems">ZFS: The Last Word in Filesystems &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
+</section>
+
+<section>
+  <h1>Follow Me</h1>
+  <p id='followme'>
+    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
+    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
+    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
+    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
+    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
+    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
+    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
+    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
+    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
+    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
+    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
+    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
+    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
+    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
+  </p>
+</section>
+
+<section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">Moving E-Mail from Gmail to Google Apps over IMAP using imapsync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/19/hello-octopress/">Hello Octopress!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/20/home-sweet-home/">Home Sweet $HOME</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>On GitHub</h1>
+  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+
+
+
+<section class="tag-cloud">
+  <h1>Tags</h1>
+  <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> 
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tony Duckles -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nynim';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/';
+        var disqus_url = 'http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+</body>
+</html>

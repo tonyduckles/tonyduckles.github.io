@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Simple Off-Site Backups...? - Nynim.org</title>
+  <meta name="author" content="Tony Duckles">
+  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+
+  
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://nynim.org/blog/2007/09/11/simple-off-site-backups/">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
+  
+
+<!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6748678-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+
+   
+  <link href="/octopress-favicon.png" rel="icon">
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Nynim.org</a></h1>
+  
+    <h2>Tony Duckles on programming, photography, and general geekery</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:nynim.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
+  <li><a href="/archives/">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+
+
+
+
+
+
+
+
+
+
+
+<article class="hentry " role="article">
+  
+  <header>
+    <h1 class="entry-title">
+
+Simple Off-Site Backups...?
+
+</h1>
+
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-11T20:23:38-05:00" pubdate data-updated="true">Sep 11<span>th</span>, 2007</time>
+         &bull; <a rel="bookmark" href="/blog/2007/09/11/simple-off-site-backups/">Permalink</a>
+      </p>
+    
+  </header>
+
+<div class="entry-content"><p>Lately I&#8217;ve been consumed with the idea of getting more serious about backing-
+up all the data I have. I tend to be a digital pack-rat: my music collection,
+digital photos I&#8217;ve taken, all the songs I&#8217;ve ever recorded, various tarballs
+filled with code-stuffs for college projects I did, etc. There&#8217;s a wealth of
+nostalgia there, and I realized that I really wouldn&#8217;t want to lose a lot of
+that stuff.</p>
+
+<!-- more -->
+
+
+<p>I already use a quasi-RAID system: I have two identical hdd&#8217;s in my file-
+server box and I rsync the &#8220;master&#8221; drive to the &#8220;slave&#8221; drive every so often.
+Not only does this provide me some amount of rollback-ness (i.e. because I
+only rsync so often), but the decision to not RAID-mirror the drives was
+intentional: if the filesystem or partition table on the RAID somehow became
+corrupted, all my data could be lost.</p>
+
+<p>But&#8230;what if my house burns down? (*gasp* Oh noes!!) Yes, that would be sad
+indeed! So, rather than just providing a single layer of redundancy locally,
+if I really want to invest in the survival of my important data, I really need
+to spread that data around; I need to diversify.</p>
+
+<p>I&#8217;ve looked around at various web-based back-up solutions like
+<a href="http://aws.amazon.com/s3">Amazon&#8217;s S3 service</a>, but those don&#8217;t seem very optimal for me
+because of the amount of data I want to backup (~150GB) and because it seems
+like it would be a PITA to do a full restore over my home cable internet pipe.
+Not to mention the monthly fees, paying someone else to store my data safe and
+sound. But, dare I trust my important (and partially sensitive) data to a
+stranger?</p>
+
+<p>Currently, I&#8217;m tempted by a seemingly simple solution: just get an external
+USB hdd, mirror my data once locally, and then throw it at a friend&#8217;s house
+and use rsync to keep it up-to-date. The main cost involved is the cost of the
+new hdd; there&#8217;s no monthly fee because I already need to pay for my internet-
+access. And I can even return the favor by hosting drives on my end too. And
+this could even be expanded to a multiple people, if you wanted to back-up
+your data in multiple off-sites. This seems almost too easy to me, but it
+seems perfectly effective. Anything, it&#8217;s making use of the hidden geek-
+factor: you&#8217;re a geek and you have geek friends, so why not make the most of
+it and use them for geeky endeavors like helping each other backup each
+other&#8217;s data? ;)</p>
+
+<p>The main problem I have with this plan is that my data wouldn&#8217;t be encrypted
+at all. I&#8217;m not sure how paranoid I really need to be about my friends
+snooping around my data. Though, I think this is basically the general idea
+as: what would happen if someone stole your computer? So, that&#8217;s really more
+an argument that I should be locally encrypting my data so that even if prying
+eyes were to get at my local/master copy, they still wouldn&#8217;t be able to do
+much with it.</p>
+
+<p>Has anyone else given thought to getting more serious about backing up their
+data?</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-09-11T20:23:38-05:00" pubdate data-updated="true">Sep 11<span>th</span>, 2007</time>
+
+
+<span class="categories">
+  Categories:
+  
+    <a class='category' href='/blog/categories/storage/'>Storage</a>
+  
+</span>
+
+
+
+
+<span class="tags">
+  Tags:
+  
+    <a class='tag' href='/blog/tags/backups/'>backups</a>
+  
+</span>
+
+
+
+      
+
+    </p>
+    
+      <div class="sharing">
+  
+    
+      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
+    
+  
+  
+    
+      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/blog/2007/09/11/simple-off-site-backups/" target="_blank">+1</a>
+    
+  
+  
+  
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2007/08/06/minesweeper-the-movie/" title="Previous Post: Minesweeper: The Movie">&laquo; Minesweeper: The Movie</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2007/09/11/maintaining-online-identities/" title="Next Post: Maintaining Online Identities">Maintaining Online Identities &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+<section>
+  <h1>Comments</h1>
+  
+
+  
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  
+</section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
+</section>
+
+<section>
+  <h1>Follow Me</h1>
+  <p id='followme'>
+    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
+    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
+    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
+    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
+    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
+    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
+    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
+    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
+    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
+    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
+    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
+    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
+    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
+    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
+  </p>
+</section>
+
+<section>
+  <h1>Related Posts</h1>
+  <ul id="related_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2007/09/11/maintaining-online-identities/">Maintaining Online Identities</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/19/hello-octopress/">Hello Octopress!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/03/05/zfs-the-last-word-in-filesystems/">ZFS: The Last Word in Filesystems</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/">Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/">All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>On GitHub</h1>
+  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
+  
+</section>
+
+
+
+
+
+
+<section class="tag-cloud">
+  <h1>Tags</h1>
+  <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> 
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Tony Duckles -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'nynim';
+			var disqus_developer = '0';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://nynim.org/blog/2007/09/11/simple-off-site-backups/';
+        var disqus_url = 'http://nynim.org/blog/2007/09/11/simple-off-site-backups/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+</body>
+</html>
