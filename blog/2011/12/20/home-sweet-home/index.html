@@ -122,12 +122,12 @@ Home Sweet $HOME
   </header>
 
 <div class="entry-content"><p><img class="right" src="/images/2011/12/img_Terminal.png" width="180" height="180">
-About a year and a half ago, I stumbled upon Ryan Tomayko&#8217;s &#8221;<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>&#8221;
+About a year and a half ago, I stumbled upon Ryan Tomayko&#39;s &ldquo;<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>&rdquo;
 repository on Github. The moment I saw it, I thought it was a <em>great</em> idea:
-the idea of managing all your <code>$HOME</code> directory &#8220;dot-files&#8221; in a Git repository.
+the idea of managing all your <code>$HOME</code> directory &ldquo;dot-files&rdquo; in a Git repository.
 That single idea led me on a personal crusade to better understand all the
-different configuration files that live in your UNIX (<em>Linux, Mac OSX, etc.</em>)
-home directory, and the end-result was creating my own &#8221;<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>&#8221;
+different configuration files that live in your UNIX (_Linux, Mac OSX, etc._)
+home directory, and the end-result was creating my own &ldquo;<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>&rdquo;
 Git repository for synchronizing/tracking/deploying my dot-files between the
 various machines I work upon.</p>
 
@@ -137,14 +137,13 @@ command-line shell experience.</p>
 
 <!-- more -->
 
-
 <h2>Using Git</h2>
 
 <p>I found it to be a very natural fit to use Git to track the edits to my dot-files.
-It makes it dead-easy to see what changes I&#8217;ve made since the last commit and
+It makes it dead-easy to see what changes I&#39;ve made since the last commit and
 easy to commit those changes and push them to a central Git repository.</p>
 
-<p>Git also makes it dead-easy to &#8220;bootstrap&#8221; my dot-files environment into a
+<p>Git also makes it dead-easy to &ldquo;bootstrap&rdquo; my dot-files environment into a
 brand-new home directory:</p>
 
 <figure class='code'><figcaption>Dotfiles bootstrap </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c"># Clone the repo into ~/dotfiles/</span>
@@ -156,26 +155,23 @@ brand-new home directory:</p>
 </div><div class='line'>rm -rf dotfiles
 </div></pre></td></tr></table></div></figure>
 
-
 <h2>~/bin/</h2>
 
 <p>Ryan has a <code>~/bin/</code> directory in his dot-files repo with all kinds of nifty
 little utilities.</p>
 
-<p>There&#8217;s a bunch of great Git-related utilities in there, e.g.:</p>
+<p>There&#39;s a bunch of great Git-related utilities in there, e.g.:</p>
 
 <ul>
 <li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-up">git-up</a> - Like <code>git-pull</code> but show a short and sexy log of changes immediately after merging (git-up) or rebasing (git-reup).</li>
 <li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-incoming">git-incoming</a>/<a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-outgoing">git-outgoing</a> - Shows difference between the current branch vs. the upstream branch.</li>
 </ul>
 
-
-<p>And there&#8217;s also some great general-purpose utilities in there, e.g.:</p>
+<p>And there&#39;s also some great general-purpose utilities in there, e.g.:</p>
 
 <ul>
 <li><a href="http://betterthangrep.com/">ack</a> - A tool like <code>grep</code>, designed for programmers with large trees of heterogeneous source code. Very handy for recursive file-searching.</li>
 </ul>
-
 
 <h2>~/.gitconfig</h2>
 
@@ -185,15 +181,14 @@ colors for various sub-commands (diff, status), which is <em>very</em> handy.</p
 
 <h2>~/.inputrc</h2>
 
-<p>There&#8217;s a lot of neat options in the <code>.inputrc</code> file, for binding key-sequences
+<p>There&#39;s a lot of neat options in the <code>.inputrc</code> file, for binding key-sequences
 to various command-line options. For example:</p>
 
 <figure class='code'><figcaption>.inputrc snippet </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'>C-n: <span class="nb">history</span>-search-forward
 </div><div class='line'>C-p: <span class="nb">history</span>-search-backward
 </div></pre></td></tr></table></div></figure>
 
-
-<p>&#8230;are the <strong>two single-most time-saving key-bindings</strong> that I stumbled upon. This
+<p>&hellip;are the <strong>two single-most time-saving key-bindings</strong> that I stumbled upon. This
 lets you type a partial command and then use <code>Ctrl-n</code> and <code>Ctrl-p</code> to
 completion-match the rest of the line based on your command history. Awesome!</p>
 
@@ -202,7 +197,7 @@ longer commands which I often type. Completion-matching for-the-win!</p>
 
 <h2>Vim: .vimrc and .vim/</h2>
 
-<p>Before setting out on this project, I had used Vi some but hadn&#8217;t really explored
+<p>Before setting out on this project, I had used Vi some but hadn&#39;t really explored
 (or understood) the full-power that was <a href="http://www.vim.org/">Vim</a>. Digging
 into the <code>.vimrc</code> file, reading-up on all the various config options, and
 digging into all the <code>~/.vim/</code> plugins which Ryan had was an eye-opening
@@ -212,14 +207,14 @@ and color-schemes set by default made for an oh-so-much more pleasant
 Vim experience.</p>
 
 <p>This all led me to learning a lot more about Vim and becoming much more proficent
-using Vim. It&#8217;s now my text-based editor of choice. Once you get to know the
+using Vim. It&#39;s now my text-based editor of choice. Once you get to know the
 key-bindings and the various commands, the command-chaining that you can do
 in Vim is incredibly powerful.</p>
 
 <h2>Sharing is Fun!</h2>
 
-<p>If you&#8217;re at all interesting in learning more about customizing your Unix
-shell environment, looking at other people&#8217;s dot-files is a great learning
+<p>If you&#39;re at all interesting in learning more about customizing your Unix
+shell environment, looking at other people&#39;s dot-files is a great learning
 experience. And publishing your dot-files on Github is a great way to
 share your shell-environment with the world so that others can learn
 and explore.</p>
@@ -414,7 +409,7 @@ and explore.</p>
 
 <section class="tag-cloud">
   <h1>Tags</h1>
-  <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> 
+  <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> 
 </section>
 
 

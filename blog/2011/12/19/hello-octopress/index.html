@@ -121,38 +121,33 @@ Hello Octopress!
     
   </header>
 
-<div class="entry-content"><p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:</p>
-
-<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p><footer><strong>Octopress</strong> <cite><a href='https://github.com/imathis/octopress'>github.com/imathis/octopress/&hellip;</a></cite></footer></blockquote>
-
+<div class="entry-content"><p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:
+<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p><footer><strong>Octopress</strong> <cite><a href='https://github.com/imathis/octopress'>github.com/imathis/octopress/&hellip;</a></cite></footer></blockquote></p>
 
 <p>Sweet indeed! The more I read about it, the more intrigued I became. After a
 few hours spent exploring the code, importing the posts/pages from my Wordpress
-install into Octopress, and tweaking the default theme to my taste, I&#8217;ve taken
+install into Octopress, and tweaking the default theme to my taste, I&#39;ve taken
 the jump and moved my site over to using the Octopress platform.</p>
 
 <!-- more -->
 
-
-<p>Octopress is a simple blogging platform aimed at hackers. It&#8217;s built around the
+<p>Octopress is a simple blogging platform aimed at hackers. It&#39;s built around the
 <a href="http://github.com/mojombo/jekyll">Jekyll</a> engine, which is the blog-aware static
-site generator that powers <a href="http://pages.github.com/">Github Pages</a>.  The &#8220;database&#8221;
+site generator that powers <a href="http://pages.github.com/">Github Pages</a>.  The &ldquo;database&rdquo;
 for the site is simply a collection of flat text files using
 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (or Textile) mark-up. You
-can setup either &#8220;posts&#8221; or &#8220;pages&#8221;, all as you&#8217;d expect. When you&#8217;re ready to
-deploy, you use <code>Rakefile</code> automation to &#8220;generate&#8221; the static site files.</p>
+can setup either &ldquo;posts&rdquo; or &ldquo;pages&rdquo;, all as you&#39;d expect. When you&#39;re ready to
+deploy, you use <code>Rakefile</code> automation to &ldquo;generate&rdquo; the static site files.</p>
 
-<p>It also has a great default theme (IMHO) &#8211; very clean and simple &#8211; which was
+<p>It also has a great default theme (IMHO) &ndash; very clean and simple &ndash; which was
 actually my original attraction. It was only after reading more about the project
 that I realized it had huge appeal to my geek-side too.</p>
 
 <h2>Why Octopress?</h2>
 
-<p>It was Matt Gemmell&#8217;s &#8221;<a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a>&#8221;
-post which resonated the most with me:</p>
-
-<blockquote><p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.</p><footer><strong>Matt Gemmell</strong></footer></blockquote>
-
+<p>It was Matt Gemmell&#39;s &ldquo;<a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a>&rdquo;
+post which resonated the most with me:
+<blockquote><p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.</p><footer><strong>Matt Gemmell</strong></footer></blockquote></p>
 
 <p>For what I do with my website, Wordpress was overkill. It ended-up being
 <em>Yet-Another-Thing-I-Needed-To-Maintain-Security-Patches-On&trade;</em>.</p>
@@ -161,13 +156,13 @@ post which resonated the most with me:</p>
 pages and posts as plain-text text-files, all static files so no security-patches
 or vulnerabilities to worry about, and easily portable and backup-able. It combines
 a lot of things which I have grown to love: I can keep all my content in a Git
-repository so that I can publish from multiple locations (<em>if need be</em>), I can
-work on the site entirely in text (<code>vim</code> + <code>screen</code>), and it&#8217;s dead easy to
+repository so that I can publish from multiple locations (_if need be_), I can
+work on the site entirely in text (<code>vim</code> + <code>screen</code>), and it&#39;s dead easy to
 deploy and backup.</p>
 
 <h2>Migrating from Wordpress</h2>
 
-<p>It really didn&#8217;t take that long to migrate everything over to Octopress.</p>
+<p>It really didn&#39;t take that long to migrate everything over to Octopress.</p>
 
 <p>It took a few hours to get a cleaned-up import of my old Wordpress content.
 Based on the recommendation of others, I used <a href="https://github.com/thomasf/exitwp">exitwp</a>
@@ -183,33 +178,33 @@ job overall though.</p>
 
 <p>From there, I spent some time looking through the guts of the Octopress source
 code getting acquainted with things and seeing how I might be able to fiddle
-with some of its inner fiddly-bits. It&#8217;s written with native support for
-customization, trying to keep a clear separation between the core &#8220;code&#8221; of
-the site (<em>which can be overwritten during a future upgrade</em>) versus any
-&#8220;customization&#8221; files which the user might make changes too. It&#8217;s a fantastic
-paradigm and one that you don&#8217;t often see too much of in projects.</p>
+with some of its inner fiddly-bits. It&#39;s written with native support for
+customization, trying to keep a clear separation between the core &ldquo;code&rdquo; of
+the site (_which can be overwritten during a future upgrade_) versus any
+&ldquo;customization&rdquo; files which the user might make changes too. It&#39;s a fantastic
+paradigm and one that you don&#39;t often see too much of in projects.</p>
 
-<p>Last but not least, I spent some time tweaking the theme to my tasting (<em>&#8230;a
-bit of pepper here, a bit of salt there&#8230;</em>). As I mentioned above, it natively
+<p>Last but not least, I spent some time tweaking the theme to my tasting (_&hellip;a
+bit of pepper here, a bit of salt there&hellip;_). As I mentioned above, it natively
 carves out files which are earmarked for user-customizations, where you can
-tweak the CSS (SASS), colors, page/sidebar dimensions, etc. It&#8217;s all just
+tweak the CSS (SASS), colors, page/sidebar dimensions, etc. It&#39;s all just
 extremely well-thought-out and a joy to use and extend.</p>
 
 <h2>Ending Thoughts</h2>
 
-<p>This has been a fun pet project for me.  It&#8217;s the first time I&#8217;ve used a Ruby environment.
-It&#8217;s also the first time I&#8217;ve played with <a href="http://sass-lang.com/">SASS</a> (<code>*.scss</code>),
+<p>This has been a fun pet project for me.  It&#39;s the first time I&#39;ve used a Ruby environment.
+It&#39;s also the first time I&#39;ve played with <a href="http://sass-lang.com/">SASS</a> (<code>*.scss</code>),
 and boy is it going to be hard to go back to writing plain-old CSS.
-SASS&#8217;s <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">color functions</a>
+SASS&#39;s <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">color functions</a>
 are ridiculously slick: being able to do things like <code>desaturate(lighten($nav-bg, 8), 15)</code>
-in a <code>*.scss</code> file is <em>awesome</em> and makes tweaking a site&#8217;s color-scheme
+in a <code>*.scss</code> file is <em>awesome</em> and makes tweaking a site&#39;s color-scheme
 oh-so-much easier.</p>
 
-<p>I&#8217;m a bit sad to have lost the lifestream (<a href="https://github.com/dcramer/wp-lifestream/">wp-lifestream</a>)
-functionality from my old Wordpress site. But then again I&#8217;m already doing
-full exports of most of my lifestream&#8217;d websites (Google Reader, Delicious),
+<p>I&#39;m a bit sad to have lost the lifestream (<a href="https://github.com/dcramer/wp-lifestream/">wp-lifestream</a>)
+functionality from my old Wordpress site. But then again I&#39;m already doing
+full exports of most of my lifestream&#39;d websites (Google Reader, Delicious),
 so it might not be too hard to generate static lifestream pages using a
-<code>cronjob</code> or something. That&#8217;s a project for another day&#8230;</p>
+<code>cronjob</code> or something. That&#39;s a project for another day&hellip;</p>
 
 <h2>Useful Links</h2>
 
@@ -225,7 +220,6 @@ Tool for converting Wordpress export XML to the Jekyll blog engine.</li>
 <li><a href="http://www.vim.org/scripts/script.php?script_id=3835">vim-octopress</a> -
 Vim syntax highlighting mode for Octopress-flavored <code>*.markdown</code> files.</li>
 </ul>
-
 </div>
 
 
@@ -417,7 +411,7 @@ Vim syntax highlighting mode for Octopress-flavored <code>*.markdown</code> file
 
 <section class="tag-cloud">
   <h1>Tags</h1>
-  <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> 
+  <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> 
 </section>
 
 

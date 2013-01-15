@@ -122,62 +122,61 @@ Maintaining Online Identities
   </header>
 
 <div class="entry-content"><p>I stumbled across this neat site called <a href="http://www.clipperz.com/">Clipperz</a> a
-few weeks back. On the surface, it&#8217;s &#8221;<em>a free and anonymous online password
-manager</em>&#8221;. This was immediately interesting to me because I&#8217;d really like to
+few weeks back. On the surface, it&#39;s &ldquo;_a free and anonymous online password
+manager_&rdquo;. This was immediately interesting to me because I&#39;d really like to
 find a (secure!) web-based password manager.</p>
 
 <!-- more -->
 
-
-<p>More and more lately, I&#8217;ve been
+<p>More and more lately, I&#39;ve been
 trying to find web apps that can replace the desktop applications I use on a
-daily basis. It&#8217;s just so incredibly convenient to have the portability to be
+daily basis. It&#39;s just so incredibly convenient to have the portability to be
 able to do everything you need from inside a web-browser, and more importantly
 to have the persistent-state data stored on the server-side rather than on
-each individual machine I use throughout the day. I&#8217;m already a huge fan of
-webapps like <a href="http://del.icio.us/tduckles">del.icio.us</a> (<em>for tracking all my
-bookmarks</em>) and <a href="http://www.google.com/reader/">Google Reader</a> (<em>for all my
-RSS aggregation and reading needs</em>), and finding a web-based password manager
+each individual machine I use throughout the day. I&#39;m already a huge fan of
+webapps like <a href="http://del.icio.us/tduckles">del.icio.us</a> (_for tracking all my
+bookmarks_) and <a href="http://www.google.com/reader/">Google Reader</a> (_for all my
+RSS aggregation and reading needs_), and finding a web-based password manager
 would be ideal. It really becomes a chore remembering what username or e-mail
 address I registered with at various websites: Amazon, eBay, Newegg, Google,
-Yahoo, credit cards, travel sites, online bill pay, banks, etc. (Oy!) It&#8217;s
-just a lot of identities to juggle. I&#8217;ve thought about using
-<a href="http://keepass.info/">KeePass</a> or something, but that&#8217;s a desktop app and I&#8217;d
+Yahoo, credit cards, travel sites, online bill pay, banks, etc. (Oy!) It&#39;s
+just a lot of identities to juggle. I&#39;ve thought about using
+<a href="http://keepass.info/">KeePass</a> or something, but that&#39;s a desktop app and I&#39;d
 have to keep my database in-sync between work and home.</p>
 
-<p>What really interested me about Clipperz is their claim at being a &#8220;zero-
-knowledge&#8221; web-application: they only store encrypted data on their server-
+<p>What really interested me about Clipperz is their claim at being a &ldquo;zero-
+knowledge&rdquo; web-application: they only store encrypted data on their server-
 side, and use Javascript to decrypt the data client-side based on the username
 and password which you supply. Your password is never sent to the server at
-all; it&#8217;s merely used to decrypt the data locally. That&#8217;s a pretty slick idea,
-IMO. But, I&#8217;m also a little nervous about trusting some third-party website
-will all my personal sensitive online account information. So, I&#8217;m tempted to
-sit down and write my own webapp to recreate that wheel, except that it&#8217;s all
-code I can vouch for and know that it&#8217;s not secretly sending my data off to
+all; it&#39;s merely used to decrypt the data locally. That&#39;s a pretty slick idea,
+IMO. But, I&#39;m also a little nervous about trusting some third-party website
+will all my personal sensitive online account information. So, I&#39;m tempted to
+sit down and write my own webapp to recreate that wheel, except that it&#39;s all
+code I can vouch for and know that it&#39;s not secretly sending my data off to
 some third-party site. You can already find open-source Javascript-based
-implementations of the various crypto algorithms that I&#8217;d need to use. And it
+implementations of the various crypto algorithms that I&#39;d need to use. And it
 seems like a simple AJAX-based webapp to save/load data from the server.</p>
 
-<p>Also really intriguing is Clipperz&#8217; one-click-sign-in feature. They have a
+<p>Also really intriguing is Clipperz&#39; one-click-sign-in feature. They have a
 Javascript bookmark which pulls HTML FORM information off a given login page
 and then allows you to link the various FORM INPUT fields with the appropriate
-data-fields on the &#8220;card&#8221; for that website (e.g. username, password). The one-
+data-fields on the &ldquo;card&rdquo; for that website (e.g. username, password). The one-
 click sign-in then just has to do a HTTP POST to the desired web-address with
-the correct FORM data to act just like the real login page. It&#8217;s simple
+the correct FORM data to act just like the real login page. It&#39;s simple
 enough, but that seems like the real time-saver here. Not only could you have
 a webapp which stores all your personal data, but it also provides a quick
 launchpad to login any site you need. That just takes it a step further and
-makes the webapp almost a blackbox: you don&#8217;t really <em>need</em> to know what your
+makes the webapp almost a blackbox: you don&#39;t really <em>need</em> to know what your
 username and password is anymore because the webapp database knows it and can
-feed it to the target website&#8217;s login form for you.</p>
+feed it to the target website&#39;s login form for you.</p>
 
-<p>This just seems like a really awesome idea, and I&#8217;m really tempted to just use
-Clipperz natively so that I don&#8217;t have to re-invent the wheel, but I&#8217;m still
-just nervous about using someone else&#8217;s website as a database to store all my
-personal sensitive data. It&#8217;s basically just a trust issue, and I don&#8217;t think
+<p>This just seems like a really awesome idea, and I&#39;m really tempted to just use
+Clipperz natively so that I don&#39;t have to re-invent the wheel, but I&#39;m still
+just nervous about using someone else&#39;s website as a database to store all my
+personal sensitive data. It&#39;s basically just a trust issue, and I don&#39;t think
 I have any good reason to trust that their Javascript code will never do
-anything malicious. I&#8217;d much rather control the data myself on my private
-webserver. If only Clipperz was a SourceForge project&#8230; ;)</p>
+anything malicious. I&#39;d much rather control the data myself on my private
+webserver. If only Clipperz was a SourceForge project&hellip; ;)</p>
 </div>
 
 
@@ -369,7 +368,7 @@ webserver. If only Clipperz was a SourceForge project&#8230; ;)</p>
 
 <section class="tag-cloud">
   <h1>Tags</h1>
-  <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> 
+  <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> 
 </section>
 
 

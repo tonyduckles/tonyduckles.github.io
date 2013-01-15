@@ -121,25 +121,24 @@ ZFS: The Last Word in Filesystems
     
   </header>
 
-<div class="entry-content"><p>I&#8217;ve been spending a lot of time lately reading-up on different options since
+<div class="entry-content"><p>I&#39;ve been spending a lot of time lately reading-up on different options since
 my current home file-server setup is slowly running out of disk-space. Sure, I
-could just throw some new HDD&#8217;s in there, but the inner-geek in me really
-wants to setup a new system that has both redundancy and scalability &#8211;
+could just throw some new HDD&#39;s in there, but the inner-geek in me really
+wants to setup a new system that has both redundancy and scalability &ndash;
 something more robust and future-proof.</p>
 
 <p>In reading through different online forums, the topic of ZFS-based systems
-kept coming-up again and again. I had heard the term &#8220;ZFS&#8221; thrown around
-before but I had never really spent the time to read-up on it. It&#8217;s just
+kept coming-up again and again. I had heard the term &ldquo;ZFS&rdquo; thrown around
+before but I had never really spent the time to read-up on it. It&#39;s just
 another filesystem, right? How fancy can it be?</p>
 
-<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &#8221;<em>just another
-filesystem</em>&#8220;&#8230;</p>
+<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &ldquo;_just another
+filesystem_&rdquo;&hellip;</p>
 
 <!-- more -->
 
-
 <ul>
-<li>It&#8217;s a
+<li>It&#39;s a
 <a href="http://blogs.sun.com/bonwick/entry/rampant_layering_violation">filesystem, logical volume manager, and software RAID subsystem</a>
 all wrapped-up into one end-to-end system.</li>
 <li>It does <a href="http://blogs.sun.com/bonwick/entry/zfs_end_to_end_data">end-to-end checksums</a>,
@@ -148,19 +147,18 @@ that was previously written to disk.</li>
 <li>It is a transactional file system, which guarantees a consistent on-disk
 data-state even with catastrophic failures like a power loss.</li>
 <li>You can do data scrubbing online, as opposed to the normal Linux solution
-of ext2/ext3/ext4 where you can only &#8220;fsck&#8221; a filesystem offline.</li>
-<li>It uses a copy-on-write strategy which makes doing filesystem snapshot&#8217;ing
+of ext2/ext3/ext4 where you can only &ldquo;fsck&rdquo; a filesystem offline.</li>
+<li>It uses a copy-on-write strategy which makes doing filesystem snapshot&#39;ing
 a breeze. For example, you could setup a cronjob to take nightly snapshots
 of your filesystem to facilitate incremental backups, i.e. allowing you to
 go back in time and recover old-states of files.</li>
 <li>It has <a href="http://blogs.sun.com/bonwick/entry/raid_z">RAID-Z support</a>, which
 is similar to RAID-5/RAID-6 except without the potentially-fatal
-&#8221;<em>RAID-5 write hole</em>&#8221; problem, in part thanks to the copy-on-write strategy.</li>
+&ldquo;_RAID-5 write hole_&rdquo; problem, in part thanks to the copy-on-write strategy.</li>
 <li>You can <a href="http://dlc.sun.com/osol/docs/content/ZFSADMIN/gbchx.html">replicate ZFS filesystems</a>
 (<code>zfs send</code> and <code>zfs receive</code>), snapshots and all, making it dead-easy to
 backup ZFS filesystems to remote machines.</li>
 </ul>
-
 
 <p>Very, very cool stuff! The more I read about it, the more I wanted it for my
 next-generation file-server solution. In particular, I really love the idea of
@@ -169,16 +167,16 @@ the disks are serving up garbage-data or if somehow bits have mysteriously
 been corrupted on-disk (as unlikely as that might be).</p>
 
 <p>In reading about all these various historical problems that ZFS sets out to
-address, I&#8217;m really surprised that more OSes haven&#8217;t tried to adopt superior
+address, I&#39;m really surprised that more OSes haven&#39;t tried to adopt superior
 filesystem technology. The classic problem for so many Windows-users seems to
-be that their installs get &#8220;corrupt&#8221;, likely usually due to folks forcibly
+be that their installs get &ldquo;corrupt&rdquo;, likely usually due to folks forcibly
 powering-off their computers before the hard-drives have a chance to flush
-their write-buffer to disk. And then folks get to cope with BSOD&#8217;s or broken
+their write-buffer to disk. And then folks get to cope with BSOD&#39;s or broken
 Windows installs. Sad times for everyone. Filesystems seem like such a
-foundational part of the OS that you&#8217;d expect companies would spend the time
+foundational part of the OS that you&#39;d expect companies would spend the time
 to make them as robust as possible. I read some rumors that Apple was planning
 to incorporate ZFS into OSX a few years back, but apparently that fell apart
-for some reason. Sad&#8230;</p>
+for some reason. Sad&hellip;</p>
 
 <p>Kudos to the Sun folks for designing such a fantastic filesystem and then
 open-sourcing it!</p>
@@ -373,7 +371,7 @@ open-sourcing it!</p>
 
 <section class="tag-cloud">
   <h1>Tags</h1>
-  <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> 
+  <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> 
 </section>
 
 

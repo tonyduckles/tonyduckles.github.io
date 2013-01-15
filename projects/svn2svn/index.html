@@ -93,25 +93,24 @@
 <h2>Features</h2>
 
 <ul>
-<li><strong>Meant for replaying history into an &#8220;empty target location</strong>. This could be
+<li><strong>Meant for replaying history into an &ldquo;empty target location</strong>. This could be
 an empty target repo or simply an empty folder/branch in the target repo.</li>
-<li><strong>Maintains logical history (ancestry) when possible</strong>, e.g. uses &#8220;svn copy&#8221;
+<li><strong>Maintains logical history (ancestry) when possible</strong>, e.g. uses &quot;svn copy&rdquo;
 for renames.</li>
 <li><strong>Maintains original commit messages</strong>.</li>
 <li><strong>Optionally maintain source commit authors (<code>svn:author</code>) and commit timestamps
-(<code>svn:date</code>)</strong>.  Requires a &#8220;pre-revprop-change&#8221; hook script in the target
-repo, to be able to change the &#8221;<code>svn:author</code>&#8221; and &#8221;<code>svn:date</code>&#8221; revprops after
+(<code>svn:date</code>)</strong>.  Requires a &ldquo;pre-revprop-change&rdquo; hook script in the target
+repo, to be able to change the &ldquo;<code>svn:author</code>&rdquo; and &ldquo;<code>svn:date</code>&rdquo; revprops after
 target commits have been made.</li>
-<li><strong>Optionally maintain identical revision #&#8217;s between source vs. target repo</strong>.
-Effectively requires that you&#8217;re replaying into an empty target repo,
+<li><strong>Optionally maintain identical revision #&#39;s between source vs. target repo</strong>.
+Effectively requires that you&#39;re replaying into an empty target repo,
 or rather that the first source repo revision to be replayed is less than
-the last target repo revision. Create blank &#8220;padding&#8221; revisions in the target
+the last target repo revision. Create blank &ldquo;padding&rdquo; revisions in the target
 repo as needed.</li>
 <li><strong>Optionally run an external shell script before each replayed commit</strong>,
 to give the ability to dynamically exclude or modify files as part
 of the replay.</li>
 </ul>
-
 
 <h2>Requirements</h2>
 
@@ -123,54 +122,52 @@ Windows-based usage, recommend using <a href="http://www.cygwin.com/">Cygwin</a>
 best compatibility.</li>
 </ul>
 
-
 <h2>Overview</h2>
 
 <p>This is a utility for replicating the revision history from a source path in
 a source SVN repository to a target path in a target SVN repository. In other
-words, it &#8220;replays the history&#8221; of a given source SVN repository/branch/path
+words, it &ldquo;replays the history&rdquo; of a given source SVN repository/branch/path
 into a target SVN repository/branch/path.</p>
 
 <p>This can be useful to create filtered version of a source SVN repository. For
 example, say that you have a huge SVN repository with a <em>lot</em> of old branch
 history which is taking up a lot of disk-space and not serving a lot of purpose
-going forward.  You can this utility to replay/filter just the &#8220;/trunk&#8221; SVN
-history into a new repository, so that things like &#8220;svn log&#8221; and &#8220;svn blame&#8221;
+going forward.  You can this utility to replay/filter just the &ldquo;/trunk&rdquo; SVN
+history into a new repository, so that things like &ldquo;svn log&rdquo; and &ldquo;svn blame&rdquo;
 will still show the correct (logical) history/ancestry, even though we end-up
-generating new commits which will have newer commit-dates and revision #&#8217;s
-(<em>though this script can optionally maintain the original commit-dates and
-revision #&#8217;s if desired</em>).</p>
+generating new commits which will have newer commit-dates and revision #&#39;s
+(_though this script can optionally maintain the original commit-dates and
+revision #&#39;s if desired_).</p>
 
-<p>While this replay process will obviously run faster if you&#8217;re running between
+<p>While this replay process will obviously run faster if you&#39;re running between
 both a local source and target repositories, none of this <em>requires</em> direct
-access to the repo server. You could access both the source and target repo&#8217;s
+access to the repo server. You could access both the source and target repo&#39;s
 over standard <code>http://</code>, <code>svn://</code>, <code>svn+ssh://</code>, etc. methods.</p>
 
 <h2>Usage</h2>
 
 <p>See <code>svnreplay.py --help</code>:</p>
-
-<pre><code>$ ./svnreplay.py --help
+<div class="highlight"><pre><code class="text">$ ./svnreplay.py --help
 svn2svn, version 1.7.0
 &lt;http://nynim.org/projects/svn2svn&gt; &lt;https://github.com/tonyduckles/svn2svn&gt;
 
 Usage: svnreplay.py [OPTIONS] source_url target_url
 
 Replicate (replay) history from one SVN repository to another. Maintain
-logical ancestry wherever possible, so that 'svn log' on the replayed repo
+logical ancestry wherever possible, so that &#39;svn log&#39; on the replayed repo
 will correctly follow file/folder renames.
 
 Examples:
   Create a copy of only /trunk from source repo, starting at r5000
   $ svnadmin create /svn/target
-  $ svn mkdir -m 'Add trunk' file:///svn/target/trunk
+  $ svn mkdir -m &#39;Add trunk&#39; file:///svn/target/trunk
   $ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
     1. The target_url will be checked-out to ./_wc_target
     2. The first commit to http://server/source/trunk at/after r5000 will be
        exported &amp; added into _wc_target
     3. All revisions affecting http://server/source/trunk (starting at r5000)
        will be replayed to _wc_target. Any add/copy/move/replaces that are
-       copy-from'd some path outside of /trunk (e.g. files renamed on a
+       copy-from&#39;d some path outside of /trunk (e.g. files renamed on a
        /branch and branch was merged into /trunk) will correctly maintain
        logical ancestry where possible.
 
@@ -184,7 +181,7 @@ Examples:
        logical ancestry where possible.
 
 Options:
-      --version         show program's version number and exit
+      --version         show program&#39;s version number and exit
   -h, --help            show this help message and exit
   -v, --verbose         Enable additional output (use -vv or -vvv for more).
   -a, --archive         Archive/mirror mode; same as -UDP (see REQUIRES
@@ -192,29 +189,29 @@ Options:
                         Maintain same commit author, same commit time, and
                         file/dir properties.
   -U, --keep-author     Maintain same commit authors (svn:author) as source.
-                        (REQUIRES 'pre-revprop-change' hook script to allow
-                        'svn:author' changes.)
+                        (REQUIRES &#39;pre-revprop-change&#39; hook script to allow
+                        &#39;svn:author&#39; changes.)
   -D, --keep-date       Maintain same commit time (svn:date) as source.
-                        (REQUIRES 'pre-revprop-change' hook script to allow
-                        'svn:date' changes.)
+                        (REQUIRES &#39;pre-revprop-change&#39; hook script to allow
+                        &#39;svn:date&#39; changes.)
   -P, --keep-prop       Maintain same file/dir SVN properties as source.
-  -R, --keep-revnum     Maintain same rev #'s as source. Creates placeholder
-                        target revisions (by modifying a 'svn2svn:keep-revnum'
+  -R, --keep-revnum     Maintain same rev #&#39;s as source. Creates placeholder
+                        target revisions (by modifying a &#39;svn2svn:keep-revnum&#39;
                         property at the root of the target repo).
   -c, --continue        Continue from last source commit to target (based on
                         svn2svn:* revprops).
   -f, --force           Allow replaying into a non-empty target-repo folder.
   -r, --revision=ARG    Revision range to replay from source_url.
                         A revision argument can be one of:
-                           START        Start rev # (end will be 'HEAD')
-                           START:END    Start and ending rev #'s
+                           START        Start rev # (end will be &#39;HEAD&#39;)
+                           START:END    Start and ending rev #&#39;s
                         Any revision # formats which SVN understands are
-                        supported, e.g. 'HEAD', '{2010-01-31}', etc.
+                        supported, e.g. &#39;HEAD&#39;, &#39;{2010-01-31}&#39;, etc.
   -u, --log-author      Append source commit author to replayed commit
                         mesages.
   -d, --log-date        Append source commit time to replayed commit messages.
   -l, --limit=NUM       Maximum number of source revisions to process.
-  -n, --dry-run         Process next source revision but don't commit changes
+  -n, --dry-run         Process next source revision but don&#39;t commit changes
                         to target working-copy (forces --limit=1).
   -x, --verify          Verify ancestry and content for changed paths in
                         commit after every target commit or last target
@@ -225,8 +222,7 @@ Options:
                         commit, e.g. to modify file-content during replay.
                         Called as: CMD [wc_path] [source_rev]
       --debug           Enable debugging output (same as -vvv).
-</code></pre>
-
+</code></pre></div>
 <h2>Side Effects</h2>
 
 <ul>
@@ -234,65 +230,57 @@ Options:
 actions from the source repo, to get the history to replay and to get the
 file contents at each step along teh way.</li>
 <li>You must have commit access to the target repo. Additionally, for some of
-the optional command-line args, you&#8217;ll need access to the target repo to
-setup hook scripts, e.g. &#8220;pre-revprop-change&#8221;.</li>
+the optional command-line args, you&#39;ll need access to the target repo to
+setup hook scripts, e.g. &ldquo;pre-revprop-change&rdquo;.</li>
 <li>This script will create some folders off of your current working directory:
 
 <ul>
-<li>&#8220;<code>_wc_target</code>&#8221;: This is the checkout of the target_url, where we replay
+<li>&ldquo;<code>_wc_target</code>&rdquo;: This is the checkout of the target_url, where we replay
 actions into and where we commit to the target repo. You can safely
 remove this directory after a run, and the script will do a fresh
-&#8220;svn checkout&#8221; (if needed) when starting the next time.</li>
-<li>&#8220;<code>_wc_target_tmp</code>&#8221;: This is a temporary folder, which will only be created
+&ldquo;svn checkout&rdquo; (if needed) when starting the next time.</li>
+<li>&ldquo;<code>_wc_target_tmp</code>&rdquo;: This is a temporary folder, which will only be created
 if using <code>--keep-revnum</code> mode and it should only exist for brief periods
 of time. This is where we commit dummy/padding revisions to the target repo,
 checking out the root folder of the target repo and modifying a
-&#8221;<code>svn2svn:keep-revnum</code>&#8221; property, i.e. a small change to trigger a commit
+&ldquo;<code>svn2svn:keep-revnum</code>&rdquo; property, i.e. a small change to trigger a commit
 and in a location that will likely go un-noticed in the final target repo.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-
 
 <h2>Examples</h2>
 
 <p><strong>Create a copy of only /trunk from source repo, starting at r5000</strong></p>
-
-<pre><code>$ svnadmin create /svn/target
-$ svn mkdir -m 'Add trunk' file:///svn/target/trunk
+<div class="highlight"><pre><code class="text">$ svnadmin create /svn/target
+$ svn mkdir -m &#39;Add trunk&#39; file:///svn/target/trunk
 $ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
-</code></pre>
-
+</code></pre></div>
 <ol>
 <li>The <code>target_url</code> will be checked-out to <code>./_wc_target</code>.</li>
 <li>The first commit to <code>http://server/source/trunk</code> at/after r5000 will be
 exported &amp; added into <code>_wc_target</code>.</li>
 <li>All revisions affecting <code>http://server/source/trunk</code> (starting at r5000)
 will be replayed to <code>_wc_target</code>. Any add/copy/move/replaces that are
-copy-from&#8217;d some path outside of /trunk (e.g. files renamed on a
+copy-from&#39;d some path outside of /trunk (e.g. files renamed on a
 /branch and branch was merged into /trunk) will correctly maintain
 logical ancestry where possible.</li>
 </ol>
 
-
 <p><strong>Use continue-mode (-c) to pick-up where the last run left-off</strong></p>
-
-<pre><code>$ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
-</code></pre>
-
+<div class="highlight"><pre><code class="text">$ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
+</code></pre></div>
 <ol>
 <li>The <code>target_url</code> will be checked-out to <code>./_wc_target</code>, if not already
 checked-out</li>
 <li>All new revisions affecting <code>http://server/source/trunk</code> starting from
 the last replayed revision to <code>file:///svn/target/trunk</code> (based on the
-&#8221;<code>svn2svn:*</code>&#8221; revprops) will be replayed to <code>_wc_target</code>, maintaining all
+&ldquo;<code>svn2svn:*</code>&rdquo; revprops) will be replayed to <code>_wc_target</code>, maintaining all
 logical ancestry where possible.</li>
 </ol>
 
-
 <h2>Credits</h2>
 
-<p>This project borrows a lot of code from the &#8220;hgsvn&#8221; project.  Many thanks to
+<p>This project borrows a lot of code from the &ldquo;hgsvn&rdquo; project.  Many thanks to
 the folks who have contributed to the hgsvn project, for writing code that is
 easily re-usable:</p>
 
@@ -301,21 +289,19 @@ easily re-usable:</p>
 <li><a href="https://bitbucket.org/andialbrecht/hgsvn/overview">https://bitbucket.org/andialbrecht/hgsvn/overview</a></li>
 </ul>
 
-
-<p>This project was originally inspired by this &#8220;svn2svn&#8221; project:<br/>
-<a href="http://code.google.com/p/svn2svn/">http://code.google.com/p/svn2svn/</a><br/>
-That project didn&#8217;t fully meet my needs, so I forked and ended-up rewriting
+<p>This project was originally inspired by this &ldquo;svn2svn&rdquo; project:<br>
+<a href="http://code.google.com/p/svn2svn/">http://code.google.com/p/svn2svn/</a><br>
+That project didn&#39;t fully meet my needs, so I forked and ended-up rewriting
 the majority of the code.</p>
 
 <h2>Links</h2>
 
 <ul>
-<li>Introduction: &#8221;<strong><a href="http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a></strong>&#8221;</li>
+<li>Introduction: &ldquo;**<a href="http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>**&rdquo;</li>
 <li>Project page: <a href="http://nynim.org/projects/svn2svn">http://nynim.org/projects/svn2svn</a></li>
 <li>Source code @ Github: <a href="https://github.com/tonyduckles/svn2svn">https://github.com/tonyduckles/svn2svn</a></li>
 <li>Source code @ git.nynim.org <a href="http://git.nynim.org/svn2svn.git">http://git.nynim.org/svn2svn.git</a></li>
 </ul>
-
 
   
     <footer>
@@ -443,7 +429,7 @@ the majority of the code.</p>
 
 <section class="tag-cloud">
   <h1>Tags</h1>
-  <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> 
+  <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> 
 </section>
 
 

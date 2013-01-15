@@ -124,19 +124,19 @@
 
 <div class="entry-content"><p>On my Windows machines at both work and home, I like to run <a href="http://www.cygwin.com/">Cygwin</a>
 to get a UNIX-like environment on Windows: <code>screen</code>, <code>ssh</code>, <code>grep</code>, etc.
-I use SSH&#8217;s <a href="https://hkn.eecs.berkeley.edu/~dhsu/ssh_public_key_howto.html">public key authentication</a>
+I use SSH&#39;s <a href="https://hkn.eecs.berkeley.edu/%7Edhsu/ssh_public_key_howto.html">public key authentication</a>
 pretty extensively to get password-less authentication to make it dead-easy
 (and quick!) to SSH around to different machines.</p>
 
-<p>On some of the non-UNIX machines at work, I couldn&#8217;t get SSH public-key auth
+<p>On some of the non-UNIX machines at work, I couldn&#39;t get SSH public-key auth
 working, but those machines <em>do</em> support Kerberos auth (binding to Active
 Directory). Based on my Google searches, all I could find were articles talking
 about compiling OpenSSH from source to get a working Kerberos-enabled version
 of OpenSSH on Cygwin. So, that made it sound like it would be a pain to get
 this working.  But, after doing some more playing around, I found this was
-actually easy to setup once you understand the various pieces. Since I couldn&#8217;t
+actually easy to setup once you understand the various pieces. Since I couldn&#39;t
 find any helpful information online when I first tried to get this working, I
-figured I&#8217;d write up what worked for me in case that helps other people.</p>
+figured I&#39;d write up what worked for me in case that helps other people.</p>
 
 </div>
 
@@ -191,7 +191,7 @@ figured I&#8217;d write up what worked for me in case that helps other people.</
   </header>
 
 <div class="entry-content"><p>Just over a year ago, I built a new home file-server since I was quickly
-outgrowing my existing storage capacity. Rather than just dropping more HDD&#8217;s
+outgrowing my existing storage capacity. Rather than just dropping more HDD&#39;s
 into the existing hardware I had running, I succumbed to geek techno-lust and
 opted to explore new technologies: <strong>ZFS</strong> and <strong>VMWare ESXi</strong>.</p>
 
@@ -247,17 +247,17 @@ opted to explore new technologies: <strong>ZFS</strong> and <strong>VMWare ESXi<
     
   </header>
 
-<div class="entry-content"><p>I&#8217;ve found myself in a (potentially unique) situation where we have a
+<div class="entry-content"><p>I&#39;ve found myself in a (potentially unique) situation where we have a
 <em>gi-normous</em> <a href="http://subversion.apache.org/">Subversion</a> repository at work and
-we&#8217;ve been exploring ways on how to trim off some of the fat but still keep all
+we&#39;ve been exploring ways on how to trim off some of the fat but still keep all
 the logical history so that we could still use things like <code>svn blame</code> to
 drill-down into code-history. Our central SVN repository is some 4-5 years old
-and a whopping 300GB+ on-disk. (Yowza!) What we&#8217;d really like to do is dump
+and a whopping 300GB+ on-disk. (Yowza!) What we&#39;d really like to do is dump
 just the <code>/trunk</code> history out to a new repo and roll forward with that, ditching
 any historical baggage from old topic branches (<code>/branches</code>). The trouble is,
-I haven&#8217;t been able to find any tools to do this.</p>
+I haven&#39;t been able to find any tools to do this.</p>
 
-<p>So, I ended-up writing my own tool to do this. But, first, some back-story&#8230;</p>
+<p>So, I ended-up writing my own tool to do this. But, first, some back-story&hellip;</p>
 
 </div>
 
@@ -312,12 +312,12 @@ I haven&#8217;t been able to find any tools to do this.</p>
   </header>
 
 <div class="entry-content"><p><img class="right" src="/images/2011/12/img_Terminal.png" width="180" height="180">
-About a year and a half ago, I stumbled upon Ryan Tomayko&#8217;s &#8221;<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>&#8221;
+About a year and a half ago, I stumbled upon Ryan Tomayko&#39;s &ldquo;<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>&rdquo;
 repository on Github. The moment I saw it, I thought it was a <em>great</em> idea:
-the idea of managing all your <code>$HOME</code> directory &#8220;dot-files&#8221; in a Git repository.
+the idea of managing all your <code>$HOME</code> directory &ldquo;dot-files&rdquo; in a Git repository.
 That single idea led me on a personal crusade to better understand all the
-different configuration files that live in your UNIX (<em>Linux, Mac OSX, etc.</em>)
-home directory, and the end-result was creating my own &#8221;<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>&#8221;
+different configuration files that live in your UNIX (_Linux, Mac OSX, etc._)
+home directory, and the end-result was creating my own &ldquo;<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>&rdquo;
 Git repository for synchronizing/tracking/deploying my dot-files between the
 various machines I work upon.</p>
 
@@ -377,14 +377,12 @@ command-line shell experience.</p>
     
   </header>
 
-<div class="entry-content"><p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:</p>
-
-<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p><footer><strong>Octopress</strong> <cite><a href='https://github.com/imathis/octopress'>github.com/imathis/octopress/&hellip;</a></cite></footer></blockquote>
-
+<div class="entry-content"><p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:
+<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p><footer><strong>Octopress</strong> <cite><a href='https://github.com/imathis/octopress'>github.com/imathis/octopress/&hellip;</a></cite></footer></blockquote></p>
 
 <p>Sweet indeed! The more I read about it, the more intrigued I became. After a
 few hours spent exploring the code, importing the posts/pages from my Wordpress
-install into Octopress, and tweaking the default theme to my taste, I&#8217;ve taken
+install into Octopress, and tweaking the default theme to my taste, I&#39;ve taken
 the jump and moved my site over to using the Octopress platform.</p>
 
 </div>
@@ -439,19 +437,19 @@ the jump and moved my site over to using the Octopress platform.</p>
     
   </header>
 
-<div class="entry-content"><p>I&#8217;ve been spending a lot of time lately reading-up on different options since
+<div class="entry-content"><p>I&#39;ve been spending a lot of time lately reading-up on different options since
 my current home file-server setup is slowly running out of disk-space. Sure, I
-could just throw some new HDD&#8217;s in there, but the inner-geek in me really
-wants to setup a new system that has both redundancy and scalability &#8211;
+could just throw some new HDD&#39;s in there, but the inner-geek in me really
+wants to setup a new system that has both redundancy and scalability &ndash;
 something more robust and future-proof.</p>
 
 <p>In reading through different online forums, the topic of ZFS-based systems
-kept coming-up again and again. I had heard the term &#8220;ZFS&#8221; thrown around
-before but I had never really spent the time to read-up on it. It&#8217;s just
+kept coming-up again and again. I had heard the term &ldquo;ZFS&rdquo; thrown around
+before but I had never really spent the time to read-up on it. It&#39;s just
 another filesystem, right? How fancy can it be?</p>
 
-<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &#8221;<em>just another
-filesystem</em>&#8220;&#8230;</p>
+<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &ldquo;_just another
+filesystem_&rdquo;&hellip;</p>
 
 </div>
 
@@ -505,7 +503,7 @@ filesystem</em>&#8220;&#8230;</p>
     
   </header>
 
-<div class="entry-content"><p>I have confidence in Google&#8217;s ability to keep their e-mail service up-and-
+<div class="entry-content"><p>I have confidence in Google&#39;s ability to keep their e-mail service up-and-
 running and keep proper backups of data, but my e-mail history is <em>my</em> data
 and I like to have my own copy of it. Since Google provides access to your
 Google Apps (and Gmail) e-mail over IMAP, you can do all kinds of things using
@@ -514,11 +512,11 @@ IMAP.</p>
 
 <p>I run an Ubuntu box at home and it was easy to install the <code>dovecot-imapd</code>
 package to get an IMAP server installed. Since my box is behind my
-router/firewall, I&#8217;m wasn&#8217;t that concerned with tweaking Dovecot&#8217;s default
-configuration, but I&#8217;m sure you could fiddle with the config to ensure that
+router/firewall, I&#39;m wasn&#39;t that concerned with tweaking Dovecot&#39;s default
+configuration, but I&#39;m sure you could fiddle with the config to ensure that
 Dovecot only binds to <code>127.0.0.1</code>.</p>
 
-<p>From there, it&#8217;s just a matter of using <code>imapsync</code>, just like I ended-up
+<p>From there, it&#39;s just a matter of using <code>imapsync</code>, just like I ended-up
 using previously to
 <a href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
 
@@ -574,22 +572,58 @@ using previously to
     
   </header>
 
-<div class="entry-content"><p>Two years ago, I transitioned from using regular Gmail (i.e. &#8220;&#8230;@gmail.com&#8221;)
-to setting up Google Apps for &#8220;nynim.org&#8221; (i.e. &#8220;&#8230;@nynim.org&#8221;). I had found
+<div class="entry-content"><p>Two years ago, I transitioned from using regular Gmail (i.e. &ldquo;<a href="mailto:...@gmail.com">&hellip;@gmail.com</a>&rdquo;)
+to setting up Google Apps for &ldquo;nynim.org&rdquo; (i.e. &ldquo;<a href="mailto:...@nynim.org">&hellip;@nynim.org</a>&rdquo;). I had found
 the following article back then which gave me helpful hints on how to use
 <code>imapsync</code> to push data to my new Google Apps e-mail address:</p>
 
 <p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
 
 <p>I adapted that script for my own needs, and I was able to successfully copy
-all the mail from my regular Gmail account to my new Google Apps account.</p>
+all the mail from my regular Gmail account to my new Google Apps account.
+&lt;!&ndash; more &ndash;&gt;</p>
 
+<p>Here is the final script I ended-up with:</p>
+
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c">#!/bin/sh</span>
+</div><div class='line'> <span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
+</div><div class='line'> imapsync <span class="se">\</span>
+</div><div class='line'>   --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
+</div><div class='line'>   --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
+</div><div class='line'>   --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
+</div><div class='line'>   --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
+</div><div class='line'>   --useheader <span class="s1">&#39;Message-Id&#39;</span> --skipsize <span class="se">\</span>
+</div><div class='line'>   --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
+</div><div class='line'>   --split1 100 --split2 100 <span class="se">\</span>
+</div><div class='line'>   --maxage 50 <span class="se">\</span>
+</div><div class='line'>   --regexmess <span class="s1">&#39;s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g&#39;</span>
+</div></pre></td></tr></table></div></figure>
+
+<p>The <code>--syncinternaldates</code>, <code>--useheader &#39;Message-Id&#39;</code>,
+and <code>--skipsize</code> options are all recommended by the imapsync FAQ
+(search for &ldquo;Gmail&rdquo;):</p>
+
+<p><strong><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></strong></p>
+
+<p>I opted to use the <code>--passfile1/passfile2</code> options rather than passing in a
+plain-text password in via a command-line param for two reasons: first because
+anyone with access to your system can use <code>ps</code> to view active processes and
+hence would see your password plain-as-day; second because it just better
+abstracts the script-logic from the password-text, and we can control the
+file-permissions of those password files.</p>
+
+<p>All your Gmail labels should sync-over <em>automagically</em>. Since this is going
+Google-to-Google, because Google presents labels as separate IMAP folders in
+their Gmail IMAP implementation, the process above should sync and preserve
+all your Gmail labels for free.</p>
+
+<p>It&#39;s been a two years since I&#39;ve used this script, but I seem to remember it
+working pretty painlessly. I wanted to share it here for anyone else who might
+be looking to do this same thing.</p>
 </div>
 
   <footer>
     
-    
-    <p><a rel="full-article" href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">Read on &rarr;</a></p>
     
   </footer>
 
@@ -638,7 +672,7 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 
 <div class="entry-content"><p><a href="http://kotaku.com/5430723/what-to-wear+a"><img class="" src="/images/2010/08/500x_marioscloset.jpg"></a></p>
 
-<p>(<em>via <a href="http://kotaku.com/5430723/what-to-wear+a">kotaku.com</a></em>)</p>
+<p>(*via <a href="http://kotaku.com/5430723/what-to-wear+a">kotaku.com</a>*)</p>
 </div>
 
   <footer>
@@ -691,7 +725,7 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 
 <div class="entry-content"><p><a href="http://autocompleteme.com/"><img class="" src="/images/2010/08/autocompletemecom-howtoraise.jpg"></a></p>
 
-<p>(<em>via <a href="http://autocompleteme.com/">autocompleteme.com</a></em>)</p>
+<p>(*via <a href="http://autocompleteme.com/">autocompleteme.com</a>*)</p>
 
 <p>Google auto-complete hilarity.</p>
 </div>
@@ -717,7 +751,7 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
   
     <section>
   <h1>About Me</h1>
-  <p>My name is Tony Duckles. I&#8217;m a software developer by day; photographer, musician, and geek by night.</p>
+  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
 </section>
 
 <section>
@@ -763,7 +797,7 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 <section>
   <h1>On GitHub</h1>
   <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
@@ -775,7 +809,7 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
     <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
@@ -789,7 +823,7 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 
 <section class="tag-cloud">
   <h1>Tags</h1>
-  <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> 
+  <span class='rank-5'><a href='/blog/tags/cygwin'>cygwin</a></span> <span class='rank-5'><a href='/blog/tags/security'>security</a></span> <span class='rank-5'><a href='/blog/tags/sweetcron'>sweetcron</a></span> <span class='rank-5'><a href='/blog/tags/password'>password</a></span> <span class='rank-3'><a href='/blog/tags/rss'>rss</a></span> <span class='rank-3'><a href='/blog/tags/imap'>imap</a></span> <span class='rank-5'><a href='/blog/tags/iphone'>iphone</a></span> <span class='rank-5'><a href='/blog/tags/ssh'>ssh</a></span> <span class='rank-5'><a href='/blog/tags/videogame'>videogame</a></span> <span class='rank-5'><a href='/blog/tags/scifi'>scifi</a></span> <span class='rank-5'><a href='/blog/tags/delicious'>delicious</a></span> <span class='rank-5'><a href='/blog/tags/octopress'>octopress</a></span> <span class='rank-5'><a href='/blog/tags/supermariobros'>supermariobros</a></span> <span class='rank-5'><a href='/blog/tags/software'>software</a></span> <span class='rank-3'><a href='/blog/tags/zfs'>zfs</a></span> <span class='rank-5'><a href='/blog/tags/dotfiles'>dotfiles</a></span> <span class='rank-5'><a href='/blog/tags/vmware'>vmware</a></span> <span class='rank-3'><a href='/blog/tags/storage'>storage</a></span> <span class='rank-5'><a href='/blog/tags/esxi'>esxi</a></span> <span class='rank-5'><a href='/blog/tags/lifestream'>lifestream</a></span> <span class='rank-3'><a href='/blog/tags/backups'>backups</a></span> <span class='rank-3'><a href='/blog/tags/news'>news</a></span> <span class='rank-3'><a href='/blog/tags/email'>email</a></span> <span class='rank-5'><a href='/blog/tags/googlereader'>googlereader</a></span> <span class='rank-5'><a href='/blog/tags/firefly'>firefly</a></span> <span class='rank-5'><a href='/blog/tags/python'>python</a></span> <span class='rank-1'><a href='/blog/tags/humor'>humor</a></span> <span class='rank-5'><a href='/blog/tags/tv'>tv</a></span> <span class='rank-3'><a href='/blog/tags/gmail'>gmail</a></span> <span class='rank-1'><a href='/blog/tags/webapps'>webapps</a></span> <span class='rank-5'><a href='/blog/tags/svn'>svn</a></span> <span class='rank-5'><a href='/blog/tags/kerberos'>kerberos</a></span> <span class='rank-5'><a href='/blog/tags/legal'>legal</a></span> <span class='rank-1'><a href='/blog/tags/google'>google</a></span> <span class='rank-3'><a href='/blog/tags/videogames'>videogames</a></span> <span class='rank-5'><a href='/blog/tags/git'>git</a></span> 
 </section>
 
 
