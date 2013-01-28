@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-01-14T18:37:00-06:00</updated>
+  <updated>2013-01-27T22:57:32-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -799,7 +799,7 @@ be looking to do this same thing.</p>
 <link href="http://nynim.org/blog/2009/12/28/what-to-wear-a/"/>
 <updated>2009-12-28T23:20:00-06:00</updated>
 <id>http://nynim.org/blog/2009/12/28/what-to-wear-a</id>
-<category term="Quick Notes" />
+<category term="Humor" /><category term="Quick Notes" /><category term="Video Games" />
 
       <content type="html"><![CDATA[<p><a href="http://kotaku.com/5430723/what-to-wear+a"><img class="" src="http://nynim.org/images/2010/08/500x_marioscloset.jpg"></a></p>
 
@@ -817,7 +817,7 @@ be looking to do this same thing.</p>
 <link href="http://nynim.org/blog/2009/11/22/autocomplete-me/"/>
 <updated>2009-11-22T23:21:00-06:00</updated>
 <id>http://nynim.org/blog/2009/11/22/autocomplete-me</id>
-<category term="Quick Notes" />
+<category term="Humor" /><category term="Quick Notes" />
 
       <content type="html"><![CDATA[<p><a href="http://autocompleteme.com/"><img class="" src="http://nynim.org/images/2010/08/autocompletemecom-howtoraise.jpg"></a></p>
 
@@ -837,7 +837,7 @@ be looking to do this same thing.</p>
 <link href="http://nynim.org/blog/2009/11/13/geodefense/"/>
 <updated>2009-11-13T19:57:00-06:00</updated>
 <id>http://nynim.org/blog/2009/11/13/geodefense</id>
-<category term="Quick Notes" />
+<category term="Quick Notes" /><category term="Video Games" />
 
       <content type="html"><![CDATA[<p><a href="http://www.appolicio%20us.com/games/apps/24846-geodefense-lite-critical-thought-games"><img class="" src="http://nynim.org/images/2010/08/geodefense_1250610916.jpg"></a></p>
 
@@ -1029,7 +1029,7 @@ data?</p>
 <link href="http://kotaku.com/gaming/clips/minesweeper-the-movie-286639.php"/>
 <updated>2007-08-06T22:03:31-05:00</updated>
 <id>http://nynim.org/blog/2007/08/06/minesweeper-the-movie</id>
-<category term="Quick Notes" />
+<category term="Humor" /><category term="Quick Notes" />
 
       <content type="html"><![CDATA[<p>The guys over at College Humor have done it again, creating a faux movie
 trailer for
@@ -1155,7 +1155,7 @@ aggregating 24-7 for you and is accessible from any computer.</p>
 <link href="http://www.collegehumor.com/tag:streetfighterthelateryears"/>
 <updated>2006-11-27T22:43:12-06:00</updated>
 <id>http://nynim.org/blog/2006/11/27/street-fighter-the-later-years</id>
-<category term="Quick Notes" />
+<category term="Humor" /><category term="Quick Notes" /><category term="Video Games" />
 
       <content type="html"><![CDATA[<p>I don&#39;t know about you, but I remember playing a fair amount of
 <a href="http://en.wikipedia.org/wiki/Street_fighter#Street_Fighter_II">Street Fighter 2</a> back
@@ -1206,7 +1206,7 @@ season.</p>
 <link href="http://nynim.org/blog/2006/03/21/reblog-web-based-server-side-rss-aggregator/"/>
 <updated>2006-03-21T22:08:58-06:00</updated>
 <id>http://nynim.org/blog/2006/03/21/reblog-web-based-server-side-rss-aggregator</id>
-<category term="Web" />
+<category term="Software" /><category term="Web" />
 
       <content type="html"><![CDATA[<p>Like many people these days, I use RSS feeds to keep up on news from various
 feeds. But, with some of the higher traffic sites, since the RSS XML file only
