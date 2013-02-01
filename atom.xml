@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-01-27T22:57:32-06:00</updated>
+  <updated>2013-01-31T19:06:21-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -746,8 +746,9 @@ the following article back then which gave me helpful hints on how to use
 <p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
 
 <p>I adapted that script for my own needs, and I was able to successfully copy
-all the mail from my regular Gmail account to my new Google Apps account.
-&lt;!&ndash; more &ndash;&gt;</p>
+all the mail from my regular Gmail account to my new Google Apps account.</p>
+
+<!-- more -->
 
 <p>Here is the final script I ended-up with:</p>
 

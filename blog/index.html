@@ -580,50 +580,14 @@ the following article back then which gave me helpful hints on how to use
 <p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
 
 <p>I adapted that script for my own needs, and I was able to successfully copy
-all the mail from my regular Gmail account to my new Google Apps account.
-&lt;!&ndash; more &ndash;&gt;</p>
+all the mail from my regular Gmail account to my new Google Apps account.</p>
 
-<p>Here is the final script I ended-up with:</p>
-
-<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c">#!/bin/sh</span>
-</div><div class='line'> <span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
-</div><div class='line'> imapsync <span class="se">\</span>
-</div><div class='line'>   --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
-</div><div class='line'>   --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
-</div><div class='line'>   --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
-</div><div class='line'>   --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
-</div><div class='line'>   --useheader <span class="s1">&#39;Message-Id&#39;</span> --skipsize <span class="se">\</span>
-</div><div class='line'>   --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
-</div><div class='line'>   --split1 100 --split2 100 <span class="se">\</span>
-</div><div class='line'>   --maxage 50 <span class="se">\</span>
-</div><div class='line'>   --regexmess <span class="s1">&#39;s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g&#39;</span>
-</div></pre></td></tr></table></div></figure>
-
-<p>The <code>--syncinternaldates</code>, <code>--useheader &#39;Message-Id&#39;</code>,
-and <code>--skipsize</code> options are all recommended by the imapsync FAQ
-(search for &ldquo;Gmail&rdquo;):</p>
-
-<p><strong><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></strong></p>
-
-<p>I opted to use the <code>--passfile1/passfile2</code> options rather than passing in a
-plain-text password in via a command-line param for two reasons: first because
-anyone with access to your system can use <code>ps</code> to view active processes and
-hence would see your password plain-as-day; second because it just better
-abstracts the script-logic from the password-text, and we can control the
-file-permissions of those password files.</p>
-
-<p>All your Gmail labels should sync-over <em>automagically</em>. Since this is going
-Google-to-Google, because Google presents labels as separate IMAP folders in
-their Gmail IMAP implementation, the process above should sync and preserve
-all your Gmail labels for free.</p>
-
-<p>It&#39;s been a two years since I&#39;ve used this script, but I seem to remember it
-working pretty painlessly. I wanted to share it here for anyone else who might
-be looking to do this same thing.</p>
 </div>
 
   <footer>
     
+    
+    <p><a rel="full-article" href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">Read on &rarr;</a></p>
     
   </footer>
 
