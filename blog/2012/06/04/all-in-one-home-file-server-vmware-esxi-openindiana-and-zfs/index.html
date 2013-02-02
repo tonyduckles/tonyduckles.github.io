@@ -162,10 +162,10 @@ whatever size is appropriate) to expand my pool. It was this easy expansion
 which pushed me towards a mirrored configuration rather than a RAID-Z style
 configuration. The trouble with RAID-Z is that you can&#39;t add new devices to a
 vdev after you&#39;ve initially created it; the only way to &ldquo;grow&rdquo; a RAID-Z vdev is
-by replacing <strong>all</strong> of the individual drives (*one at a time, waiting for each
-to resilver*) and setting the &ldquo;autoexpand&rdquo; property on the pool so that ZFS
+by replacing <strong>all</strong> of the individual drives (<em>one at a time, waiting for each
+to resilver</em>) and setting the &ldquo;autoexpand&rdquo; property on the pool so that ZFS
 will auto-expand the pool based on the new common maximum size of each of the
-individual drives. But, that&#39;s a whole lot of moving parts (*pun intended*) and
+individual drives. But, that&#39;s a whole lot of moving parts (<em>pun intended</em>) and
 replacing all the drives in the pool isn&#39;t quite my idea of easy expansion.
 Mirroring just seems easier, given that I don&#39;t need lots of individual drives
 for raw performance reasons.</p>
@@ -216,8 +216,8 @@ such low power draw.</p>
 server-grade hardware has been an eye-opening experience. Being able to
 remote-control the server, e.g. mounting an ISO remotely over the Java-based
 client and installing the OS on the computer all without needing to hook-up a
-keyboard or monitor, has been a revelation.  (*Goodbye old CRT monitor that I
-used to keep around for my server closet!*)</p>
+keyboard or monitor, has been a revelation.  (<em>Goodbye old CRT monitor that I
+used to keep around for my server closet!</em>)</p>
 
 <p>I love the flexibility of ESXi. I have an Ubuntu VM for development/testing, a
 FreeBSD VM for running Mediatomb (PS3 media-server), etc. It even let me play

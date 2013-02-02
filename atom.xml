@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-01-31T19:06:21-06:00</updated>
+  <updated>2013-02-01T22:08:57-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -136,10 +136,10 @@ whatever size is appropriate) to expand my pool. It was this easy expansion
 which pushed me towards a mirrored configuration rather than a RAID-Z style
 configuration. The trouble with RAID-Z is that you can&#39;t add new devices to a
 vdev after you&#39;ve initially created it; the only way to &ldquo;grow&rdquo; a RAID-Z vdev is
-by replacing <strong>all</strong> of the individual drives (*one at a time, waiting for each
-to resilver*) and setting the &ldquo;autoexpand&rdquo; property on the pool so that ZFS
+by replacing <strong>all</strong> of the individual drives (<em>one at a time, waiting for each
+to resilver</em>) and setting the &ldquo;autoexpand&rdquo; property on the pool so that ZFS
 will auto-expand the pool based on the new common maximum size of each of the
-individual drives. But, that&#39;s a whole lot of moving parts (*pun intended*) and
+individual drives. But, that&#39;s a whole lot of moving parts (<em>pun intended</em>) and
 replacing all the drives in the pool isn&#39;t quite my idea of easy expansion.
 Mirroring just seems easier, given that I don&#39;t need lots of individual drives
 for raw performance reasons.</p>
@@ -190,8 +190,8 @@ such low power draw.</p>
 server-grade hardware has been an eye-opening experience. Being able to
 remote-control the server, e.g. mounting an ISO remotely over the Java-based
 client and installing the OS on the computer all without needing to hook-up a
-keyboard or monitor, has been a revelation.  (*Goodbye old CRT monitor that I
-used to keep around for my server closet!*)</p>
+keyboard or monitor, has been a revelation.  (<em>Goodbye old CRT monitor that I
+used to keep around for my server closet!</em>)</p>
 
 <p>I love the flexibility of ESXi. I have an Ubuntu VM for development/testing, a
 FreeBSD VM for running Mediatomb (PS3 media-server), etc. It even let me play
@@ -248,7 +248,7 @@ I haven&#39;t been able to find any tools to do this.</p>
 
 <h2>Existing Tools</h2>
 
-<p>In doing some searches for variations around &ldquo;_svn repo filter_&rdquo;, I found a lot
+<p>In doing some searches for variations around &ldquo;<em>svn repo filter</em>&rdquo;, I found a lot
 of people pointing to the &ldquo;<a href="http://svnbook.red-bean.com/en/1.7/svn.ref.svndumpfilter.html">svndumpfilter</a>&rdquo;
 utility as the tool-of-choice. Sadly, it doesn&#39;t seem to be quite &ldquo;smart&rdquo; enough
 to do what I&#39;d like it to do. It seems to be aimed at (namely) filtering an
@@ -288,7 +288,7 @@ to start working on my own solution.</p>
 
 <p>The closest fit I found was a project named &ldquo;<a href="http://code.google.com/p/svn2svn/">svn2svn</a>&rdquo;
 hosted on Google Code. It had copied parts of the &ldquo;<a href="https://bitbucket.org/andialbrecht/hgsvn/overview">hgsvn</a>&rdquo;
-project (_sychronizing between Mercurial and Subversion repositories_) and
+project (<em>sychronizing between Mercurial and Subversion repositories</em>) and
 slapped them together in a way that worked for the original author&#39;s needs.
 It used &ldquo;<code>svn log</code>&rdquo; to walk the entire history of a given path in a source
 repository and then manually replayed those changes to a working-copy of
@@ -378,7 +378,7 @@ About a year and a half ago, I stumbled upon Ryan Tomayko&#39;s &ldquo;<a href="
 repository on Github. The moment I saw it, I thought it was a <em>great</em> idea:
 the idea of managing all your <code>$HOME</code> directory &ldquo;dot-files&rdquo; in a Git repository.
 That single idea led me on a personal crusade to better understand all the
-different configuration files that live in your UNIX (_Linux, Mac OSX, etc._)
+different configuration files that live in your UNIX (<em>Linux, Mac OSX, etc.</em>)
 home directory, and the end-result was creating my own &ldquo;<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>&rdquo;
 Git repository for synchronizing/tracking/deploying my dot-files between the
 various machines I work upon.</p>
@@ -520,7 +520,7 @@ post which resonated the most with me:
 pages and posts as plain-text text-files, all static files so no security-patches
 or vulnerabilities to worry about, and easily portable and backup-able. It combines
 a lot of things which I have grown to love: I can keep all my content in a Git
-repository so that I can publish from multiple locations (_if need be_), I can
+repository so that I can publish from multiple locations (<em>if need be</em>), I can
 work on the site entirely in text (<code>vim</code> + <code>screen</code>), and it&#39;s dead easy to
 deploy and backup.</p>
 
@@ -544,12 +544,12 @@ job overall though.</p>
 code getting acquainted with things and seeing how I might be able to fiddle
 with some of its inner fiddly-bits. It&#39;s written with native support for
 customization, trying to keep a clear separation between the core &ldquo;code&rdquo; of
-the site (_which can be overwritten during a future upgrade_) versus any
+the site (<em>which can be overwritten during a future upgrade</em>) versus any
 &ldquo;customization&rdquo; files which the user might make changes too. It&#39;s a fantastic
 paradigm and one that you don&#39;t often see too much of in projects.</p>
 
-<p>Last but not least, I spent some time tweaking the theme to my tasting (_&hellip;a
-bit of pepper here, a bit of salt there&hellip;_). As I mentioned above, it natively
+<p>Last but not least, I spent some time tweaking the theme to my tasting (<em>&hellip;a
+bit of pepper here, a bit of salt there&hellip;</em>). As I mentioned above, it natively
 carves out files which are earmarked for user-customizations, where you can
 tweak the CSS (SASS), colors, page/sidebar dimensions, etc. It&#39;s all just
 extremely well-thought-out and a joy to use and extend.</p>
@@ -610,8 +610,8 @@ kept coming-up again and again. I had heard the term &ldquo;ZFS&rdquo; thrown ar
 before but I had never really spent the time to read-up on it. It&#39;s just
 another filesystem, right? How fancy can it be?</p>
 
-<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &ldquo;_just another
-filesystem_&rdquo;&hellip;</p>
+<p>Well, <strong>ZFS is just damn cool</strong>. ZFS is <em>lot</em> more than &ldquo;<em>just another
+filesystem</em>&rdquo;&hellip;</p>
 
 <!-- more -->
 
@@ -632,7 +632,7 @@ of your filesystem to facilitate incremental backups, i.e. allowing you to
 go back in time and recover old-states of files.</li>
 <li>It has <a href="http://blogs.sun.com/bonwick/entry/raid_z">RAID-Z support</a>, which
 is similar to RAID-5/RAID-6 except without the potentially-fatal
-&ldquo;_RAID-5 write hole_&rdquo; problem, in part thanks to the copy-on-write strategy.</li>
+&ldquo;<em>RAID-5 write hole</em>&rdquo; problem, in part thanks to the copy-on-write strategy.</li>
 <li>You can <a href="http://dlc.sun.com/osol/docs/content/ZFSADMIN/gbchx.html">replicate ZFS filesystems</a>
 (<code>zfs send</code> and <code>zfs receive</code>), snapshots and all, making it dead-easy to
 backup ZFS filesystems to remote machines.</li>
@@ -743,7 +743,7 @@ to setting up Google Apps for &ldquo;nynim.org&rdquo; (i.e. &ldquo;<a href="mail
 the following article back then which gave me helpful hints on how to use
 <code>imapsync</code> to push data to my new Google Apps e-mail address:</p>
 
-<p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
+<p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed<em>the</em>gmail_migration/</a></strong></p>
 
 <p>I adapted that script for my own needs, and I was able to successfully copy
 all the mail from my regular Gmail account to my new Google Apps account.</p>
@@ -804,7 +804,7 @@ be looking to do this same thing.</p>
 
       <content type="html"><![CDATA[<p><a href="http://kotaku.com/5430723/what-to-wear+a"><img class="" src="http://nynim.org/images/2010/08/500x_marioscloset.jpg"></a></p>
 
-<p>(*via <a href="http://kotaku.com/5430723/what-to-wear+a">kotaku.com</a>*)</p>
+<p>(<em>via <a href="http://kotaku.com/5430723/what-to-wear+a">kotaku.com</a></em>)</p>
 ]]></content>
     </entry>
   
@@ -822,7 +822,7 @@ be looking to do this same thing.</p>
 
       <content type="html"><![CDATA[<p><a href="http://autocompleteme.com/"><img class="" src="http://nynim.org/images/2010/08/autocompletemecom-howtoraise.jpg"></a></p>
 
-<p>(*via <a href="http://autocompleteme.com/">autocompleteme.com</a>*)</p>
+<p>(<em>via <a href="http://autocompleteme.com/">autocompleteme.com</a></em>)</p>
 
 <p>Google auto-complete hilarity.</p>
 ]]></content>
@@ -842,7 +842,7 @@ be looking to do this same thing.</p>
 
       <content type="html"><![CDATA[<p><a href="http://www.appolicio%20us.com/games/apps/24846-geodefense-lite-critical-thought-games"><img class="" src="http://nynim.org/images/2010/08/geodefense_1250610916.jpg"></a></p>
 
-<p>(*via <a href="http://www.appolicious.com/games/apps/24846-geodefense-lite-critical-thought-games">appolicious.com</a>*)</p>
+<p>(<em>via <a href="http://www.appolicious.com/games/apps/24846-geodefense-lite-critical-thought-games">appolicious.com</a></em>)</p>
 
 <p>After hearing some rave-reviews from various places over the past few days,
 I picked-up GeoDefense for the iPhone this evening. Wow, it’s a blast! Nice
@@ -896,8 +896,8 @@ an e-mail!</p>
 <category term="Security" />
 
       <content type="html"><![CDATA[<p>I stumbled across this neat site called <a href="http://www.clipperz.com/">Clipperz</a> a
-few weeks back. On the surface, it&#39;s &ldquo;_a free and anonymous online password
-manager_&rdquo;. This was immediately interesting to me because I&#39;d really like to
+few weeks back. On the surface, it&#39;s &ldquo;<em>a free and anonymous online password
+manager</em>&rdquo;. This was immediately interesting to me because I&#39;d really like to
 find a (secure!) web-based password manager.</p>
 
 <!-- more -->
@@ -908,9 +908,9 @@ daily basis. It&#39;s just so incredibly convenient to have the portability to b
 able to do everything you need from inside a web-browser, and more importantly
 to have the persistent-state data stored on the server-side rather than on
 each individual machine I use throughout the day. I&#39;m already a huge fan of
-webapps like <a href="http://del.icio.us/tduckles">del.icio.us</a> (_for tracking all my
-bookmarks_) and <a href="http://www.google.com/reader/">Google Reader</a> (_for all my
-RSS aggregation and reading needs_), and finding a web-based password manager
+webapps like <a href="http://del.icio.us/tduckles">del.icio.us</a> (<em>for tracking all my
+bookmarks</em>) and <a href="http://www.google.com/reader/">Google Reader</a> (<em>for all my
+RSS aggregation and reading needs</em>), and finding a web-based password manager
 would be ideal. It really becomes a chore remembering what username or e-mail
 address I registered with at various websites: Amazon, eBay, Newegg, Google,
 Yahoo, credit cards, travel sites, online bill pay, banks, etc. (Oy!) It&#39;s
@@ -1053,8 +1053,8 @@ It&#39;s a hilarious mishmash of awful action-movie stereotypes.</p>
 
       <content type="html"><![CDATA[<p>Yes, somewhere along the line&hellip;I became a geek. I started using multiple
 computers, not just between home/work/school/etc., but even multiple computers
-at home. (_Though, I mainly use my MacBook for all my casual web-surfing needs
-these days at home&hellip;_) I was always annoyed by having different bookmarks on
+at home. (<em>Though, I mainly use my MacBook for all my casual web-surfing needs
+these days at home&hellip;</em>) I was always annoyed by having different bookmarks on
 the different computers I used, which meant frustration when I had to remember
 which computer I bookmarked that useful such-and-such on. I wanted a way to
 have a centralized webpage for my bookmarks and hence could access from
@@ -1063,8 +1063,8 @@ wherever I was. So, inspired by
 was my little pet project, and it was good&hellip;</p>
 
 <p>Then I found out that someone else had already done the same thing and they
-had done it better. Enter <a href="http://del.icio.us/tduckles">del.icio.us</a>. (_Ooh,
-the pretty pretty tag-clouds! Yes, my tag-cloud is quite delicious indeed&hellip;_)
+had done it better. Enter <a href="http://del.icio.us/tduckles">del.icio.us</a>. (<em>Ooh,
+the pretty pretty tag-clouds! Yes, my tag-cloud is quite delicious indeed&hellip;</em>)
 Tags are such a simple concept, but oh-so effective. It just makes so much
 sense to have a webapp where you save bookmarks and can assign arbitrary tags
 to each entry. del.icio.us then makes it very easy to navigate around your
@@ -1126,13 +1126,13 @@ needs. Here are the things which really won me over:</p>
 <ul>
 <li>Super-slick UI, with fantastic keyboard navigation support.</li>
 <li>Nifty AJAX tricks, like only loading enough items into the ListView to fit
-on screen initially and then fetching more as you scroll down. (_Of course,
+on screen initially and then fetching more as you scroll down. (<em>Of course,
 they do this for performance reasons, but it&#39;s still implemented very cleanly
-and just &ldquo;feels&rdquo; nice._)</li>
+and just &ldquo;feels&rdquo; nice.</em>)</li>
 <li>You can &ldquo;star&rdquo;/flag entries that are useful, and then go back and look at
 all the articles you&#39;ve flagged. It remembers the timestamp of when you
-flagged the entry, which I find handy. (_Though most useful links I consume
-in a <a href="http://del.icio.us/tduckles">del.icio.us</a>-fashion these days&hellip;_)</li>
+flagged the entry, which I find handy. (<em>Though most useful links I consume
+in a <a href="http://del.icio.us/tduckles">del.icio.us</a>-fashion these days&hellip;</em>)</li>
 <li>You can easily sort either by Oldest or Newest, and it saves that preference
 on each &ldquo;view&rdquo; (i.e. viewing entries from just one feed vs all entries) you have.</li>
 <li>Has an &ldquo;infinite&rdquo; scrollback feature, to allow you to scroll backwards through
