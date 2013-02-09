@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-02-02T13:12:01-06:00</updated>
+  <updated>2013-02-08T20:20:18-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -306,7 +306,7 @@ got familiar with the code, and started hacking to extend the code to solve my
 problem at hand.</p>
 
 <p>The net-result is my own (nearly completely rewritten) take on the problem,
-a project which I&#39;m also calling <strong><a href="http://nynim.org/projects/svn2svn/">svn2svn</a></strong>.</p>
+a project which I&#39;m also calling <strong><a href="http://nynim.org/code/svn2svn/">svn2svn</a></strong>.</p>
 
 <p>I&#39;ve made several enhancements to the original script:</p>
 
@@ -353,7 +353,7 @@ file-contents at this point&hellip;or add brand-new files if you want. We&#39;re
 so this opens a lot of interesting options.</p></li>
 </ul>
 
-<p>Check-out the <a href="http://nynim.org/projects/svn2svn/">svn2svn project page</a> for more details.</p>
+<p>Check-out the <a href="http://nynim.org/code/svn2svn/">svn2svn project page</a> for more details.</p>
 
 <p>Also, I have the project mirrored on <a href="https://github.com/tonyduckles/svn2svn">Github</a>
 so please feel free to fork the project, send me issues/enhancements, or
