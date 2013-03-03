@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-02-21T00:14:27-06:00</updated>
+  <updated>2013-03-03T15:35:03-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -11,6 +11,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Mr. Money Mustache: From Zero to Hero in One Blog Post]]></title>
+<link href="http://www.mrmoneymustache.com/2013/02/22/getting-rich-from-zero-to-hero-in-one-blog-post/"/>
+<updated>2013-03-03T11:07:14-06:00</updated>
+<id>http://nynim.org/blog/2013/03/03/mr-money-mustache-from-zero-to-hero-in-one-blog-post</id>
+<category term="Finance" />
+
+      <content type="html"><![CDATA[<p>I really love this blog. Lots of great financial and lifestyle advice here, and
+I really identify with his philosophy:</p>
+
+<blockquote><p>The bottom line is this: by focusing on happiness itself, you can lead a much<br/>better life than those who focus on convenience, luxury, and following the lead<br/>of the financially illiterate herd that is the TV-ad-absorbing Middle Class of<br/>the United States today (and most of the other rich countries).  Happiness<br/>comes from many sources, but none of these sources involve car or purse<br/>upgrades. No matter what the herd or the TV set tells you, this is the truth.</p></blockquote>
+<p><a rel="bookmark" href="http://nynim.org/blog/2013/03/03/mr-money-mustache-from-zero-to-hero-in-one-blog-post/">&#9875; Permalink</a></p>]]></content>
+    </entry>
   
     <entry>
       
@@ -1194,57 +1213,6 @@ Firefly yet. I certainly wish that the TV series hadn&#39;t been cancel mid-1st-
 season.</p>
 
 <p><strong><a href="http://www.donetheimpossible.com/">http://www.donetheimpossible.com/</a></strong></p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[reBlog - Web-Based, Server-Side RSS Aggregator]]></title>
-<link href="http://nynim.org/blog/2006/03/21/reblog-web-based-server-side-rss-aggregator/"/>
-<updated>2006-03-21T22:08:58-06:00</updated>
-<id>http://nynim.org/blog/2006/03/21/reblog-web-based-server-side-rss-aggregator</id>
-<category term="Software" /><category term="Web" />
-
-      <content type="html"><![CDATA[<p>Like many people these days, I use RSS feeds to keep up on news from various
-feeds. But, with some of the higher traffic sites, since the RSS XML file only
-keeps the last 40 headlines or so, if I don&#39;t update the feed every ~12 hours,
-then I&#39;ll miss some posts. Since my iBook has been on the fritz lately, I&#39;ve
-just been leaving it on 24-7, so I was able to have it auto-refresh every few
-hours.</p>
-
-<p>This weekend, I was suddenly struck with the idea that it would be cool to
-have an RSS reader with a web-interface, and the RSS fetcher could run as a
-crontab job. This has the benefits of being able to be accessed anywhere, and
-to fetch new posts automagically, without needing some desktop computer
-somewhere to handle that.</p>
-
-<!-- more -->
-
-<p>At first, I thought it might be a cool home project to write up. Using some
-AJAX techniques, I could come up with a pretty slick interface. But, surely
-someone else must have had this same idea too, so I did some searching for
-existing open-source projects like this. And, sure enough, enter
-<a href="http://www.reblog.org/">reBlog</a>.
-<a href="http://www.lifehacker.com/software/feature/how-to-set-up-reblog-killer-server-side-feed-reader-160825.php">This article</a>
-gives a good overview of the
-feature-set, and also has a Google Video giving a short workflow run-through.</p>
-
-<p>It uses a lot of AJAX tricks, and it even has full keyboard navigation
-shortcuts. It uses &ldquo;,&rdquo; and &ldquo;.&rdquo; as the default row up/down, but I was able to
-fiddle with the source code to map &ldquo;j&rdquo; and &ldquo;k&rdquo; to these same functions, so I
-could use it vi-style. ;) So, it&#39;s really easy to scroll through posts, mark
-them as read or flag them for follow-up. All the posts you flag (or &ldquo;Publish&rdquo;
-in reBlog terminology) go to a different bucket, which can be rendered to a
-RSS feed itself, I guess so you can point some other RSS reader to the list.</p>
-
-<p>I&#39;m just very impressed with the project. It&#39;s really just what I was looking
-for. The 2.0 version is still in beta, and I&#39;m hoping by the final version
-they offer more flexibility/customizing. So, if you&#39;ve ever wanted a web-based
-RSS reading solution, check out reBlog.</p>
 ]]></content>
     </entry>
   
