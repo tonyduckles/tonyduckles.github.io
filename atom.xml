@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-03-06T19:44:01-06:00</updated>
+  <updated>2013-03-06T22:43:25-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -198,7 +198,7 @@ there.</p>
 <blockquote><p>The bottom line is this: by focusing on happiness itself, you can lead a much better life than those who focus on convenience, luxury, and following the lead of the financially illiterate herd that is the TV-ad-absorbing Middle Class of the United States today (and most of the other rich countries).  Happiness comes from many sources, but none of these sources involve car or purse upgrades. No matter what the herd or the TV set tells you, this is the truth.</p></blockquote>
 
 <p>Living within your means and cutting-back on needless spending means lower
-monthly expenses. By cutting thoses recurring expenses, you&#39;re able to save
+monthly expenses. By cutting those recurring expenses, you&#39;re able to save
 more money.  The more money you save, the more compounding interest and
 investing works in your favor. By learning to live more frugally, you&#39;re
 changing your <strong>lifestyle and mindset</strong> and you end-up not <em>needing</em> as much
@@ -253,7 +253,7 @@ figured I&#39;d write up what worked for me in case that helps other people.</p>
    Alternatively, rather than fiddling with <code>/etc/krb5.conf</code> on my Cygwin
    install, I opted to use the <code>KRB5&#95;CONFIG</code> environment variable (see the
    <code>kinit</code> manpage) to point to a <code>~/.krb5.conf</code> file instead to keep my
-   Kerberos config confined to my <code>$HOME</code> directory (since I <a href="http://nynim.org/blog/2011/12/20/home-sweet-home">keepmy $HOME directory under version control</a>).</li>
+   Kerberos config confined to my <code>$HOME</code> directory (since I <a href="http://nynim.org/blog/2011/12/20/home-sweet-home">keep my $HOME directory under version control</a>).</li>
 <li>Modify your <code>~/.ssh/config</code> file to enable GSSAPI authentication:
    
 <figure class='code'><figcaption>~/.ssh/config </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>GSSAPIAuthentication yes</div></pre></td></tr></table></div></figure>
@@ -313,8 +313,8 @@ But once my spare-time dried up, all that old computer hardware just became <em>
 taking-up space and it seemed like such a pain to fire up an old computer just to
 tinker with some new configuration.</p>
 
-<p>So, going virtualizations held a lot of (obvious) appeal to me: minimize my physical
-hardware (less power consumed, less physical space, etc) while letting me easily
+<p>So, going virtualized held a lot of (obvious) appeal to me: minimize my physical
+hardware (less power consumed, less physical space, etc.) while letting me easily
 tinker with new configurations.</p>
 
 <h2>ZFS-Powered</h2>
@@ -458,7 +458,7 @@ and happily work on your sandboxed branch. Say that you decide to rename some of
 the pre-existing files/folders, so you run the appropriate <code>svn move</code> commands and
 happily commit those changes to your branch. Once everything is working happily,
 you go to merge these changes into <code>/trunk</code> and that all works great. After the
-commmit, if you run a <code>svn log -v -l1 /trunk</code> to look at the details of the most
+commit, if you run a <code>svn log -v -l1 /trunk</code> to look at the details of the most
 recent commit to trunk, you&#39;ll see something like this:
     A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
 &hellip;which only describes the (top-level) folder rename, not any add/modifications/renames/etc
@@ -512,7 +512,7 @@ the different edge-cases. The general idea here is that we can use <code>svn log
 to walk backwards through the ancestry on a copy-from case: if we can trace
 back our ancestry to same source path we&#39;re replaying, then we can do an <code>svn
 copy</code> from that original parent and then do <code>svn export</code> to update the
-contents of all the files to match the final copy-from verison. There&#39;s also
+contents of all the files to match the final copy-from version. There&#39;s also
 some extra recursion that needs to happen here, to handle cases where child
 files got renamed inside of a parent-renamed folder. There are other
 edge-cases like files getting replaced inside a parent-renamed folder.</p></li>
@@ -527,7 +527,7 @@ from some revision # in the source repo, we can map this to the equivalent
 revision # in the target repo so we can do an equivalent <code>svn copy</code> command.</p></li>
 <li><p><strong>Better verbosity output, and optional debug output.</strong> As I was playing with
 the rewrite, I quickly found I needed better debug output, to see which shell
-commands were being run and ot display just general debug/status messages as
+commands were being run and to display just general debug/status messages as
 we do all this new complicate ancestry-walking logic. Bonus: the debugging
 messages have colored output, using <a href="http://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes">ANSI escape
 codes</a> which all
@@ -653,7 +653,7 @@ Vim to meet your needs. Simple things like getting syntax-highlighting
 and color-schemes set by default made for an oh-so-much more pleasant
 Vim experience.</p>
 
-<p>This all led me to learning a lot more about Vim and becoming much more proficent
+<p>This all led me to learning a lot more about Vim and becoming much more proficient
 using Vim. It&#39;s now my text-based editor of choice. Once you get to know the
 key-bindings and the various commands, the command-chaining that you can do
 in Vim is incredibly powerful.</p>
