@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-03-06T23:06:20-06:00</updated>
+  <updated>2013-03-09T12:10:44-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -11,6 +11,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[Project-Level .ackrc Files]]></title>
+<link href="http://nynim.org/blog/2013/03/09/project-level-ackrc-files/"/>
+<updated>2013-03-09T11:56:26-06:00</updated>
+<id>http://nynim.org/blog/2013/03/09/project-level-ackrc-files</id>
+<category term="Coding" />
+
+      <content type="html"><![CDATA[<p><a href="http://betterthangrep.com/">Ack</a> is a fantastic (<em>and portable!</em>) replacement
+for <code>grep</code>. It&#39;s aimed at programmers and by default will only search a
+white-list of known file-extensions so that it will only search the &ldquo;code&rdquo; in a
+directory.</p>
+
+<p><code>ack</code> looks at your <code>~/.ackrc</code> file to get any customized &ldquo;default&rdquo; settings
+you want. I use my (<em>user-level</em>) <code>~/.ackrc</code> to <a href="https://github.com/tonyduckles/dotfiles/blob/master/.ackrc">enable some personalized default options</a>,
+e.g. color-ize output, always use a <code>$PAGER</code>, sort the output by filename, etc.</p>
+
+<p>But sometimes I want to have <strong>directory-level</strong> (or project-level) additional
+settings, namely to always exclude/ignore certain directories when searching at
+the project-level.</p>
+
+<!-- more -->
+
+<p>For example, here are the exclusions I want for my <a href="http://nynim.org/blog/2011/12/19/hello-octopress/">Octopress</a>
+build environment:
+<figure class='code'><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>--ignore-dir=.gist-cache
+</div><div class='line'>--ignore-dir=.pygments-cache
+</div><div class='line'>--ignore-dir=.sass-cache
+</div><div class='line'>--ignore-dir=.themes
+</div><div class='line'>--ignore-dir=_deploy
+</div><div class='line'>--ignore-dir=public</div></pre></td></tr></table></div></figure></p>
+
+<p>So, I wrote-up a little <code>ack</code> wrapper script: <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a>.
+It crawls the directory tree looking for an additional &ldquo;local&rdquo; <code>.ackrc</code> file,
+starting from the current working directory crawling up through any parent
+directories until we find a <code>.ackrc</code> file (<em>or until we reach either <code>$HOME</code> or
+<code>/</code></em>).</p>
+
+<figure class='code'><figcaption>ack-wrapper<a href='https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper'>link</a></figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c">#!/bin/sh</span>
+</div><div class='line'><span class="c"># Wrapper around &#39;ack&#39; to crawl all directories from $PWD to / (or $HOME)</span>
+</div><div class='line'><span class="c"># looking for a &quot;local&quot; .ackrc file. Useful for setting project-level</span>
+</div><div class='line'><span class="c"># --ignore-dir settings.</span>
+</div><div class='line'> </div><div class='line'><span class="nv">PWD</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+</div><div class='line'><span class="nv">HOME</span><span class="o">=</span>~
+</div><div class='line'><span class="nv">ack</span><span class="o">=</span><span class="k">$(</span><span class="nb">type</span> -P ack<span class="k">)</span>
+</div><div class='line'><span class="nv">ackrc</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</div><div class='line'> </div><div class='line'><span class="nv">match</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</div><div class='line'><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;$PWD&quot;</span>
+</div><div class='line'><span class="k">while</span> <span class="o">[</span> <span class="s2">&quot;$dir&quot;</span> !<span class="o">=</span> <span class="s2">&quot;/&quot;</span> -a <span class="s2">&quot;$match&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span>; <span class="k">do</span>
+</div><div class='line'><span class="k">    if</span> <span class="o">[</span> -e <span class="s2">&quot;$dir/.ackrc&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</div><div class='line'><span class="k">        if</span> <span class="o">[</span> <span class="s2">&quot;$dir&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</div><div class='line'><span class="k">            </span><span class="nv">match</span><span class="o">=</span>1
+</div><div class='line'>            <span class="nb">echo</span> <span class="s2">&quot;(Include: ${dir}/.ackrc)&quot;</span>
+</div><div class='line'>            <span class="nv">ackrc</span><span class="o">=</span><span class="k">$(</span>egrep <span class="s2">&quot;^[^#]&quot;</span> <span class="s2">&quot;${dir}/.ackrc&quot;</span> | tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span><span class="k">)</span>
+</div><div class='line'>        <span class="k">else</span>
+</div><div class='line'><span class="k">            </span><span class="nv">match</span><span class="o">=</span>0
+</div><div class='line'>        <span class="k">fi</span>
+</div><div class='line'><span class="k">    else</span>
+</div><div class='line'><span class="k">        </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="s2">&quot;$dir&quot;</span><span class="k">)</span>
+</div><div class='line'>    <span class="k">fi</span>
+</div><div class='line'><span class="k">done</span>
+</div><div class='line'> </div><div class='line'><span class="c"># Add quote-wrapping for any additional args to ensure proper passing to</span>
+</div><div class='line'><span class="c"># real &#39;ack&#39;.</span>
+</div><div class='line'><span class="k">for </span>arg in <span class="s2">&quot;$@&quot;</span>; <span class="k">do </span><span class="nv">ackrc</span><span class="o">=</span><span class="s2">&quot;${ackrc} &#39;${arg}&#39;&quot;</span>; <span class="k">done</span>
+</div><div class='line'> </div><div class='line'><span class="c"># Run the final command</span>
+</div><div class='line'><span class="nb">eval</span> <span class="s2">&quot;${ack} ${ackrc}&quot;</span>
+</div></pre></td></tr></table></div></figure>
+
+<h3>Installation</h3>
+
+<ul>
+<li>Grab the <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a> script,
+drop it somewhere in your <code>$PATH</code> (<em>I like having a <code>~/bin/</code> directory</em>), and
+make sure it&#39;s executable (<code>chmod 755 path/to/ack-wrapper</code>).</li>
+<li>Update your <code>.bashrc</code> to <code>alias ack=ack-wrapper</code>, so that running <code>ack ...</code>
+will first call the wrapper script, search for any &ldquo;local&rdquo; <code>.ackrc</code> files,
+insert any additional options found into the original supplied command-line
+arguments, and finally call the (real) <code>ack</code> executable.</li>
+</ul>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1338,27 +1424,6 @@ all the posts which Google has ever fetched for that feed.</li>
 RSS reader/aggregator, especially if you want something that does the
 aggregating 24-7 for you and is accessible from any computer.</p>
 ]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Street Fighter: The Later Years]]></title>
-<link href="http://www.collegehumor.com/tag:streetfighterthelateryears"/>
-<updated>2006-11-27T22:43:12-06:00</updated>
-<id>http://nynim.org/blog/2006/11/27/street-fighter-the-later-years</id>
-<category term="Humor" /><category term="Quick Notes" /><category term="Video Games" />
-
-      <content type="html"><![CDATA[<p>I don&#39;t know about you, but I remember playing a fair amount of
-<a href="http://en.wikipedia.org/wiki/Street_fighter#Street_Fighter_II">Street Fighter 2</a> back
-in the day. College Humor is running this hilarious
-<a href="http://www.collegehumor.com/tag:streetfighterthelateryears">series</a>, looking
-into the lives of the Street Fighter combatants&hellip;10 years later. *insert
-suspenseful music here!*</p>
-<p><a rel="bookmark" href="http://nynim.org/blog/2006/11/27/street-fighter-the-later-years/">&#9875; Permalink</a></p>]]></content>
     </entry>
   
 </feed>
