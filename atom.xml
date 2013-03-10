@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-03-09T12:10:44-06:00</updated>
+  <updated>2013-03-10T11:12:48-05:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -54,19 +54,21 @@ starting from the current working directory crawling up through any parent
 directories until we find a <code>.ackrc</code> file (<em>or until we reach either <code>$HOME</code> or
 <code>/</code></em>).</p>
 
-<figure class='code'><figcaption>ack-wrapper<a href='https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper'>link</a></figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c">#!/bin/sh</span>
-</div><div class='line'><span class="c"># Wrapper around &#39;ack&#39; to crawl all directories from $PWD to / (or $HOME)</span>
+<p>(<strong>Update 2012-03-10:</strong> <em>It looks like <a href="https://github.com/petdance/ack2">Ack v2.0</a>
+supports PWD .ackrc files natively, and has some other neat enhancements to boot!</em>)</p>
+
+<figure class='code'><figcaption>ack-wrapper<a href='https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper'>link</a></figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div><div data-line='9' class='line-number'></div><div data-line='10' class='line-number'></div><div data-line='11' class='line-number'></div><div data-line='12' class='line-number'></div><div data-line='13' class='line-number'></div><div data-line='14' class='line-number'></div><div data-line='15' class='line-number'></div><div data-line='16' class='line-number'></div><div data-line='17' class='line-number'></div><div data-line='18' class='line-number'></div><div data-line='19' class='line-number'></div><div data-line='20' class='line-number'></div><div data-line='21' class='line-number'></div><div data-line='22' class='line-number'></div><div data-line='23' class='line-number'></div><div data-line='24' class='line-number'></div><div data-line='25' class='line-number'></div><div data-line='26' class='line-number'></div><div data-line='27' class='line-number'></div><div data-line='28' class='line-number'></div><div data-line='29' class='line-number'></div><div data-line='30' class='line-number'></div><div data-line='31' class='line-number'></div><div data-line='32' class='line-number'></div><div data-line='33' class='line-number'></div><div data-line='34' class='line-number'></div><div data-line='35' class='line-number'></div><div data-line='36' class='line-number'></div><div data-line='37' class='line-number'></div><div data-line='38' class='line-number'></div><div data-line='39' class='line-number'></div><div data-line='40' class='line-number'></div><div data-line='41' class='line-number'></div><div data-line='42' class='line-number'></div><div data-line='43' class='line-number'></div><div data-line='44' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="c">#!/bin/sh</span>
+</div><div class='line'><span class="c"># Wrapper around &#39;ack&#39; to crawl all directories from `pwd` to / (or $HOME)</span>
 </div><div class='line'><span class="c"># looking for a &quot;local&quot; .ackrc file. Useful for setting project-level</span>
 </div><div class='line'><span class="c"># --ignore-dir settings.</span>
-</div><div class='line'> </div><div class='line'><span class="nv">PWD</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+</div><div class='line'> </div><div class='line'><span class="c"># Search for &quot;local&quot; .ackrc file in CWD or any parents</span>
 </div><div class='line'><span class="nv">HOME</span><span class="o">=</span>~
-</div><div class='line'><span class="nv">ack</span><span class="o">=</span><span class="k">$(</span><span class="nb">type</span> -P ack<span class="k">)</span>
 </div><div class='line'><span class="nv">ackrc</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-</div><div class='line'> </div><div class='line'><span class="nv">match</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-</div><div class='line'><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;$PWD&quot;</span>
-</div><div class='line'><span class="k">while</span> <span class="o">[</span> <span class="s2">&quot;$dir&quot;</span> !<span class="o">=</span> <span class="s2">&quot;/&quot;</span> -a <span class="s2">&quot;$match&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span>; <span class="k">do</span>
-</div><div class='line'><span class="k">    if</span> <span class="o">[</span> -e <span class="s2">&quot;$dir/.ackrc&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-</div><div class='line'><span class="k">        if</span> <span class="o">[</span> <span class="s2">&quot;$dir&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</div><div class='line'><span class="nv">match</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</div><div class='line'><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+</div><div class='line'><span class="k">while</span> <span class="o">[</span> <span class="s2">&quot;${dir}&quot;</span> !<span class="o">=</span> <span class="s2">&quot;/&quot;</span> -a <span class="s2">&quot;${match}&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span>; <span class="k">do</span>
+</div><div class='line'><span class="k">    if</span> <span class="o">[</span> -e <span class="s2">&quot;${dir}/.ackrc&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</div><div class='line'><span class="k">        if</span> <span class="o">[</span> <span class="s2">&quot;${dir}&quot;</span> !<span class="o">=</span> <span class="s2">&quot;${HOME}&quot;</span> <span class="o">]</span>; <span class="k">then</span>
 </div><div class='line'><span class="k">            </span><span class="nv">match</span><span class="o">=</span>1
 </div><div class='line'>            <span class="nb">echo</span> <span class="s2">&quot;(Include: ${dir}/.ackrc)&quot;</span>
 </div><div class='line'>            <span class="nv">ackrc</span><span class="o">=</span><span class="k">$(</span>egrep <span class="s2">&quot;^[^#]&quot;</span> <span class="s2">&quot;${dir}/.ackrc&quot;</span> | tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span><span class="k">)</span>
@@ -74,20 +76,33 @@ directories until we find a <code>.ackrc</code> file (<em>or until we reach eith
 </div><div class='line'><span class="k">            </span><span class="nv">match</span><span class="o">=</span>0
 </div><div class='line'>        <span class="k">fi</span>
 </div><div class='line'><span class="k">    else</span>
-</div><div class='line'><span class="k">        </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="s2">&quot;$dir&quot;</span><span class="k">)</span>
+</div><div class='line'><span class="k">        </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="s2">&quot;${dir}&quot;</span><span class="k">)</span>
 </div><div class='line'>    <span class="k">fi</span>
 </div><div class='line'><span class="k">done</span>
 </div><div class='line'> </div><div class='line'><span class="c"># Add quote-wrapping for any additional args to ensure proper passing to</span>
 </div><div class='line'><span class="c"># real &#39;ack&#39;.</span>
-</div><div class='line'><span class="k">for </span>arg in <span class="s2">&quot;$@&quot;</span>; <span class="k">do </span><span class="nv">ackrc</span><span class="o">=</span><span class="s2">&quot;${ackrc} &#39;${arg}&#39;&quot;</span>; <span class="k">done</span>
-</div><div class='line'> </div><div class='line'><span class="c"># Run the final command</span>
-</div><div class='line'><span class="nb">eval</span> <span class="s2">&quot;${ack} ${ackrc}&quot;</span>
+</div><div class='line'><span class="k">for </span>arg in <span class="s2">&quot;$@&quot;</span>; <span class="k">do</span>
+</div><div class='line'><span class="k">    if</span> <span class="o">[</span> -z <span class="s2">&quot;${ackrc}&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</div><div class='line'><span class="k">        </span><span class="nv">ackrc</span><span class="o">=</span><span class="s2">&quot;&#39;${arg}&#39;&quot;</span>
+</div><div class='line'>    <span class="k">else</span>
+</div><div class='line'><span class="k">        </span><span class="nv">ackrc</span><span class="o">=</span><span class="s2">&quot;${ackrc} &#39;${arg}&#39;&quot;</span>
+</div><div class='line'>    <span class="k">fi</span>
+</div><div class='line'><span class="k">done</span>
+</div><div class='line'> </div><div class='line'><span class="c"># Build command to eval</span>
+</div><div class='line'><span class="nv">cmd</span><span class="o">=</span><span class="s2">&quot;command ack ${ackrc}&quot;</span>
+</div><div class='line'><span class="k">if</span> <span class="o">[</span> ! -t 0 <span class="o">]</span>; <span class="k">then</span>
+</div><div class='line'>    <span class="c"># If stdin is a pipe, use cat to redirect stdin to stdout and pipe</span>
+</div><div class='line'>    <span class="c"># that data into ack.</span>
+</div><div class='line'>    <span class="nv">cmd</span><span class="o">=</span><span class="s2">&quot;cat | ${cmd}&quot;</span>
+</div><div class='line'><span class="k">fi</span>
+</div><div class='line'> </div><div class='line'><span class="c"># Eval the final command</span>
+</div><div class='line'><span class="nb">eval</span> <span class="s2">&quot;${cmd}&quot;</span>
 </div></pre></td></tr></table></div></figure>
 
-<h3>Installation</h3>
+<h3>Usage</h3>
 
 <ul>
-<li>Grab the <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a> script,
+<li>Grab the latest version of the <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a> script,
 drop it somewhere in your <code>$PATH</code> (<em>I like having a <code>~/bin/</code> directory</em>), and
 make sure it&#39;s executable (<code>chmod 755 path/to/ack-wrapper</code>).</li>
 <li>Update your <code>.bashrc</code> to <code>alias ack=ack-wrapper</code>, so that running <code>ack ...</code>
