@@ -189,26 +189,36 @@ figured I&#39;d write up what worked for me in case that helps other people.</p>
 
 <h2>Installation</h2>
 
-<ol>
-<li>Install the <code>openssh</code> package.</li>
-<li>Install the <code>heimdal</code> package, which supplies an implementation of the
-   Kerberos tools. This gets you things like <code>kinit</code>, <code>klist</code>, etc.</li>
-<li>You may want to configure your <code>/etc/krb5.conf</code> file to list a default realm
-   so that you don&rsquo;t need to specify it when doing the <code>kinit</code> later on:
-   
+<h4>Step 1 - Install the &ldquo;openssh&rdquo; package</h4>
+
+<p>Install the <code>openssh</code> package. This gets you the OpenSSH client tools, e.g. <code>ssh</code>,
+<code>ssh-agent</code>, etc.</p>
+
+<h4>Step 2 - Install the &ldquo;heimdal&rdquo; package</h4>
+
+<p>Install the <code>heimdal</code> package, which supplies an implementation of the Kerberos
+tools. This gets you things like <code>kinit</code>, <code>klist</code>, etc.</p>
+
+<h4>Step 3 - (Optional) Configure your &ldquo;krb5.conf&rdquo; file</h4>
+
+<p>You may want to configure your <code>/etc/krb5.conf</code> file to list a default realm
+so that you don&#39;t need to specify it when doing the <code>kinit</code> later on:</p>
+
 <figure class='code'><figcaption>/etc/krb5.conf </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div></pre></td><td class='main  sh'><pre><div class='line'><span class="o">[</span>libdefaults<span class="o">]</span>
-</div><div class='line'>       <span class="nv">default_realm</span> <span class="o">=</span> REALM_NAME
+</div><div class='line'>  <span class="nv">default_realm</span> <span class="o">=</span> REALM_NAME
 </div></pre></td></tr></table></div></figure>
 
-   Alternatively, rather than fiddling with <code>/etc/krb5.conf</code> on my Cygwin
-   install, I opted to use the <code>KRB5&#95;CONFIG</code> environment variable (see the
-   <code>kinit</code> manpage) to point to a <code>~/.krb5.conf</code> file instead to keep my
-   Kerberos config confined to my <code>$HOME</code> directory (since I <a href="/blog/2011/12/20/home-sweet-home">keep my $HOME directory under version control</a>).</li>
-<li>Modify your <code>~/.ssh/config</code> file to enable GSSAPI authentication:
-   
+<p>Alternatively, rather than fiddling with <code>/etc/krb5.conf</code> on my Cygwin
+install, I opted to use the <code>KRB5_CONFIG</code> environment variable (see the
+<code>kinit</code> manpage) to point to a <code>~/.krb5.conf</code> file instead to keep my
+Kerberos config confined to my <code>$HOME</code> directory (since I
+<a href="/blog/2011/12/20/home-sweet-home">keep my $HOME directory under version control</a>).</p>
+
+<h4>Step 4 - Modify your &ldquo;.ssh/config&rdquo; file</h4>
+
+<p>Modify your <code>~/.ssh/config</code> file to enable GSSAPI authentication:</p>
+
 <figure class='code'><figcaption>~/.ssh/config </figcaption><div class='highlight'><table><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>GSSAPIAuthentication yes</div></pre></td></tr></table></div></figure>
-</li>
-</ol>
 
 <h2>Usage</h2>
 
