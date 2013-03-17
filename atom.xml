@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2013-03-16T17:08:57-05:00</updated>
+  <updated>2013-03-17T17:25:48-05:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -11,6 +11,112 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+    <entry>
+      
+
+
+
+
+<title type="html"><![CDATA[The Death of Google Reader]]></title>
+<link href="http://nynim.org/blog/2013/03/17/the-death-of-google-reader/"/>
+<updated>2013-03-17T13:57:22-05:00</updated>
+<id>http://nynim.org/blog/2013/03/17/the-death-of-google-reader</id>
+<category term="Web" />
+
+      <content type="html"><![CDATA[<p>So, Google is <a href="http://googlereader.blogspot.com/2013/03/powering-down-google-reader.html">killing Google Reader</a>.</p>
+
+<p>When I saw that headline on Wednesday evening, I felt a mixture of emotions:
+anger, sadness, and worry. Anger that Google could shut-down a service that
+was so personally-valuable to me; sadness that a web-service I&#39;ve depending
+upon for years was going away; worry that there might not be an alternative
+service out there that could fill the same role in all the same ways that the
+Google Reader ecosystem has.</p>
+
+<!-- more -->
+
+<p>You see, I&#39;ve been <a href="http://nynim.org/blog/2007/05/19/google-reader/">using Google Reader since 2007</a>.
+It&#39;s the web-app I use more than any others. I&#39;ve had a dedicated Google
+Reader pinned-tab open in all my Firefox sessions for as long as I can remember.</p>
+
+<p>I use it every single day. It&#39;s the way I read the Internet.</p>
+
+<p>Google Reader is more than just a simple web-app: it&#39;s the back-end RSS
+aggregator service which crawls all the 120+ RSS feeds I follow and centrally
+stores all the state about what unread (and starred) articles I have.  That
+kind of <em>read-anywhere-sync-to-everywhere</em> workflow is immensely valuable to me
+because I want to be able to access my news wherever I am and with whatever
+device is most handy: I use the Google Reader web-app on my home laptop, home
+desktop, and work desktop machines; I use <a href="http://reederapp.com/">Reeder</a> on my
+iPhone; I use <a href="https://play.google.com/store/apps/details?id=com.noinnion.android.greader.readerpro&amp;hl=en">gReader</a>
+on my Nexus 7 Android.</p>
+
+<h2>Community Reactions</h2>
+
+<p>It&#39;s been interesting to read the reactions/backlash from the tech community. I
+found some interesting blog-posts via Twitter:</p>
+
+<h3>The Social Web Isn&#39;t a Replacement for RSS</h3>
+
+<p>Christian Heilmann wrote &ldquo;<a href="http://christianheilmann.com/2013/03/14/rip-google-reader-id-have-paid-for-you/">RIP Google Reader - I&#39;d Have Paid For You</a>&rdquo;
+where we talks about how the social web will never be a replacement for the
+one-stop aggregation service that Google Reader provides:
+<blockquote><p>Yes, RSS has been declared dead many times and people keep banging on about the social web and that Facebook, Twitter, Reddit and others have replaced the old style of blogging and having an own feed. But I don’t buy it, sorry. <b>Every social network is full of senseless chatter and organised advertising.</b> Social media experts and PR folk make sure that information about certain products and celebrities get read and retweeted. I don’t care about that. <b>I don’t want it. The same way I don’t watch public access channels or randomly surf channels but instead plan what I want to see on TV.</b> Random exploration and finding things by chance is fun, but it is not helping you to keep up to date – it is the ADHD of information consumption.</p></blockquote></p>
+
+<h3>Moving Towards a Walled-Off Web?</h3>
+
+<p>Jonathan Poritsky wrote a fantastic blog-post titled &ldquo;<a href="http://www.candlerblog.com/2013/03/15/google-and-reader/">Reader&#39;s End and Google Today</a>&rdquo;,
+where he points out that this could be the start of a disturbing shift in
+Google&#39;s priorities:
+<blockquote><p>The biggest issue doesn’t seem to be the loss of Reader itself, but the recognition <b>that Google’s priorities have shifted</b><br/>&hellip;</p><p>But walls have sprouted up. Google can’t access the massive amounts of data people pour into Facebook and Twitter, so they built Google+ as their own social walled garden. Twitter is exerting control over how users experience their product, which shuts out competitors like Instagram (which is owned by Facebook), which can no longer display images inline in tweets. <b>The Web is getting smaller, not bigger, with each company working to become the umbrella under which you experience the Internet.</b> So Google has taken steps to make sure that the Web as users know it exists under their company banner, and Reader doesn’t fit in with that plan anymore.</p><p>I was once a Google cheerleader. <b>Like many I believed their goal was to make a better Web for everyone</b>, with the one major tradeoff being that they would sell ads instead of charging users. That may once have been true but the Google of 2013 doesn’t want to build a better Web, it wants to build a better Google. I don’t think that goal is aligned with any of my own.</p></blockquote></p>
+
+<p>With this move, Google is seeding a lot of ill-will in the tech community.
+This feels very much against the &ldquo;Do No Evil&rdquo; slogan which Google touts.
+If Google can shutdown a service as beloved as Reader, then it makes you
+wonder which services are safe from the chopping-block&hellip;</p>
+
+<h2>A New Hope: Google Reader Alternatives</h2>
+
+<p>Even though Google says that &ldquo;<em>usage of Google Reader has declined</em>&rdquo;, there&#39;s
+obviously still a <strong>lot</strong> of people in the tech community who still find great
+value in RSS and a Reader-like service. And a lot can happen in the next 3
+months leading up to the July 1st shutdown.</p>
+
+<p>So, the imminent death of Google Reader could just be trigger-point needed to
+spark another renaissance in RSS readers like what we had circa 2005-2006.</p>
+
+<p>And it looks like we will have several options. <strong><a href="http://www.replacereader.com/">ReplaceReader</a></strong>
+is a neat little site I found for folks to suggest replacements for Google Reader.</p>
+
+<p>I expect the biggest challenge (for me personally) in finding a suitable
+replacement for will be finding a solution that I can still (easily) access
+(and seamlessly sync!) across multiple platforms.  I&#39;ve gotten spoiled-rotten
+by the native iOS and Android Google Reader clients.  And whatever I pick, I
+want to make sure that I still have some exit-paths in case <em>that service</em>
+closes-up shop for some reason. Some kind of open-source/self-host option could
+be nice so that I can control my own data, but then again needing to maintain a
+DB-backed website isn&#39;t really something I want to do anymore.</p>
+
+<p><strong><a href="http://tt-rss.org/">Tiny Tiny RSS</a></strong> is an open-source self-host option which
+looks pretty mature. This looks promising if all you need is a simple web interface.</p>
+
+<p>The most interesting option I&#39;ve seen so far is <strong><a href="http://www.newsblur.com">NewsBlur</a></strong>.
+It&#39;s open-source (on Github) and self-host-able (nice to know I have options)
+but also has a paid hosted option. And it looks extremely polished and
+<strong>simply gorgeous</strong>. It keeps the same simple/functional interface principals as
+Google Reader while updating the UI for 2013. And there are iOS and Android
+clients so that I can still access my news on whatever device I want.</p>
+
+<p>I expect (or at least hope) there will be a flurry of activity in the RSS
+reader space in the next few months leading up to the July 1st shutdown.  It
+will be interesting to see what alternatives the community embraces. I plan to
+watch the space for a while before committing to any particular option, to see
+which options rise to the top.</p>
+
+<p>I plan to write a follow-up post in a few months detailing what option I end-up
+going with&hellip;</p>
+]]></content>
+    </entry>
   
     <entry>
       
@@ -1402,52 +1508,6 @@ to do an XSLT to transform that XML data into HTML or whatever presentation-
 layer you wanted. In the past, I had always only thought of AJAX calls
 returning some chunk of HTML which you could then insert somewhere into the
 document DOM.</p>
-]]></content>
-    </entry>
-  
-    <entry>
-      
-
-
-
-
-<title type="html"><![CDATA[Google Reader]]></title>
-<link href="http://nynim.org/blog/2007/05/19/google-reader/"/>
-<updated>2007-05-19T21:46:18-05:00</updated>
-<id>http://nynim.org/blog/2007/05/19/google-reader</id>
-<category term="Web" />
-
-      <content type="html"><![CDATA[<p>I really dig the whole web-based RSS aggregator/reader thing. For the past
-year or so, I&#39;ve been using <a href="http://www.reblog.org/">reBlog</a> on my Linux box
-at home. It had it&#39;s quirks, but it was great to use.</p>
-
-<p>Enter <strong><a href="http://www.google.com/reader/">Google Reader</a></strong>. Being the show-off&#39;s
-they are, Google has created a fantastic RSS reader web-app. I&#39;ve ditched my
-home-based reBlog setup for using Google Reader for all my RSS feed reading
-needs. Here are the things which really won me over:</p>
-
-<!-- more -->
-
-<ul>
-<li>Super-slick UI, with fantastic keyboard navigation support.</li>
-<li>Nifty AJAX tricks, like only loading enough items into the ListView to fit
-on screen initially and then fetching more as you scroll down. (<em>Of course,
-they do this for performance reasons, but it&#39;s still implemented very cleanly
-and just &ldquo;feels&rdquo; nice.</em>)</li>
-<li>You can &ldquo;star&rdquo;/flag entries that are useful, and then go back and look at
-all the articles you&#39;ve flagged. It remembers the timestamp of when you
-flagged the entry, which I find handy. (<em>Though most useful links I consume
-in a <a href="http://del.icio.us/tduckles">del.icio.us</a>-fashion these days&hellip;</em>)</li>
-<li>You can easily sort either by Oldest or Newest, and it saves that preference
-on each &ldquo;view&rdquo; (i.e. viewing entries from just one feed vs all entries) you have.</li>
-<li>Has an &ldquo;infinite&rdquo; scrollback feature, to allow you to scroll backwards through
-all the posts which Google has ever fetched for that feed.</li>
-<li>It&#39;s free. ;)</li>
-</ul>
-
-<p>I would definitely recommend Google Reader to anyone that uses a fat-client
-RSS reader/aggregator, especially if you want something that does the
-aggregating 24-7 for you and is accessible from any computer.</p>
 ]]></content>
     </entry>
   
