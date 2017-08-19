@@ -19,8 +19,8 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?201708182152" type="text/css">
-    <link href='/stylesheets/all-958d45fee415f2d267d37b7939d5bff3.css' media='all' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/pixyll.css?201708182216" type="text/css">
+    <link href='/stylesheets/all-bb7cec597036f0156297ead03d2f4741.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
     
@@ -233,83 +233,77 @@ over standard <code class="highlighter-rouge">http://</code>, <code class="highl
 <h2 id="usage">Usage</h2>
 <p>See <code class="highlighter-rouge">svnreplay.py --help</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ ./svnreplay.py --help
-svn2svn, version 1.7.0
-&lt;http://nynim.org/code/svn2svn&gt; &lt;https://github.com/tonyduckles/svn2svn&gt;
-
-Usage: svnreplay.py [OPTIONS] source_url target_url
-
-Replicate (replay) history from one SVN repository to another. Maintain
-logical ancestry wherever possible, so that 'svn log' on the replayed repo
-will correctly follow file/folder renames.
-
-Examples:
-  Create a copy of only /trunk from source repo, starting at r5000
-  $ svnadmin create /svn/target
-  $ svn mkdir -m 'Add trunk' file:///svn/target/trunk
-  $ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
-    1. The target_url will be checked-out to ./_wc_target
-    2. The first commit to http://server/source/trunk at/after r5000 will be
-       exported &amp; added into _wc_target
-    3. All revisions affecting http://server/source/trunk (starting at r5000)
-       will be replayed to _wc_target. Any add/copy/move/replaces that are
-       copy-from'd some path outside of /trunk (e.g. files renamed on a
-       /branch and branch was merged into /trunk) will correctly maintain
-       logical ancestry where possible.
-
-  Use continue-mode (-c) to pick-up where the last run left-off
-  $ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
-    1. The target_url will be checked-out to ./_wc_target, if not already
-       checked-out
-    2. All new revisions affecting http://server/source/trunk starting from
-       the last replayed revision to file:///svn/target/trunk (based on the
-       svn2svn:* revprops) will be replayed to _wc_target, maintaining all
-       logical ancestry where possible.
-
-Options:
-      --version         show program's version number and exit
-  -h, --help            show this help message and exit
-  -v, --verbose         Enable additional output (use -vv or -vvv for more).
-  -a, --archive         Archive/mirror mode; same as -UDP (see REQUIRES
-                        below).
-                        Maintain same commit author, same commit time, and
-                        file/dir properties.
-  -U, --keep-author     Maintain same commit authors (svn:author) as source.
-                        (REQUIRES 'pre-revprop-change' hook script to allow
-                        'svn:author' changes.)
-  -D, --keep-date       Maintain same commit time (svn:date) as source.
-                        (REQUIRES 'pre-revprop-change' hook script to allow
-                        'svn:date' changes.)
-  -P, --keep-prop       Maintain same file/dir SVN properties as source.
-  -R, --keep-revnum     Maintain same rev #'s as source. Creates placeholder
-                        target revisions (by modifying a 'svn2svn:keep-revnum'
-                        property at the root of the target repo).
-  -c, --continue        Continue from last source commit to target (based on
-                        svn2svn:* revprops).
-  -f, --force           Allow replaying into a non-empty target-repo folder.
-  -r, --revision=ARG    Revision range to replay from source_url.
-                        A revision argument can be one of:
-                           START        Start rev # (end will be 'HEAD')
-                           START:END    Start and ending rev #'s
-                        Any revision # formats which SVN understands are
-                        supported, e.g. 'HEAD', '{2010-01-31}', etc.
-  -u, --log-author      Append source commit author to replayed commit
-                        mesages.
-  -d, --log-date        Append source commit time to replayed commit messages.
-  -l, --limit=NUM       Maximum number of source revisions to process.
-  -n, --dry-run         Process next source revision but don't commit changes
-                        to target working-copy (forces --limit=1).
-  -x, --verify          Verify ancestry and content for changed paths in
-                        commit after every target commit or last target
-                        commit.
-  -X, --verify-all      Verify ancestry and content for entire target_url tree
-                        after every target commit or last target commit.
-      --pre-commit=CMD  Run the given shell script before each replayed
-                        commit, e.g. to modify file-content during replay.
-                        Called as: CMD [wc_path] [source_rev]
-      --debug           Enable debugging output (same as -vvv).
-</code></pre>
-</div>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ ./svnreplay.py --help
+</div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">svn2svn, version 1.7.0
+</div></div><div data-line="3" class="code-highlight-row unnumbered"><div class="code-highlight-line">&lt;http://nynim.org/code/svn2svn&gt; &lt;https://github.com/tonyduckles/svn2svn&gt;
+</div></div><div data-line="4" class="code-highlight-row unnumbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row unnumbered"><div class="code-highlight-line">Usage: svnreplay.py [OPTIONS] source_url target_url
+</div></div><div data-line="6" class="code-highlight-row unnumbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row unnumbered"><div class="code-highlight-line">Replicate (replay) history from one SVN repository to another. Maintain
+</div></div><div data-line="8" class="code-highlight-row unnumbered"><div class="code-highlight-line">logical ancestry wherever possible, so that 'svn log' on the replayed repo
+</div></div><div data-line="9" class="code-highlight-row unnumbered"><div class="code-highlight-line">will correctly follow file/folder renames.
+</div></div><div data-line="10" class="code-highlight-row unnumbered"><div class="code-highlight-line"> </div></div><div data-line="11" class="code-highlight-row unnumbered"><div class="code-highlight-line">Examples:
+</div></div><div data-line="12" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Create a copy of only /trunk from source repo, starting at r5000
+</div></div><div data-line="13" class="code-highlight-row unnumbered"><div class="code-highlight-line">  $ svnadmin create /svn/target
+</div></div><div data-line="14" class="code-highlight-row unnumbered"><div class="code-highlight-line">  $ svn mkdir -m 'Add trunk' file:///svn/target/trunk
+</div></div><div data-line="15" class="code-highlight-row unnumbered"><div class="code-highlight-line">  $ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
+</div></div><div data-line="16" class="code-highlight-row unnumbered"><div class="code-highlight-line">    1. The target_url will be checked-out to ./_wc_target
+</div></div><div data-line="17" class="code-highlight-row unnumbered"><div class="code-highlight-line">    2. The first commit to http://server/source/trunk at/after r5000 will be
+</div></div><div data-line="18" class="code-highlight-row unnumbered"><div class="code-highlight-line">       exported &amp; added into _wc_target
+</div></div><div data-line="19" class="code-highlight-row unnumbered"><div class="code-highlight-line">    3. All revisions affecting http://server/source/trunk (starting at r5000)
+</div></div><div data-line="20" class="code-highlight-row unnumbered"><div class="code-highlight-line">       will be replayed to _wc_target. Any add/copy/move/replaces that are
+</div></div><div data-line="21" class="code-highlight-row unnumbered"><div class="code-highlight-line">       copy-from'd some path outside of /trunk (e.g. files renamed on a
+</div></div><div data-line="22" class="code-highlight-row unnumbered"><div class="code-highlight-line">       /branch and branch was merged into /trunk) will correctly maintain
+</div></div><div data-line="23" class="code-highlight-row unnumbered"><div class="code-highlight-line">       logical ancestry where possible.
+</div></div><div data-line="24" class="code-highlight-row unnumbered"><div class="code-highlight-line"> </div></div><div data-line="25" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Use continue-mode (-c) to pick-up where the last run left-off
+</div></div><div data-line="26" class="code-highlight-row unnumbered"><div class="code-highlight-line">  $ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
+</div></div><div data-line="27" class="code-highlight-row unnumbered"><div class="code-highlight-line">    1. The target_url will be checked-out to ./_wc_target, if not already
+</div></div><div data-line="28" class="code-highlight-row unnumbered"><div class="code-highlight-line">       checked-out
+</div></div><div data-line="29" class="code-highlight-row unnumbered"><div class="code-highlight-line">    2. All new revisions affecting http://server/source/trunk starting from
+</div></div><div data-line="30" class="code-highlight-row unnumbered"><div class="code-highlight-line">       the last replayed revision to file:///svn/target/trunk (based on the
+</div></div><div data-line="31" class="code-highlight-row unnumbered"><div class="code-highlight-line">       svn2svn:* revprops) will be replayed to _wc_target, maintaining all
+</div></div><div data-line="32" class="code-highlight-row unnumbered"><div class="code-highlight-line">       logical ancestry where possible.
+</div></div><div data-line="33" class="code-highlight-row unnumbered"><div class="code-highlight-line"> </div></div><div data-line="34" class="code-highlight-row unnumbered"><div class="code-highlight-line">Options:
+</div></div><div data-line="35" class="code-highlight-row unnumbered"><div class="code-highlight-line">      --version         show program's version number and exit
+</div></div><div data-line="36" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -h, --help            show this help message and exit
+</div></div><div data-line="37" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -v, --verbose         Enable additional output (use -vv or -vvv for more).
+</div></div><div data-line="38" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -a, --archive         Archive/mirror mode; same as -UDP (see REQUIRES
+</div></div><div data-line="39" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        below).
+</div></div><div data-line="40" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        Maintain same commit author, same commit time, and
+</div></div><div data-line="41" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        file/dir properties.
+</div></div><div data-line="42" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -U, --keep-author     Maintain same commit authors (svn:author) as source.
+</div></div><div data-line="43" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        (REQUIRES 'pre-revprop-change' hook script to allow
+</div></div><div data-line="44" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        'svn:author' changes.)
+</div></div><div data-line="45" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -D, --keep-date       Maintain same commit time (svn:date) as source.
+</div></div><div data-line="46" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        (REQUIRES 'pre-revprop-change' hook script to allow
+</div></div><div data-line="47" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        'svn:date' changes.)
+</div></div><div data-line="48" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -P, --keep-prop       Maintain same file/dir SVN properties as source.
+</div></div><div data-line="49" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -R, --keep-revnum     Maintain same rev #'s as source. Creates placeholder
+</div></div><div data-line="50" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        target revisions (by modifying a 'svn2svn:keep-revnum'
+</div></div><div data-line="51" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        property at the root of the target repo).
+</div></div><div data-line="52" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -c, --continue        Continue from last source commit to target (based on
+</div></div><div data-line="53" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        svn2svn:* revprops).
+</div></div><div data-line="54" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -f, --force           Allow replaying into a non-empty target-repo folder.
+</div></div><div data-line="55" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -r, --revision=ARG    Revision range to replay from source_url.
+</div></div><div data-line="56" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        A revision argument can be one of:
+</div></div><div data-line="57" class="code-highlight-row unnumbered"><div class="code-highlight-line">                           START        Start rev # (end will be 'HEAD')
+</div></div><div data-line="58" class="code-highlight-row unnumbered"><div class="code-highlight-line">                           START:END    Start and ending rev #'s
+</div></div><div data-line="59" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        Any revision # formats which SVN understands are
+</div></div><div data-line="60" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        supported, e.g. 'HEAD', '&#x7b;2010-01-31&#x7d;', etc.
+</div></div><div data-line="61" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -u, --log-author      Append source commit author to replayed commit
+</div></div><div data-line="62" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        mesages.
+</div></div><div data-line="63" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -d, --log-date        Append source commit time to replayed commit messages.
+</div></div><div data-line="64" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -l, --limit=NUM       Maximum number of source revisions to process.
+</div></div><div data-line="65" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -n, --dry-run         Process next source revision but don't commit changes
+</div></div><div data-line="66" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        to target working-copy (forces --limit=1).
+</div></div><div data-line="67" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -x, --verify          Verify ancestry and content for changed paths in
+</div></div><div data-line="68" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        commit after every target commit or last target
+</div></div><div data-line="69" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        commit.
+</div></div><div data-line="70" class="code-highlight-row unnumbered"><div class="code-highlight-line">  -X, --verify-all      Verify ancestry and content for entire target_url tree
+</div></div><div data-line="71" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        after every target commit or last target commit.
+</div></div><div data-line="72" class="code-highlight-row unnumbered"><div class="code-highlight-line">      --pre-commit=CMD  Run the given shell script before each replayed
+</div></div><div data-line="73" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        commit, e.g. to modify file-content during replay.
+</div></div><div data-line="74" class="code-highlight-row unnumbered"><div class="code-highlight-line">                        Called as: CMD [wc_path] [source_rev]
+</div></div><div data-line="75" class="code-highlight-row unnumbered"><div class="code-highlight-line">      --debug           Enable debugging output (same as -vvv).
+</div></div></pre></div></figure>
 
 <h2 id="side-effects">Side Effects</h2>
 <ul>
@@ -338,11 +332,10 @@ and in a location that will likely go un-noticed in the final target repo.</li>
 <h2 id="examples">Examples</h2>
 <p><strong>Create a copy of only /trunk from source repo, starting at r5000</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ svnadmin create /svn/target
-$ svn mkdir -m 'Add trunk' file:///svn/target/trunk
-$ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
-</code></pre>
-</div>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ svnadmin create /svn/target
+</div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ svn mkdir -m 'Add trunk' file:///svn/target/trunk
+</div></div><div data-line="3" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
+</div></div></pre></div></figure>
 
 <ol>
   <li>The <code class="highlighter-rouge">target_url</code> will be checked-out to <code class="highlighter-rouge">./_wc_target</code>.</li>
@@ -357,9 +350,8 @@ logical ancestry where possible.</li>
 
 <p><strong>Use continue-mode (-c) to pick-up where the last run left-off</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
-</code></pre>
-</div>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
+</div></div></pre></div></figure>
 
 <ol>
   <li>The <code class="highlighter-rouge">target_url</code> will be checked-out to <code class="highlighter-rouge">./_wc_target</code>, if not already

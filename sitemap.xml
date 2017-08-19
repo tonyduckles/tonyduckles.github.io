@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://nynim.org/code/svn2svn/</loc>
-<lastmod>2017-08-18T21:52:35-05:00</lastmod>
+<lastmod>2017-08-18T22:16:06-05:00</lastmod>
 </url>
 <url>
 <loc>http://nynim.org/guitar-tabs/gufs/smile/</loc>
@@ -176,9 +176,6 @@
 <loc>http://nynim.org/blog/categories/humor/</loc>
 </url>
 <url>
-<loc>http://nynim.org/blog/</loc>
-</url>
-<url>
 <loc>http://nynim.org/blog/categories/legal/</loc>
 </url>
 <url>
@@ -204,11 +201,5 @@
 </url>
 <url>
 <loc>http://nynim.org/blog/categories/web/</loc>
-</url>
-<url>
-<loc>http://nynim.org/blog/page/2/</loc>
-</url>
-<url>
-<loc>http://nynim.org/blog/page/3/</loc>
 </url>
 </urlset>
