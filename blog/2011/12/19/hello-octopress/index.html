@@ -1,453 +1,295 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Hello Octopress! - Nynim.org</title>
-  <meta name="author" content="Tony Duckles">
-  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hello Octopress! &#8211; Nynim.org</title>
+    <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tony Duckles on programming, photography, and general geekery
+">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tony Duckles">
+    
+    <meta name="keywords" content="octopress, octopress overview, octopress introduction, octopress wordpress, blog, wordpress, sass, jekkyl, ruby">
+    <link rel="canonical" href="http://nynim.org/blog/2011/12/19/hello-octopress/">
+    <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
+    <link href="/favicon.png" rel="icon">
 
-  
-  <meta name="keywords" content="octopress, octopress overview, octopress introduction, octopress wordpress, blog, wordpress, sass, jekkyl, ruby">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/pixyll.css?201708182152" type="text/css">
+    <link href='/stylesheets/all-958d45fee415f2d267d37b7939d5bff3.css' media='all' rel='stylesheet' type='text/css'>
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+    
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    
 
-  
-  <link rel="canonical" href="http://nynim.org/blog/2011/12/19/hello-octopress/">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
-  
+    <!-- MathJax -->
+    
 
+    <!-- Verifications -->
+    
+    
 
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Hello Octopress!">
+    <meta property="og:description" content="Introduction to Octopress and my migration path from Wordpress to Octopress">
+    <meta property="og:url" content="http://nynim.org/blog/2011/12/19/hello-octopress/">
+    <meta property="og:site_name" content="Nynim.org">
+    
 
-<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css'>
-
-
-
-<meta property="og:url" content="http://nynim.org/blog/2011/12/19/hello-octopress/" />
-
-
-
-
-
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Nynim.org (Tony Duckles)" />
-  
-  <meta property="og:title" content="Hello Octopress!" />
-  <meta itemprop="name" content="Hello Octopress!" />
-  
-  
-  
-  <meta name="author" content="Tony Duckles" />
-  <meta property="article:author" content="https://plus.google.com/102139386060265100781" />
-  
-  
-  <meta property="article:published_time" content="2011-12-19 21:53:00 -0600" />
-  
-  
-  
-  <meta property="article:section" content="Blog" />
-  
-  
-  
-  
-  <meta name="description" content="Introduction to Octopress and my migration path from Wordpress to Octopress" />
-  <meta property="og:description" content="Introduction to Octopress and my migration path from Wordpress to Octopress" />
-  <meta itemprop="description" content="Introduction to Octopress and my migration path from Wordpress to Octopress" />
-  
-  
-  <meta name="keywords" content="octopress, octopress overview, octopress introduction, octopress wordpress, blog, wordpress, sass, jekkyl, ruby" />
-  
-  
-  <meta property="article:tag" content="octopress" />
-  
-  <meta property="article:tag" content="octopress overview" />
-  
-  <meta property="article:tag" content="octopress introduction" />
-  
-  <meta property="article:tag" content="octopress wordpress" />
-  
-  <meta property="article:tag" content="blog" />
-  
-  <meta property="article:tag" content="wordpress" />
-  
-  <meta property="article:tag" content="sass" />
-  
-  <meta property="article:tag" content="jekkyl" />
-  
-  <meta property="article:tag" content="ruby" />
-  
-  
-
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-6748678-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-  
-
-   
-  <link href="/octopress-favicon.png" rel="icon">
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Nynim.org</a></h1>
-  
-    <h2>Tony Duckles on programming, photography, and general geekery</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:nynim.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/archives/">Archives</a></li>
-  <li><a href="/blog/categories/">Categories</a></li>
-  <li><a href="/code/">Code</a></li>
-  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-
-
-
-
-
-
-
-
-
-
-
-<article class="hentry " role="article">
-  
-  <header>
-    <h1 class="entry-title">
-
-Hello Octopress!
-
-</h1>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    
+        <meta name="twitter:site" content="@tonyduckles" />
+        <meta name="twitter:creator" content="@tonyduckles" />
+    
+    <meta name="twitter:title" content="Hello Octopress!" />
+    <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery
+" />
+    <meta name="twitter:url" content="http://nynim.org/blog/2011/12/19/hello-octopress/" />
+    
 
     
-      <p class="meta">
+    <script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-6748678-1', 'auto');
+       ga('send', 'pageview');
+    </script>
+    
+</head>
+<body class="site">
+  
+	
+
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <nav class="site-nav">
+        <a href="/blog/">Blog</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/blog/archives/">Archives</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/code/">Code</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/guitar-tabs/">Guitar Tabs</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/about/">About</a>
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="social-icons-right">
+    
+      <a class="fa fa-github" href="https://github.com/tonyduckles"></a>
+    
+    
+    
+    
+    
+      <a class="fa fa-twitter" href="https://twitter.com/tonyduckles"></a>
+    
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/tonyduckles"></a>
+    
+    
+    
+    
+    
+    
+      <a class="fa fa-instagram" href="https://www.instagram.com/tonyduckles"></a>
+    
+    
+      <a class="fa fa-flickr" href="https://www.flickr.com/photos/tonyduckles"></a>
+    
+    
+      <a class="fa fa-lastfm" href="https://last.fm/user/tonyduckles"></a>
+    
+    
+      <a class="fa fa-thumb-tack" href="https://pinboard.in/u:tduckles"></a>
+    
+    <a class="fa fa-rss" href="/atom.xml"></a>
+    <a class="fa fa-envelope" href="mailto:tony@nynim.org"></a>
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
         
 
 
 
-
-
-
-
-
+<div class="post-header mb2">
+  <h1>
   
+    Hello Octopress!
+  
+  </h1>
+  <span class="post-meta">Dec 19, 2011</span><br>
+  
+  <span class="post-meta small">
+  
+    4 minute read
+  
+  </span>
+</div>
 
-
-<time datetime="2011-12-19T21:53:00-06:00" pubdate data-updated="true">Dec 19<span>th</span>, 2011</time>
-         &bull; <a rel="bookmark" href="/blog/2011/12/19/hello-octopress/">Permalink</a>
-      </p>
-    
-  </header>
-
-<div class="entry-content"><p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:
-<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p><footer><strong>Octopress</strong> <cite><a href='https://github.com/imathis/octopress'>github.com/imathis/octopress/&hellip;</a></cite></footer></blockquote></p>
+<article class="post-content">
+  <p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:</p>
+<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p></blockquote>
 
 <p>Sweet indeed! The more I read about it, the more intrigued I became. After a
 few hours spent exploring the code, importing the posts/pages from my Wordpress
-install into Octopress, and tweaking the default theme to my taste, I&#39;ve taken
+install into Octopress, and tweaking the default theme to my taste, I've taken
 the jump and moved my site over to using the Octopress platform.</p>
 
 <!-- more -->
 
-<p>Octopress is a simple blogging platform aimed at hackers. It&#39;s built around the
+<p>Octopress is a simple blogging platform aimed at hackers. It's built around the
 <a href="http://github.com/mojombo/jekyll">Jekyll</a> engine, which is the blog-aware static
-site generator that powers <a href="http://pages.github.com/">Github Pages</a>.  The &ldquo;database&rdquo;
+site generator that powers <a href="http://pages.github.com/">Github Pages</a>.  The "database"
 for the site is simply a collection of flat text files using
 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (or Textile) mark-up. You
-can setup either &ldquo;posts&rdquo; or &ldquo;pages&rdquo;, all as you&#39;d expect. When you&#39;re ready to
-deploy, you use <code>Rakefile</code> automation to &ldquo;generate&rdquo; the static site files.</p>
+can setup either "posts" or "pages", all as you'd expect. When you're ready to
+deploy, you use <code class="highlighter-rouge">Rakefile</code> automation to "generate" the static site files.</p>
 
-<p>It also has a great default theme (IMHO) &ndash; very clean and simple &ndash; which was
+<p>It also has a great default theme (IMHO) – very clean and simple – which was
 actually my original attraction. It was only after reading more about the project
 that I realized it had huge appeal to my geek-side too.</p>
 
-<h2>Why Octopress?</h2>
-
-<p>It was Matt Gemmell&#39;s &ldquo;<a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a>&rdquo;
-post which resonated the most with me:
-<blockquote><p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.</p><footer><strong>Matt Gemmell</strong></footer></blockquote></p>
+<h2 id="why-octopress">Why Octopress?</h2>
+<p>It was Matt Gemmell's "<a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a>"
+post which resonated the most with me:</p>
+<blockquote><p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.</p></blockquote>
 
 <p>For what I do with my website, Wordpress was overkill. It ended-up being
-<em>Yet-Another-Thing-I-Needed-To-Maintain-Security-Patches-On&trade;</em>.</p>
+<em>Yet-Another-Thing-I-Needed-To-Maintain-Security-Patches-On™</em>.</p>
 
 <p>I was immediately attracted to the simplicity which Octopress provides: editing
 pages and posts as plain-text text-files, all static files so no security-patches
 or vulnerabilities to worry about, and easily portable and backup-able. It combines
 a lot of things which I have grown to love: I can keep all my content in a Git
 repository so that I can publish from multiple locations (<em>if need be</em>), I can
-work on the site entirely in text (<code>vim</code> + <code>screen</code>), and it&#39;s dead easy to
+work on the site entirely in text (<code class="highlighter-rouge">vim</code> + <code class="highlighter-rouge">screen</code>), and it's dead easy to
 deploy and backup.</p>
 
-<h2>Migrating from Wordpress</h2>
-
-<p>It really didn&#39;t take that long to migrate everything over to Octopress.</p>
+<h2 id="migrating-from-wordpress">Migrating from Wordpress</h2>
+<p>It really didn't take that long to migrate everything over to Octopress.</p>
 
 <p>It took a few hours to get a cleaned-up import of my old Wordpress content.
 Based on the recommendation of others, I used <a href="https://github.com/thomasf/exitwp">exitwp</a>
 to create Jekyll-style posts based on my Wordpress content. This went fine for
 the most part, but there were some parts in the Wordpress export file that I
-needed to fiddle to keep the <code>exitwp</code> script from crashing. The end result
-was that I had a directory full of simple <code>*.markdown</code> files which represented
+needed to fiddle to keep the <code class="highlighter-rouge">exitwp</code> script from crashing. The end result
+was that I had a directory full of simple <code class="highlighter-rouge">*.markdown</code> files which represented
 all the content from my Wordpress site. I spent a few hours going through those
 files and cleaning up the Markdown syntax until it matched what I wanted. Some
 of my original Wordpress posts were a mixture of Wordpress mark-up and raw HTML,
-and that threw the <code>exitwp</code> parser for a loop in some places. It did a great
+and that threw the <code class="highlighter-rouge">exitwp</code> parser for a loop in some places. It did a great
 job overall though.</p>
 
 <p>From there, I spent some time looking through the guts of the Octopress source
 code getting acquainted with things and seeing how I might be able to fiddle
-with some of its inner fiddly-bits. It&#39;s written with native support for
-customization, trying to keep a clear separation between the core &ldquo;code&rdquo; of
+with some of its inner fiddly-bits. It's written with native support for
+customization, trying to keep a clear separation between the core "code" of
 the site (<em>which can be overwritten during a future upgrade</em>) versus any
-&ldquo;customization&rdquo; files which the user might make changes too. It&#39;s a fantastic
-paradigm and one that you don&#39;t often see too much of in projects.</p>
+"customization" files which the user might make changes too. It's a fantastic
+paradigm and one that you don't often see too much of in projects.</p>
 
-<p>Last but not least, I spent some time tweaking the theme to my tasting (<em>&hellip;a
-bit of pepper here, a bit of salt there&hellip;</em>). As I mentioned above, it natively
+<p>Last but not least, I spent some time tweaking the theme to my tasting (<em>…a
+bit of pepper here, a bit of salt there…</em>). As I mentioned above, it natively
 carves out files which are earmarked for user-customizations, where you can
-tweak the CSS (SASS), colors, page/sidebar dimensions, etc. It&#39;s all just
+tweak the CSS (SASS), colors, page/sidebar dimensions, etc. It's all just
 extremely well-thought-out and a joy to use and extend.</p>
 
-<h2>Ending Thoughts</h2>
-
-<p>This has been a fun pet project for me.  It&#39;s the first time I&#39;ve used a Ruby environment.
-It&#39;s also the first time I&#39;ve played with <a href="http://sass-lang.com/">SASS</a> (<code>*.scss</code>),
+<h2 id="ending-thoughts">Ending Thoughts</h2>
+<p>This has been a fun pet project for me.  It's the first time I've used a Ruby environment.
+It's also the first time I've played with <a href="http://sass-lang.com/">SASS</a> (<code class="highlighter-rouge">*.scss</code>),
 and boy is it going to be hard to go back to writing plain-old CSS.
-SASS&#39;s <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">color functions</a>
-are ridiculously slick: being able to do things like <code>desaturate(lighten($nav-bg, 8), 15)</code>
-in a <code>*.scss</code> file is <em>awesome</em> and makes tweaking a site&#39;s color-scheme
+SASS's <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">color functions</a>
+are ridiculously slick: being able to do things like <code class="highlighter-rouge">desaturate(lighten($nav-bg, 8), 15)</code>
+in a <code class="highlighter-rouge">*.scss</code> file is <em>awesome</em> and makes tweaking a site's color-scheme
 oh-so-much easier.</p>
 
-<p>I&#39;m a bit sad to have lost the lifestream (<a href="https://github.com/dcramer/wp-lifestream/">wp-lifestream</a>)
-functionality from my old Wordpress site. But then again I&#39;m already doing
-full exports of most of my lifestream&#39;d websites (Google Reader, Delicious),
+<p>I'm a bit sad to have lost the lifestream (<a href="https://github.com/dcramer/wp-lifestream/">wp-lifestream</a>)
+functionality from my old Wordpress site. But then again I'm already doing
+full exports of most of my lifestream'd websites (Google Reader, Delicious),
 so it might not be too hard to generate static lifestream pages using a
-<code>cronjob</code> or something. That&#39;s a project for another day&hellip;</p>
+<code class="highlighter-rouge">cronjob</code> or something. That's a project for another day…</p>
 
-<h2>Useful Links</h2>
-
+<h2 id="useful-links">Useful Links</h2>
 <ul>
-<li><a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a> -
+  <li><a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a> -
 A fantastic and well-thought-out introduction and overview of Octopress.</li>
-<li><a href="http://zanshin.net/2011/08/11/switching-to-octopress/">Switching to Octopress</a> -
+  <li><a href="http://zanshin.net/2011/08/11/switching-to-octopress/">Switching to Octopress</a> -
 A great end-to-end summary of the Wordpress-to-Octopress transition process.</li>
-<li><a href="http://www.meatleasing.com/octopress-hidden-features/index.html">Octopress Hidden Features</a> -
+  <li><a href="http://www.meatleasing.com/octopress-hidden-features/index.html">Octopress Hidden Features</a> -
 Pointing out some of subtle features of Octopress.</li>
-<li><a href="https://github.com/thomasf/exitwp">exitwp</a> -
+  <li><a href="https://github.com/thomasf/exitwp">exitwp</a> -
 Tool for converting Wordpress export XML to the Jekyll blog engine.</li>
-<li><a href="http://www.vim.org/scripts/script.php?script_id=3835">vim-octopress</a> -
-Vim syntax highlighting mode for Octopress-flavored <code>*.markdown</code> files.</li>
+  <li><a href="http://www.vim.org/scripts/script.php?script_id=3835">vim-octopress</a> -
+Vim syntax highlighting mode for Octopress-flavored <code class="highlighter-rouge">*.markdown</code> files.</li>
 </ul>
-</div>
 
 
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-19T21:53:00-06:00" pubdate data-updated="true">Dec 19<span>th</span>, 2011</time>
-
-
-<span class="categories">
-  Categories:
-  
-    <a class='category' href='/blog/categories/blog/'>Blog</a>
-  
-</span>
-
-
-
-      
-
-  <h3>Related Posts</h3>
-  <ul class="posts">
-  
-    <li class="related">
-      <a href="/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a>
-    </li>
-  
-    <li class="related">
-      <a href="/blog/2013/03/17/the-death-of-google-reader/">The Death of Google Reader</a>
-    </li>
-  
-    <li class="related">
-      <a href="/blog/2013/03/06/switching-to-airvoice-wireless-a-cheaper-iphone-cellular-plan/">Switching to Airvoice Wireless: A Cheaper iPhone Cellular Plan</a>
-    </li>
-  
-  </ul>
-
-
-
-    </p>
-    
-      <div class="sharing">
-  
-    
-      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
-    
-  
-  
-    
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/blog/2011/12/19/hello-octopress/" target="_blank">+1</a>
-    
-  
-  
-  
-
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2011/03/05/zfs-the-last-word-in-filesystems/" title="Previous Post: ZFS: The Last Word in Filesystems">&laquo; ZFS: The Last Word in Filesystems</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2011/12/20/home-sweet-home/" title="Next Post: Home Sweet $HOME">Home Sweet $HOME &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-<section>
-  <h1>Comments</h1>
-  
-
-  
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  
-</section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
-</section>
-
-<section>
-  <h1>Follow Me</h1>
-  <p id='followme'>
-    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
-    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
-    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
-    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
-    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
-    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
-    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
-    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
-    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
-    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
-    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
-    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
-    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
-    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
-  </p>
-</section>
-
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/06/29/happy-retirement-google-reader/">Happy Retirement Google Reader!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/17/the-death-of-google-reader/">The Death of Google Reader</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/09/project-level-ackrc-files/">Project-Level .ackrc Files</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-<section>
-  <h1>On GitHub</h1>
-  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
-  
-</section>
-
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
-  
-</section>
 
 
 
@@ -455,41 +297,38 @@ Vim syntax highlighting mode for Octopress-flavored <code>*.markdown</code> file
 
 
 
-  
-</aside>
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'nynim';
+    var disqus_identifier = 'http://nynim.org/blog/2011/12/19/hello-octopress/';
+    var disqus_title      = "Hello Octopress!";
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
+
+
+
+
+      </div>
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tony Duckles -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
 
+  <footer class="center">
+  <div class="measure">
+    <small>
+      &copy; 2017 Tony Duckles.
+      Powered by <a href="https://jekyllrb.com/">Jekyll</a>
+      and <a href="https://github.com/octopress/octopress">Octopress 3</a>.
+      Theme based on <a href="https://github.com/johnotander/pixyll">Pixyll</a>.
+    </small>
+  </div>
 </footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'nynim';
-			var disqus_developer = '0';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://nynim.org/blog/2011/12/19/hello-octopress/';
-        var disqus_url = 'http://nynim.org/blog/2011/12/19/hello-octopress/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
 </body>
 </html>

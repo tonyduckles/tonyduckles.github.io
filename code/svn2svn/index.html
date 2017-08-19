@@ -1,206 +1,259 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>svn2svn - Nynim.org</title>
-  <meta name="author" content="Tony Duckles">
-  <meta name="Generator" content="Jekyll & Octopress (http://octopress.org)">
-
-  
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://nynim.org/code/svn2svn/">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/octopress.min.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Nynim.org" type="application/atom+xml">
-  
-
-
-
-<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700' rel='stylesheet' type='text/css'>
-
-
-
-<meta property="og:url" content="http://nynim.org/code/svn2svn/" />
-
-
-
-
-
-  <meta property="og:type" content="article" />
-  <meta property="og:site_name" content="Nynim.org (Tony Duckles)" />
-  
-  <meta property="og:title" content="svn2svn" />
-  <meta itemprop="name" content="svn2svn" />
-  
-  
-  
-  <meta name="author" content="Tony Duckles" />
-  <meta property="article:author" content="https://plus.google.com/102139386060265100781" />
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-6748678-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-  
-
-   
-  <link href="/octopress-favicon.png" rel="icon">
-</head>
-
-<body  id="page"   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Nynim.org</a></h1>
-  
-    <h2>Tony Duckles on programming, photography, and general geekery</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:nynim.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/archives/">Archives</a></li>
-  <li><a href="/blog/categories/">Categories</a></li>
-  <li><a href="/code/">Code</a></li>
-  <li><a href="/guitar-tabs/">Guitar Tabs</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article role="article">
-  
-  <header>
-    <h1 class="entry-title">Svn2svn</h1>
     
-  </header>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>svn2svn &#8211; Nynim.org</title>
+    <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tony Duckles on programming, photography, and general geekery
+">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tony Duckles">
+    
+    
+    <link rel="canonical" href="http://nynim.org/code/svn2svn/">
+    <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
+    <link href="/favicon.png" rel="icon">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/pixyll.css?201708182152" type="text/css">
+    <link href='/stylesheets/all-958d45fee415f2d267d37b7939d5bff3.css' media='all' rel='stylesheet' type='text/css'>
+
+    <!-- Fonts -->
+    
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+    
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- MathJax -->
+    
+
+    <!-- Verifications -->
+    
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="svn2svn">
+    <meta property="og:description" content="Tony Duckles on programming, photography, and general geekery
+">
+    <meta property="og:url" content="http://nynim.org/code/svn2svn/">
+    <meta property="og:site_name" content="Nynim.org">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    
+        <meta name="twitter:site" content="@tonyduckles" />
+        <meta name="twitter:creator" content="@tonyduckles" />
+    
+    <meta name="twitter:title" content="svn2svn" />
+    <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery
+" />
+    <meta name="twitter:url" content="http://nynim.org/code/svn2svn/" />
+    
+
+    
+    <script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-6748678-1', 'auto');
+       ga('send', 'pageview');
+    </script>
+    
+</head>
+<body class="site">
   
+	
+
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <nav class="site-nav">
+        <a href="/blog/">Blog</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/blog/archives/">Archives</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/code/">Code</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/guitar-tabs/">Guitar Tabs</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/about/">About</a>
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="social-icons-right">
+    
+      <a class="fa fa-github" href="https://github.com/tonyduckles"></a>
+    
+    
+    
+    
+    
+      <a class="fa fa-twitter" href="https://twitter.com/tonyduckles"></a>
+    
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/tonyduckles"></a>
+    
+    
+    
+    
+    
+    
+      <a class="fa fa-instagram" href="https://www.instagram.com/tonyduckles"></a>
+    
+    
+      <a class="fa fa-flickr" href="https://www.flickr.com/photos/tonyduckles"></a>
+    
+    
+      <a class="fa fa-lastfm" href="https://last.fm/user/tonyduckles"></a>
+    
+    
+      <a class="fa fa-thumb-tack" href="https://pinboard.in/u:tduckles"></a>
+    
+    <a class="fa fa-rss" href="/atom.xml"></a>
+    <a class="fa fa-envelope" href="mailto:tony@nynim.org"></a>
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        <div class="post">
+  <header class="post-header">
+    <h1 class="h1">svn2svn</h1>
+  </header>
+  <article class="post-content">
   <p>Replicate (replay) changesets from one Subversion repository to another.</p>
 
-<h2>Features</h2>
-
+<h2 id="features">Features</h2>
 <ul>
-<li><strong>Meant for replaying history into an &ldquo;empty target location</strong>. This could be
+  <li><strong>Meant for replaying history into an "empty target location</strong>. This could be
 an empty target repo or simply an empty folder/branch in the target repo.</li>
-<li><strong>Maintains logical history (ancestry) when possible</strong>, e.g. uses &quot;svn copy&rdquo;
+  <li><strong>Maintains logical history (ancestry) when possible</strong>, e.g. uses "svn copy"
 for renames.</li>
-<li><strong>Maintains original commit messages</strong>.</li>
-<li><strong>Optionally maintain source commit authors (<code>svn:author</code>) and commit timestamps
-(<code>svn:date</code>)</strong>.  Requires a &ldquo;pre-revprop-change&rdquo; hook script in the target
-repo, to be able to change the &ldquo;<code>svn:author</code>&rdquo; and &ldquo;<code>svn:date</code>&rdquo; revprops after
+  <li><strong>Maintains original commit messages</strong>.</li>
+  <li><strong>Optionally maintain source commit authors (<code class="highlighter-rouge">svn:author</code>) and commit timestamps
+(<code class="highlighter-rouge">svn:date</code>)</strong>.  Requires a "pre-revprop-change" hook script in the target
+repo, to be able to change the "<code class="highlighter-rouge">svn:author</code>" and "<code class="highlighter-rouge">svn:date</code>" revprops after
 target commits have been made.</li>
-<li><strong>Optionally maintain identical revision #&#39;s between source vs. target repo</strong>.
-Effectively requires that you&#39;re replaying into an empty target repo,
+  <li><strong>Optionally maintain identical revision #'s between source vs. target repo</strong>.
+Effectively requires that you're replaying into an empty target repo,
 or rather that the first source repo revision to be replayed is less than
-the last target repo revision. Create blank &ldquo;padding&rdquo; revisions in the target
+the last target repo revision. Create blank "padding" revisions in the target
 repo as needed.</li>
-<li><strong>Optionally run an external shell script before each replayed commit</strong>,
+  <li><strong>Optionally run an external shell script before each replayed commit</strong>,
 to give the ability to dynamically exclude or modify files as part
 of the replay.</li>
 </ul>
 
-<h2>Requirements</h2>
-
+<h2 id="requirements">Requirements</h2>
 <ul>
-<li><strong>Python 2.6</strong> or higher.</li>
-<li><strong>Subversion 1.6</strong> or higher.</li>
-<li>Written for a UNIX-type environment, e.g. Linux, Mac OSX, etc. For
+  <li><strong>Python 2.6</strong> or higher.</li>
+  <li><strong>Subversion 1.6</strong> or higher.</li>
+  <li>Written for a UNIX-type environment, e.g. Linux, Mac OSX, etc. For
 Windows-based usage, recommend using <a href="http://www.cygwin.com/">Cygwin</a> for
 best compatibility.</li>
 </ul>
 
-<h2>Overview</h2>
-
+<h2 id="overview">Overview</h2>
 <p>This is a utility for replicating the revision history from a source path in
 a source SVN repository to a target path in a target SVN repository. In other
-words, it &ldquo;replays the history&rdquo; of a given source SVN repository/branch/path
+words, it "replays the history" of a given source SVN repository/branch/path
 into a target SVN repository/branch/path.</p>
 
 <p>This can be useful to create filtered version of a source SVN repository. For
 example, say that you have a huge SVN repository with a <em>lot</em> of old branch
 history which is taking up a lot of disk-space and not serving a lot of purpose
-going forward.  You can this utility to replay/filter just the &ldquo;/trunk&rdquo; SVN
-history into a new repository, so that things like &ldquo;svn log&rdquo; and &ldquo;svn blame&rdquo;
+going forward.  You can this utility to replay/filter just the "/trunk" SVN
+history into a new repository, so that things like "svn log" and "svn blame"
 will still show the correct (logical) history/ancestry, even though we end-up
-generating new commits which will have newer commit-dates and revision #&#39;s
+generating new commits which will have newer commit-dates and revision #'s
 (<em>though this script can optionally maintain the original commit-dates and
-revision #&#39;s if desired</em>).</p>
+revision #'s if desired</em>).</p>
 
-<p>While this replay process will obviously run faster if you&#39;re running between
+<p>While this replay process will obviously run faster if you're running between
 both a local source and target repositories, none of this <em>requires</em> direct
-access to the repo server. You could access both the source and target repo&#39;s
-over standard <code>http://</code>, <code>svn://</code>, <code>svn+ssh://</code>, etc. methods.</p>
+access to the repo server. You could access both the source and target repo's
+over standard <code class="highlighter-rouge">http://</code>, <code class="highlighter-rouge">svn://</code>, <code class="highlighter-rouge">svn+ssh://</code>, etc. methods.</p>
 
-<h2>Usage</h2>
+<h2 id="usage">Usage</h2>
+<p>See <code class="highlighter-rouge">svnreplay.py --help</code>:</p>
 
-<p>See <code>svnreplay.py --help</code>:</p>
-<div class="highlight"><pre><code class="text">$ ./svnreplay.py --help
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ./svnreplay.py --help
 svn2svn, version 1.7.0
 &lt;http://nynim.org/code/svn2svn&gt; &lt;https://github.com/tonyduckles/svn2svn&gt;
 
 Usage: svnreplay.py [OPTIONS] source_url target_url
 
 Replicate (replay) history from one SVN repository to another. Maintain
-logical ancestry wherever possible, so that &#39;svn log&#39; on the replayed repo
+logical ancestry wherever possible, so that 'svn log' on the replayed repo
 will correctly follow file/folder renames.
 
 Examples:
   Create a copy of only /trunk from source repo, starting at r5000
   $ svnadmin create /svn/target
-  $ svn mkdir -m &#39;Add trunk&#39; file:///svn/target/trunk
+  $ svn mkdir -m 'Add trunk' file:///svn/target/trunk
   $ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
     1. The target_url will be checked-out to ./_wc_target
     2. The first commit to http://server/source/trunk at/after r5000 will be
        exported &amp; added into _wc_target
     3. All revisions affecting http://server/source/trunk (starting at r5000)
        will be replayed to _wc_target. Any add/copy/move/replaces that are
-       copy-from&#39;d some path outside of /trunk (e.g. files renamed on a
+       copy-from'd some path outside of /trunk (e.g. files renamed on a
        /branch and branch was merged into /trunk) will correctly maintain
        logical ancestry where possible.
 
@@ -214,7 +267,7 @@ Examples:
        logical ancestry where possible.
 
 Options:
-      --version         show program&#39;s version number and exit
+      --version         show program's version number and exit
   -h, --help            show this help message and exit
   -v, --verbose         Enable additional output (use -vv or -vvv for more).
   -a, --archive         Archive/mirror mode; same as -UDP (see REQUIRES
@@ -222,29 +275,29 @@ Options:
                         Maintain same commit author, same commit time, and
                         file/dir properties.
   -U, --keep-author     Maintain same commit authors (svn:author) as source.
-                        (REQUIRES &#39;pre-revprop-change&#39; hook script to allow
-                        &#39;svn:author&#39; changes.)
+                        (REQUIRES 'pre-revprop-change' hook script to allow
+                        'svn:author' changes.)
   -D, --keep-date       Maintain same commit time (svn:date) as source.
-                        (REQUIRES &#39;pre-revprop-change&#39; hook script to allow
-                        &#39;svn:date&#39; changes.)
+                        (REQUIRES 'pre-revprop-change' hook script to allow
+                        'svn:date' changes.)
   -P, --keep-prop       Maintain same file/dir SVN properties as source.
-  -R, --keep-revnum     Maintain same rev #&#39;s as source. Creates placeholder
-                        target revisions (by modifying a &#39;svn2svn:keep-revnum&#39;
+  -R, --keep-revnum     Maintain same rev #'s as source. Creates placeholder
+                        target revisions (by modifying a 'svn2svn:keep-revnum'
                         property at the root of the target repo).
   -c, --continue        Continue from last source commit to target (based on
                         svn2svn:* revprops).
   -f, --force           Allow replaying into a non-empty target-repo folder.
   -r, --revision=ARG    Revision range to replay from source_url.
                         A revision argument can be one of:
-                           START        Start rev # (end will be &#39;HEAD&#39;)
-                           START:END    Start and ending rev #&#39;s
+                           START        Start rev # (end will be 'HEAD')
+                           START:END    Start and ending rev #'s
                         Any revision # formats which SVN understands are
-                        supported, e.g. &#39;HEAD&#39;, &#39;{2010-01-31}&#39;, etc.
+                        supported, e.g. 'HEAD', '{2010-01-31}', etc.
   -u, --log-author      Append source commit author to replayed commit
                         mesages.
   -d, --log-date        Append source commit time to replayed commit messages.
   -l, --limit=NUM       Maximum number of source revisions to process.
-  -n, --dry-run         Process next source revision but don&#39;t commit changes
+  -n, --dry-run         Process next source revision but don't commit changes
                         to target working-copy (forces --limit=1).
   -x, --verify          Verify ancestry and content for changed paths in
                         commit after every target commit or last target
@@ -255,229 +308,107 @@ Options:
                         commit, e.g. to modify file-content during replay.
                         Called as: CMD [wc_path] [source_rev]
       --debug           Enable debugging output (same as -vvv).
-</code></pre></div>
-<h2>Side Effects</h2>
+</code></pre>
+</div>
 
+<h2 id="side-effects">Side Effects</h2>
 <ul>
-<li>The source repo is treated as strictly read-only. We do log/info/export/etc.
+  <li>The source repo is treated as strictly read-only. We do log/info/export/etc.
 actions from the source repo, to get the history to replay and to get the
 file contents at each step along teh way.</li>
-<li>You must have commit access to the target repo. Additionally, for some of
-the optional command-line args, you&#39;ll need access to the target repo to
-setup hook scripts, e.g. &ldquo;pre-revprop-change&rdquo;.</li>
-<li>This script will create some folders off of your current working directory:
-
-<ul>
-<li>&ldquo;<code>_wc_target</code>&rdquo;: This is the checkout of the target_url, where we replay
+  <li>You must have commit access to the target repo. Additionally, for some of
+the optional command-line args, you'll need access to the target repo to
+setup hook scripts, e.g. "pre-revprop-change".</li>
+  <li>This script will create some folders off of your current working directory:
+    <ul>
+      <li>"<code class="highlighter-rouge">_wc_target</code>": This is the checkout of the target_url, where we replay
 actions into and where we commit to the target repo. You can safely
 remove this directory after a run, and the script will do a fresh
-&ldquo;svn checkout&rdquo; (if needed) when starting the next time.</li>
-<li>&ldquo;<code>_wc_target_tmp</code>&rdquo;: This is a temporary folder, which will only be created
-if using <code>--keep-revnum</code> mode and it should only exist for brief periods
+"svn checkout" (if needed) when starting the next time.</li>
+      <li>"<code class="highlighter-rouge">_wc_target_tmp</code>": This is a temporary folder, which will only be created
+if using <code class="highlighter-rouge">--keep-revnum</code> mode and it should only exist for brief periods
 of time. This is where we commit dummy/padding revisions to the target repo,
 checking out the root folder of the target repo and modifying a
-&ldquo;<code>svn2svn:keep-revnum</code>&rdquo; property, i.e. a small change to trigger a commit
+"<code class="highlighter-rouge">svn2svn:keep-revnum</code>" property, i.e. a small change to trigger a commit
 and in a location that will likely go un-noticed in the final target repo.</li>
-</ul></li>
+    </ul>
+  </li>
 </ul>
 
-<h2>Examples</h2>
-
+<h2 id="examples">Examples</h2>
 <p><strong>Create a copy of only /trunk from source repo, starting at r5000</strong></p>
-<div class="highlight"><pre><code class="text">$ svnadmin create /svn/target
-$ svn mkdir -m &#39;Add trunk&#39; file:///svn/target/trunk
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ svnadmin create /svn/target
+$ svn mkdir -m 'Add trunk' file:///svn/target/trunk
 $ svnreplay -av -r 5000 http://server/source/trunk file:///svn/target/trunk
-</code></pre></div>
+</code></pre>
+</div>
+
 <ol>
-<li>The <code>target_url</code> will be checked-out to <code>./_wc_target</code>.</li>
-<li>The first commit to <code>http://server/source/trunk</code> at/after r5000 will be
-exported &amp; added into <code>_wc_target</code>.</li>
-<li>All revisions affecting <code>http://server/source/trunk</code> (starting at r5000)
-will be replayed to <code>_wc_target</code>. Any add/copy/move/replaces that are
-copy-from&#39;d some path outside of /trunk (e.g. files renamed on a
+  <li>The <code class="highlighter-rouge">target_url</code> will be checked-out to <code class="highlighter-rouge">./_wc_target</code>.</li>
+  <li>The first commit to <code class="highlighter-rouge">http://server/source/trunk</code> at/after r5000 will be
+exported &amp; added into <code class="highlighter-rouge">_wc_target</code>.</li>
+  <li>All revisions affecting <code class="highlighter-rouge">http://server/source/trunk</code> (starting at r5000)
+will be replayed to <code class="highlighter-rouge">_wc_target</code>. Any add/copy/move/replaces that are
+copy-from'd some path outside of /trunk (e.g. files renamed on a
 /branch and branch was merged into /trunk) will correctly maintain
 logical ancestry where possible.</li>
 </ol>
 
 <p><strong>Use continue-mode (-c) to pick-up where the last run left-off</strong></p>
-<div class="highlight"><pre><code class="text">$ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
-</code></pre></div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ svnreplay -avc http://server/source/trunk file:///svn/target/trunk
+</code></pre>
+</div>
+
 <ol>
-<li>The <code>target_url</code> will be checked-out to <code>./_wc_target</code>, if not already
+  <li>The <code class="highlighter-rouge">target_url</code> will be checked-out to <code class="highlighter-rouge">./_wc_target</code>, if not already
 checked-out</li>
-<li>All new revisions affecting <code>http://server/source/trunk</code> starting from
-the last replayed revision to <code>file:///svn/target/trunk</code> (based on the
-&ldquo;<code>svn2svn:*</code>&rdquo; revprops) will be replayed to <code>_wc_target</code>, maintaining all
+  <li>All new revisions affecting <code class="highlighter-rouge">http://server/source/trunk</code> starting from
+the last replayed revision to <code class="highlighter-rouge">file:///svn/target/trunk</code> (based on the
+"<code class="highlighter-rouge">svn2svn:*</code>" revprops) will be replayed to <code class="highlighter-rouge">_wc_target</code>, maintaining all
 logical ancestry where possible.</li>
 </ol>
 
-<h2>Credits</h2>
-
-<p>This project borrows a lot of code from the &ldquo;hgsvn&rdquo; project.  Many thanks to
+<h2 id="credits">Credits</h2>
+<p>This project borrows a lot of code from the "hgsvn" project.  Many thanks to
 the folks who have contributed to the hgsvn project, for writing code that is
 easily re-usable:</p>
 
 <ul>
-<li><a href="http://pypi.python.org/pypi/hgsvn">http://pypi.python.org/pypi/hgsvn</a></li>
-<li><a href="https://bitbucket.org/andialbrecht/hgsvn/overview">https://bitbucket.org/andialbrecht/hgsvn/overview</a></li>
+  <li><a href="http://pypi.python.org/pypi/hgsvn">http://pypi.python.org/pypi/hgsvn</a></li>
+  <li><a href="https://bitbucket.org/andialbrecht/hgsvn/overview">https://bitbucket.org/andialbrecht/hgsvn/overview</a></li>
 </ul>
 
-<p>This project was originally inspired by this &ldquo;svn2svn&rdquo; project:<br>
-<a href="http://code.google.com/p/svn2svn/">http://code.google.com/p/svn2svn/</a><br>
-That project didn&#39;t fully meet my needs, so I forked and ended-up rewriting
+<p>This project was originally inspired by this "svn2svn" project:<br />
+<a href="http://code.google.com/p/svn2svn/">http://code.google.com/p/svn2svn/</a><br />
+That project didn't fully meet my needs, so I forked and ended-up rewriting
 the majority of the code.</p>
 
-<h2>Links</h2>
-
+<h2 id="links">Links</h2>
 <ul>
-<li>Introduction: &ldquo;<strong><a href="http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a></strong>&rdquo;</li>
-<li>Project page: <a href="http://nynim.org/code/svn2svn">http://nynim.org/code/svn2svn</a></li>
-<li>Source code @ Github: <a href="https://github.com/tonyduckles/svn2svn">https://github.com/tonyduckles/svn2svn</a></li>
-<li>Source code @ git.nynim.org <a href="http://git.nynim.org/svn2svn.git">http://git.nynim.org/svn2svn.git</a></li>
+  <li>Introduction: "<strong><a href="http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history/">svn2svn: Replaying SVN History</a></strong>"</li>
+  <li>Project page: <a href="http://nynim.org/code/svn2svn">http://nynim.org/code/svn2svn</a></li>
+  <li>Source code @ Github: <a href="https://github.com/tonyduckles/svn2svn">https://github.com/tonyduckles/svn2svn</a></li>
+  <li>Source code @ git.nynim.org <a href="http://git.nynim.org/svn2svn.git">http://git.nynim.org/svn2svn.git</a></li>
 </ul>
 
-  
-    <footer>
-      <p class="meta">
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</p>
-      
-        <div class="sharing">
-  
-    
-      <a href="http://twitter.com/share" title="Tweet this" class="twitter-share" target="_blank">Tweet</a>
-    
-  
-  
-    
-      <a title="+1 on Google Plus" class="googleplus-share" href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://nynim.org/code/svn2svn/index.html" target="_blank">+1</a>
-    
-  
-  
-  
-
+  </article>
 </div>
 
-      
-    </footer>
-  
-</article>
-
-
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>My name is Tony Duckles. I'm a software developer by day; photographer, musician, and geek by night.</p>
-</section>
-
-<section>
-  <h1>Follow Me</h1>
-  <p id='followme'>
-    <a href='https://plus.google.com/102139386060265100781?rel=author' rel='me'><img src='/images/followme/googleplus.png' alt='Google+' title='Google+'/></a>
-    <a href='http://www.google.com/reader/shared/user/02251058365449629000/state/com.google/starred' rel='me'><img src='/images/followme/googlereader.png' alt='Google Reader' title='Google Reader'/></a>
-    <a href='http://delicious.com/tduckles' rel='me'><img src='/images/followme/delicious.png' alt='Delicious' title='Delicious'/></a>
-    <a href='http://flickr.com/photos/tonyduckles' rel='me'><img src='/images/followme/flickr.png' alt='Flickr' title='Flickr'/></a>
-    <a href='http://twitter.com/tonyduckles' rel='me'><img src='/images/followme/twitter.png' alt='Twitter' title='Twitter'/></a>
-    <a href='http://www.facebook.com/TonyDuckles' rel='me'><img src='/images/followme/facebook.png' alt='Facebook' title='Facebook'/></a>
-    <a href='http://instagram.heroku.com/users/tonyduckles' rel='me'><img src='/images/followme/instagram.png' alt='Instagram' title='Instagram'/></a>
-    <a href='http://github.com/tonyduckles' rel='me'><img src='/images/followme/github.png' alt='Github' title='Github'/></a>
-    <a href='http://www.last.fm/user/tonyduckles' rel='me'><img src='/images/followme/lastfm.png' alt='Last.fm' title='Last.fm'/></a>
-    <a href='http://www.google.com/profiles/tonyduckles' rel='me'><img src='/images/followme/google.png' alt='Google Profile' title='Google Profile'/></a>
-    <a href='http://claimid.com/tonyduckles' rel='me'><img src='/images/followme/claimid.png' alt='ClaimID' title='ClaimID'/></a>
-    <a href='http://foursquare.com/user/tonyduckles' rel='me'><img src='/images/followme/foursquare.png' alt='Foursquare' title='Foursquare'/></a>
-    <a href='http://www.linkedin.com/in/tonyduckles' rel='me'><img src='/images/followme/linkedin.png' alt='LinkedIn' title='LinkedIn'/></a>
-    <a href='http://www.fuelly.com/driver/tonyduckles' rel='me'><img src='/images/followme/fuelly.png' alt='Fuelly' title='Fuelly'/></a>
-  </p>
-</section>
-
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/06/29/happy-retirement-google-reader/">Happy Retirement Google Reader!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/17/the-death-of-google-reader/">The Death of Google Reader</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/09/project-level-ackrc-files/">Project-Level .ackrc Files</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-<section>
-  <h1>On GitHub</h1>
-  <ul id="gh_repos" data-user="tonyduckles" data-count="6" data-skip="true">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a class="github-follow" href="https://github.com/tonyduckles">Follow @tonyduckles</a>
-  
-</section>
-
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets" data-user="tonyduckles" data-count="3" data-replies="false">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-    <a href="//twitter.com/tonyduckles" class="twitter-follow-button" data-show-count="false">Follow @tonyduckles</a>
-  
-</section>
-
-
-
-
-
-
-
-  
-</aside>
-
-
+      </div>
     </div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tony Duckles -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
 
+  <footer class="center">
+  <div class="measure">
+    <small>
+      &copy; 2017 Tony Duckles.
+      Powered by <a href="https://jekyllrb.com/">Jekyll</a>
+      and <a href="https://github.com/octopress/octopress">Octopress 3</a>.
+      Theme based on <a href="https://github.com/johnotander/pixyll">Pixyll</a>.
+    </small>
+  </div>
 </footer>
-  
-
-
-
-
-
-
 </body>
 </html>

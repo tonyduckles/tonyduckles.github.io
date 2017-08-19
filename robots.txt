@@ -1,4 +1,1 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://nynim.org/sitemap.xml 
+Sitemap: http://nynim.org/sitemap.xml
