@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Migrating From Octopress 2 to Octopress 3 &#8211; Nynim.org</title>
+    <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tony Duckles on programming, photography, and general geekery
+">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tony Duckles">
+    
+    <meta name="keywords" content="octopress, octopress upgrade, octopress3, blog, jekkyl">
+    <link rel="canonical" href="http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/">
+    <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
+    <link href="/favicon.png" rel="icon">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/pixyll.css?201708261816" type="text/css">
+    <link href='/stylesheets/all-c806af982c74ff2ad55eca2049c8e090.css' media='all' rel='stylesheet' type='text/css'>
+
+    <!-- Fonts -->
+    
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+    
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- MathJax -->
+    
+
+    <!-- Verifications -->
+    
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Migrating From Octopress 2 to Octopress 3">
+    <meta property="og:description" content="Migrating from Octopress 2 to Octopress 3">
+    <meta property="og:url" content="http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/">
+    <meta property="og:site_name" content="Nynim.org">
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    
+        <meta name="twitter:site" content="@tonyduckles" />
+        <meta name="twitter:creator" content="@tonyduckles" />
+    
+    <meta name="twitter:title" content="Migrating From Octopress 2 to Octopress 3" />
+    <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery
+" />
+    <meta name="twitter:url" content="http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/" />
+    
+
+    
+    <script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-6748678-1', 'auto');
+       ga('send', 'pageview');
+    </script>
+    
+</head>
+<body class="site">
+  
+	
+
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <nav class="site-nav">
+        <a href="/blog/">Blog</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/blog/archives/">Archives</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/code/">Code</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/guitar-tabs/">Guitar Tabs</a>
+    
+
+    
+
+    
+    
+    
+    
+        <a href="/about/">About</a>
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="social-icons-right">
+    
+      <a class="fa fa-github" href="https://github.com/tonyduckles"></a>
+    
+    
+    
+    
+    
+      <a class="fa fa-twitter" href="https://twitter.com/tonyduckles"></a>
+    
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/tonyduckles"></a>
+    
+    
+    
+    
+    
+    
+      <a class="fa fa-instagram" href="https://www.instagram.com/tonyduckles"></a>
+    
+    
+      <a class="fa fa-flickr" href="https://www.flickr.com/photos/tonyduckles"></a>
+    
+    
+      <a class="fa fa-lastfm" href="https://last.fm/user/tonyduckles"></a>
+    
+    
+      <a class="fa fa-thumb-tack" href="https://pinboard.in/u:tduckles"></a>
+    
+    <a class="fa fa-rss" href="/atom.xml"></a>
+    <a class="fa fa-envelope" href="mailto:tony@nynim.org"></a>
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+
+<div class="post-header mb2">
+  <h1>
+  
+    Migrating From Octopress 2 to Octopress 3
+  
+  </h1>
+  <span class="post-meta">Aug 26, 2017</span><br>
+  
+  <span class="post-meta small">
+  
+    7 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <p>I recently upgraded this blog to <a href="https://github.com/octopress/octopress">Octopress
+3</a>, as part of rebuilding (and
+<a href="https://www.docker.com/">Docker</a>-ifying) my blog
+<a href="https://jekyllrb.com/">Jekyll</a> build environment. This post is a guide of my
+upgrade experience and to talk about various workarounds I needed to make to
+get everything working.</p>
+
+<!-- more -->
+
+<h2 id="introduction-to-octopress-3">Introduction to Octopress 3</h2>
+
+<p>With <a href="(https://github.com/imathis/octopress)">Octopress 2</a>, the <a href="/blog/2011/12/19/hello-octopress/">paradigm I
+used</a> was to fork the canonical
+Octopress Git repository and maintain all my posts and theme files as a branch
+forked off of the Octopress "master" branch. I then periodically ran <code class="highlighter-rouge">git merge
+octopress/master</code> to pull upstream core Octopress infrastructure changes into
+my custom branch.</p>
+
+<p>As mentioned in the official "<a href="http://octopress.org/2015/01/15/octopress-3.0-is-coming/">Octopress 3.0 Is
+Coming</a>"
+announcement, there were various downsides to the Octopress 2 paradigm.  The
+main pain-point revolves around how Octopress 2 is basically just the skeleton
+of a Jekyll blog that you need to fork and modify – which means that when
+you want to take upstream changes of the Octopress 2 infrastructure, you need
+to merge those upstream changes into your local forked branch and work through
+any merge-conflicts. Sometimes easy, sometimes time-consuming.</p>
+
+<p>With Octopress 3, all of this has been re-thought so that your site is a Jekyll
+site first-and-foremost and all the extra Octopress "goodies" are delivered via
+gems which can be used as <a href="http://jekyllrb.com/docs/plugins/">Jekyll plugins</a>.
+That creates a nice clean separation between your site content versus the Jekyll
+site-building tools. Neat!</p>
+
+<h3 id="octopress-3-is-dead-long-live-octopress-3-">Octopress 3 is Dead, Long Live Octopress 3 …?</h3>
+
+<p>Side note: it's unclear what the future of Octopress 3 is.</p>
+
+<p>Octopress 3 development was active and vibrant circa 2015, but all the activity
+in the <a href="https://github.com/octopress">Octopress plugin repositories</a> seemed to
+tail-off towards the beginning of 2016. It's a shame, but I understand how
+these things sometimes go – priorities change, and life comes first.</p>
+
+<p>I opted to embrace Octopress 3 as-is because I was a big Octopress 2 fan and I
+really like the Octopress 3 vision.  Also, I wanted the small quality-of-life
+features which Octopress added above-and-beyond the default Jekyll scaffolding.</p>
+
+<p>But I did run into some small bumps along the way – more on that later.</p>
+
+<h2 id="setup-docker">Setup Docker</h2>
+
+<p>I created a <code class="highlighter-rouge">docker-compose.yml</code> file to compartmentalize Jekyll build
+environment:</p>
+
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">docker-compose.yml</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">services</span><span class="pi">:</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s">jekyll</span><span class="pi">:</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">image</span><span class="pi">:</span> <span class="s">jekyll/jekyll:latest</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">environment</span><span class="pi">:</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="s">BUNDLE_PATH</span><span class="pi">:</span> <span class="s">/srv/bundle</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">ports</span><span class="pi">:</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">4000:4000</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">volumes</span><span class="pi">:</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">.:/srv/jekyll</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">data-bundle-cache:/srv/bundle</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">volumes</span><span class="pi">:</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s">data-bundle-cache</span><span class="pi">:</span>
+</div></div></pre></div></figure>
+
+<p>Some key points:</p>
+
+<ul>
+  <li>Use the standard <code class="highlighter-rouge">jekyll/jekyll:latest</code> <a href="https://hub.docker.com/r/jekyll/jekyll/">Docker
+image</a>.</li>
+  <li>Use a persistent Docker volume as the <code class="highlighter-rouge">$BUNDLE_PATH</code> to avoid needing to
+re-download and re-install all the <code class="highlighter-rouge">Gemfile</code> gems for each <code class="highlighter-rouge">docker-compose
+run</code> container.</li>
+</ul>
+
+<p>Using Docker containers means everything is compartmentalized and that it's
+easy to bootstrap my blog build environment onto another machine.  Containers
+for the win.</p>
+
+<h2 id="setup-a-new-octopress-3-flavored-jekyll-site">Setup a New (Octopress 3-Flavored!) Jekyll Site</h2>
+
+<p>Create a new directory for your brand-new Jekyll site:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ mkdir blog
+</div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ cd blog
+</div></div></pre></div></figure>
+
+<p>Copy your <code class="highlighter-rouge">docker-compose.yml</code> file into the new directory.</p>
+
+<p>Use <code class="highlighter-rouge">docker-compose run</code> to start a shell into a new Docker container:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ docker-compose run --rm --service-ports jekyll /bin/sh
+</div></div></pre></div></figure>
+
+<p>Install the Octopress gem:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line"># gem install octopress
+</div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">Fetching: titlecase-0.1.1.gem (100%)
+</div></div><div data-line="3" class="code-highlight-row unnumbered"><div class="code-highlight-line">Successfully installed titlecase-0.1.1
+</div></div><div data-line="4" class="code-highlight-row unnumbered"><div class="code-highlight-line">...
+</div></div><div data-line="5" class="code-highlight-row unnumbered"><div class="code-highlight-line">Parsing documentation for octopress-3.0.11
+</div></div><div data-line="6" class="code-highlight-row unnumbered"><div class="code-highlight-line">Installing ri documentation for octopress-3.0.11
+</div></div><div data-line="7" class="code-highlight-row unnumbered"><div class="code-highlight-line">Done installing documentation for titlecase, octopress-deploy, octopress-hooks, octopress-escape-code, redcarpet, octopress after 1 seconds
+</div></div><div data-line="8" class="code-highlight-row unnumbered"><div class="code-highlight-line">6 gems installed
+</div></div></pre></div></figure>
+
+<p>Use the <code class="highlighter-rouge">octopress new</code> command to create a new Octopress-flavored Jekyll site:</p>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ octopress new -f .
+</div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">Running bundle install in /srv/jekyll...
+</div></div><div data-line="3" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
+</div></div><div data-line="4" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: installing your bundle as root will break this application for all non-root
+</div></div><div data-line="5" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: users on this machine.
+</div></div><div data-line="6" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: The dependency tzinfo-data (&gt;= 0) will be unused by any of the platforms Bundler is installing for. Bundler is installing for ruby but the dependency is only for x86-mingw32, x86-mswin32, x64-mingw32, java. To add those platforms to the bundle, run `bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java`.
+</div></div><div data-line="7" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching gem metadata from https://rubygems.org/...........
+</div></div><div data-line="8" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching version metadata from https://rubygems.org/..
+</div></div><div data-line="9" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching dependency metadata from https://rubygems.org/.
+</div></div><div data-line="10" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Resolving dependencies...
+</div></div><div data-line="11" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching public_suffix 3.0.0
+</div></div><div data-line="12" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Installing public_suffix 3.0.0
+</div></div><div data-line="13" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Using bundler 1.15.3
+</div></div><div data-line="14" class="code-highlight-row unnumbered"><div class="code-highlight-line">...
+</div></div><div data-line="15" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching jekyll 3.5.1
+</div></div><div data-line="16" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Installing jekyll 3.5.1
+</div></div><div data-line="17" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching jekyll-feed 0.9.2
+</div></div><div data-line="18" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Installing jekyll-feed 0.9.2
+</div></div><div data-line="19" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Fetching minima 2.1.1
+</div></div><div data-line="20" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Installing minima 2.1.1
+</div></div><div data-line="21" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Bundle complete! 4 Gemfile dependencies, 22 gems now installed.
+</div></div><div data-line="22" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Bundled gems are installed into /srv/bundle.
+</div></div><div data-line="23" class="code-highlight-row unnumbered"><div class="code-highlight-line">New jekyll site installed in /srv/jekyll.
+</div></div><div data-line="24" class="code-highlight-row unnumbered"><div class="code-highlight-line">Added Octopress scaffold:
+</div></div><div data-line="25" class="code-highlight-row unnumbered"><div class="code-highlight-line"> + _templates/
+</div></div><div data-line="26" class="code-highlight-row unnumbered"><div class="code-highlight-line"> +   draft
+</div></div><div data-line="27" class="code-highlight-row unnumbered"><div class="code-highlight-line"> +   page
+</div></div><div data-line="28" class="code-highlight-row unnumbered"><div class="code-highlight-line"> +   post
+</div></div></pre></div></figure>
+
+<p>(<em>Tip: You'll need to pass the <code class="highlighter-rouge">-f</code> flag to <code class="highlighter-rouge">octopress new</code> because you're
+trying to install into a directory which already exists</em>)</p>
+
+<p>Edit the <code class="highlighter-rouge">Gemfile</code> (created during <code class="highlighter-rouge">octopress new</code>) and minimally add the
+baseline Jekyll and Octopress gem dependencies:</p>
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">Gemfile</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">gem</span> <span class="s1">'jekyll'</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress'</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span>
+</div></div></pre></div></figure>
+
+<p>At this point, you have a brand-new empty Jekyll site with a few extra
+Octopress-flavored bits (like the <code class="highlighter-rouge">_templates</code> directory), and you can run
+<a href="https://jekyllrb.com/docs/usage/">normal Jekyll commands</a> like 'jekyll serve',
+<code class="highlighter-rouge">jekyll build</code>, etc.</p>
+
+<h2 id="managing-jekyll-plugin-gems">Managing Jekyll Plugin Gems</h2>
+
+<p>Jekyll supports several ways of <a href="https://jekyllrb.com/docs/plugins/">managing gem-based
+plugins</a>.</p>
+
+<p>I opted to manage all my gem plugins via a Bundler group in the <code class="highlighter-rouge">Gemfile</code> file.
+This just seemed the most straight-forward approach. It also seemed like a good
+idea to track both the <code class="highlighter-rouge">Gemfile</code> file and counterpart <code class="highlighter-rouge">Gemfile.lock</code> file via
+source-control (e.g. Git), but your mileage may vary.</p>
+
+<p>There are several neat Octopress 3 gem plugins, but I found that several of the
+plugins didn't work out-of-the-box with Jekyll 3.x (<em>because most of the
+plugins haven't been maintained in over a year now</em>). But thanks to the
+community-effect of GitHub, several other folks have fixed the Jekyll
+incompatibility problems and submitted pull requests. You can install the
+patched version of the various Octopress 3 gems by specifying an explicit
+<code class="highlighter-rouge">git:</code> remote URL (and the specific <code class="highlighter-rouge">branch:</code>) for that particular gem in your
+<code class="highlighter-rouge">Gemfile</code>.</p>
+
+<p>Here is the final <code class="highlighter-rouge">Gemfile</code> I ended-up with, with various patched Octopress
+gems:</p>
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">Gemfile</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">gem</span> <span class="s1">'jekyll'</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'jekyll-paginate'</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'jekyll-redirect-from'</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'jekyll-sitemap'</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress'</span>
+</div></div><div data-line="10" class="code-highlight-row numbered marked-line start-marked-line end-marked-line"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-code-highlighter'</span><span class="p">,</span> <span class="ss">git: </span><span class="s1">'https://github.com/randycoulman/code-highlighter.git'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'handle-multiline-spans'</span>  <span class="c1"># Fix for multi-line &lt;span&gt;'s (gh:octopress/code-highlighter #8)</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-codeblock'</span>
+</div></div><div data-line="12" class="code-highlight-row numbered marked-line start-marked-line end-marked-line"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-codefence'</span><span class="p">,</span> <span class="ss">git: </span><span class="s1">'https://github.com/mkleucker/codefence.git'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'fix-warning-deprecated'</span>  <span class="c1"># Fix Jeykll 3 compatibility (gh:octopress/codefence #17)</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-image-tag'</span>
+</div></div><div data-line="14" class="code-highlight-row numbered marked-line start-marked-line"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-ink'</span><span class="p">,</span> <span class="ss">git: </span><span class="s1">'https://github.com/iphoting/ink.git'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'jekyll-3'</span>  <span class="c1"># Fix Jekyll 3 compatibility (gh:octopress/ink #65)</span>
+</div></div><div data-line="15" class="code-highlight-row numbered marked-line"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-linkblog'</span><span class="p">,</span>  <span class="ss">git: </span><span class="s1">'https://github.com/andrewdavidbell/linkblog.git'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'jekyll3'</span>  <span class="c1"># Fix Jekyll 3 compatibility (gh:octopress/linkblog #7)</span>
+</div></div><div data-line="16" class="code-highlight-row numbered marked-line end-marked-line"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-quote-tag'</span><span class="p">,</span> <span class="ss">git: </span><span class="s1">'https://github.com/NickTomlin/quote-tag.git'</span><span class="p">,</span> <span class="ss">branch: </span><span class="s1">'master'</span>  <span class="c1"># Fix Jeykll 3 compatibility</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">gem</span> <span class="s1">'octopress-solarized'</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span>
+</div></div></pre></div></figure>
+
+<h2 id="migrating-content">Migrating Content</h2>
+
+<p>You'll need to copy over whatever parts you need from your old Octopress 2 site
+to your new Octopress 3 site:</p>
+
+<ul>
+  <li>Copy all your posts: <code class="highlighter-rouge">source/_posts</code> -&gt; <code class="highlighter-rouge">_posts</code></li>
+  <li>Copy all your other pages</li>
+  <li>Copy all your images: <code class="highlighter-rouge">source/images</code> -&gt; <code class="highlighter-rouge">images</code></li>
+  <li>Copy any theme files: <code class="highlighter-rouge">source/_includes</code> -&gt; <code class="highlighter-rouge">_includes</code>, etc, etc.</li>
+</ul>
+
+<h2 id="installing-a-theme">Installing a Theme</h2>
+
+<p>The original Octopress 2 theme was baked into the Octopress 2 git branch.</p>
+
+<p>You could probably migrate over the old Octopress 2 theme from your old
+Octopress 2 site, but now that we're using plain-vanilla Jekyll 3 that means we
+can use <em>any</em> of the plethora of Jekyll-based themes.  So I went hunting for a
+new theme.</p>
+
+<p>I ended-up choosing the <a href="https://github.com/johnotander/pixyll">Pixyll</a> theme
+because it was clean and modern.</p>
+
+<p>I "installed" the Pixyll theme by:</p>
+
+<ol>
+  <li>Cloning the Pixyll theme from its GitHub repo to a separate directory.</li>
+  <li>Manually copying over the files I wanted from the Pixyll directory into my
+Octopress 3 site.</li>
+  <li>Tracking the pristine Pixyll theme files in a <a href="https://github.com/tonyduckles/blog_source/commit/b1af1060">baseline
+commit</a>.</li>
+  <li>Personalizing the theme files as I wanted.</li>
+</ol>
+
+<p>I opted to create a "baseline" commit of the Pixyll theme (along with making
+note of what Git revision # from the Pixyll repo I was forking at) to (in
+theory) make it easier to take and review upstream changes to the Pixyll git
+branch: create a local Git branch off that baseline commit, copy in any
+upstream changes to the Pixyll theme, and then <code class="highlighter-rouge">git merge</code> forward onto my
+local <code class="highlighter-rouge">master</code> branch and work through any merge conflicts.</p>
+
+<p>Here are some of the customizations &amp; personalizations I made along the way:</p>
+
+<ul>
+  <li>Updated <code class="highlighter-rouge">_config.yml</code> to set various <code class="highlighter-rouge">site</code> flags which the Pixyll theme
+respects.</li>
+  <li>Updated <code class="highlighter-rouge">_includes/footer.html</code> to include my name and copyright.</li>
+  <li>Updated <code class="highlighter-rouge">_includes/head.html</code> to add the <code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">css_asset_tag</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code> Liquid tag, which was needed to get the <code class="highlighter-rouge">octopress-solarized</code>
+plugin to take effect (via the <code class="highlighter-rouge">octopress-asset-pipeline</code> plugin).</li>
+  <li>Various tweaks to CSS styling.</li>
+</ul>
+
+<h2 id="resources">Resources</h2>
+
+<p>Here are some helpful posts which laid out the vast majority of the migration
+process:</p>
+
+<ul>
+  <li><a href="http://samwize.com/2015/09/30/migrating-octopress-2-to-octopress-3/">http://samwize.com/2015/09/30/migrating-octopress-2-to-octopress-3/</a></li>
+  <li><a href="https://dgmstuart.github.io/blog/2016/01/22/migrating-from-octopress-2-to-3/">https://dgmstuart.github.io/blog/2016/01/22/migrating-from-octopress-2-to-3/</a></li>
+  <li><a href="http://www.dracotorre.com/blog/site-updated-octopress-3/">http://www.dracotorre.com/blog/site-updated-octopress-3/</a></li>
+</ul>
+
+<p>Happy upgrading!</p>
+
+</article>
+
+
+
+
+  <div class="post-footer">
+
+
+<span class="post-meta">
+  <span class="byline author vcard">Posted by <span class="fn">Tony Duckles</span></span>
+</span>
+
+
+
+
+
+
+
+
+
+
+ &bull; <span class="post-meta">
+  <time datetime="2017-08-26T18:06:26-05:00" pubdate data-updated="true">Aug 26, 2017</time>
+</span>
+
+
+
+ &bull; <span class="post-meta">
+  Categories:
+  
+    
+    <a href="/blog/categories/blog/">Blog</a>
+    
+  
+</span>
+
+</div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'nynim';
+    var disqus_identifier = 'http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/';
+    var disqus_title      = "Migrating From Octopress 2 to Octopress 3";
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+      &copy; 2017 Tony Duckles.
+      Powered by <a href="https://jekyllrb.com/">Jekyll</a>
+      and <a href="https://github.com/octopress/octopress">Octopress 3</a>.
+      Theme based on <a href="https://github.com/johnotander/pixyll">Pixyll</a>.
+    </small>
+  </div>
+</footer>
+</body>
+</html>

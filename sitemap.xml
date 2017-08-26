@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://nynim.org/code/svn2svn/</loc>
-<lastmod>2017-08-24T22:09:45-05:00</lastmod>
+<lastmod>2017-08-26T18:16:19-05:00</lastmod>
 </url>
 <url>
 <loc>http://nynim.org/guitar-tabs/gufs/smile/</loc>
@@ -135,6 +135,10 @@
 <url>
 <loc>http://nynim.org/blog/2013/06/29/happy-retirement-google-reader/</loc>
 <lastmod>2013-06-29T12:35:12-05:00</lastmod>
+</url>
+<url>
+<loc>http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/</loc>
+<lastmod>2017-08-26T18:06:26-05:00</lastmod>
 </url>
 <url>
 <loc>http://nynim.org/about/</loc>
