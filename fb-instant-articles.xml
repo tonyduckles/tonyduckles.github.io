@@ -442,12 +442,12 @@ the project-level.</p>
 
 <p>For example, here are the exclusions I want for my <a href="/blog/2011/12/19/hello-octopress/">Octopress</a>
 build environment:</p>
-<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">--ignore-dir=.gist-cache
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">--ignore-dir=.pygments-cache
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">--ignore-dir=.sass-cache
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">--ignore-dir=.themes
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">--ignore-dir=\_deploy
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">--ignore-dir=public
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=.gist-cache
+</div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=.pygments-cache
+</div></div><div data-line="3" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=.sass-cache
+</div></div><div data-line="4" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=.themes
+</div></div><div data-line="5" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=\_deploy
+</div></div><div data-line="6" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=public
 </div></div></pre></div></figure>
 
 <p>So, I wrote-up a little <code class="highlighter-rouge">ack</code> wrapper script: <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a>.
@@ -976,9 +976,12 @@ the pre-existing files/folders, so you run the appropriate <code class="highligh
 happily commit those changes to your branch. Once everything is working happily,
 you go to merge these changes into <code class="highlighter-rouge">/trunk</code> and that all works great. After the
 commit, if you run a <code class="highlighter-rouge">svn log -v -l1 /trunk</code> to look at the details of the most
-recent commit to trunk, you'll see something like this:
-    A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
-…which only describes the (top-level) folder rename, not any add/modifications/renames/etc
+recent commit to trunk, you'll see something like this:</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
+</div></div></pre></div></figure>
+
+<p>…which only describes the (top-level) folder rename, not any add/modifications/renames/etc
 that might have happened <em>inside</em> that folder on the branch. At the full repo-level,
 SVN can get away with just doing a "<code class="highlighter-rouge">svn copy</code>" from the branch to trunk, so that
 when you do an "<code class="highlighter-rouge">svn log</code>" on the new "RenamedFolder" path it will walk from trunk
@@ -1117,6 +1120,7 @@ easy to commit those changes and push them to a central Git repository.</p>
 
 <p>Git also makes it dead-easy to "bootstrap" my dot-files environment into a
 brand-new home directory:</p>
+
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">Dotfiles bootstrap</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Clone the repo into ~/dotfiles/</span>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">git clone git://github.com/tonyduckles/dotfiles.git dotfiles
 </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Move all the contents (including .git, but excluding the specal "." and ".." directories)</span>
@@ -1414,16 +1418,16 @@ using previously to
 <p>Here's the script:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Sync e-mail from "username@yourdomain.com" to localhost, using IMAP</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">          --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">          --host2 localhost --user2 username
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">          --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">          --ssl1 <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">          --useheader <span class="s1">'Message-Id'</span> --skipsize --allowsizemismatch <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">          --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">          --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">          --regextrans2 <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">          --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">         --host2 localhost --user2 username
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">         --ssl1 <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">         --useheader <span class="s1">'Message-Id'</span> --skipsize --allowsizemismatch <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">         --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">         --split1 100 --split2 100 <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">         --regextrans2 <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
 </div></div></pre></div></figure>
 
 <p>The <code class="highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
@@ -1466,7 +1470,7 @@ to setting up Google Apps for "nynim.org" (i.e. "…@nynim.org"). I had found
 the following article back then which gave me helpful hints on how to use
 <code class="highlighter-rouge">imapsync</code> to push data to my new Google Apps e-mail address:</p>
 
-<p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
+<p><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></p>
 
 <p>I adapted that script for my own needs, and I was able to successfully copy
 all the mail from my regular Gmail account to my new Google Apps account.</p>
@@ -1476,24 +1480,24 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 <p>Here is the final script I ended-up with:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c">#!/bin/sh</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> <span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> imapsync <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">   --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">   --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">   --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">   --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">   --useheader <span class="s1">'Message-Id'</span> --skipsize <span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">   --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">   --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">   --maxage 50 <span class="se">\</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">   --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync <span class="se">\</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  --useheader <span class="s1">'Message-Id'</span> --skipsize <span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">  --split1 100 --split2 100 <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  --maxage 50 <span class="se">\</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
 </div></div></pre></div></figure>
 
 <p>The <code class="highlighter-rouge">--syncinternaldates</code>, <code class="highlighter-rouge">--useheader 'Message-Id'</code>,
 and <code class="highlighter-rouge">--skipsize</code> options are all recommended by the imapsync FAQ
 (search for "Gmail"):</p>
 
-<p><strong><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></strong></p>
+<p><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></p>
 
 <p>I opted to use the <code class="highlighter-rouge">--passfile1/passfile2</code> options rather than passing in a
 plain-text password in via a command-line param for two reasons: first because
@@ -1955,7 +1959,7 @@ get fanatical about some things, but I'm not sure if I'm too that point with
 Firefly yet. I certainly wish that the TV series hadn't been cancel mid-1st-
 season.</p>
 
-<p><strong><a href="http://www.donetheimpossible.com/">http://www.donetheimpossible.com/</a></strong></p>
+<p><a href="http://www.donetheimpossible.com/">http://www.donetheimpossible.com/</a></p>
 
 
                     ]]>

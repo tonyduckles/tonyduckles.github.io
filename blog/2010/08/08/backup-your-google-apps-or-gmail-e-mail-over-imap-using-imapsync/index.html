@@ -19,7 +19,7 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?201708261816" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?201708271914" type="text/css">
     <link href='/stylesheets/all-c806af982c74ff2ad55eca2049c8e090.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
@@ -213,16 +213,16 @@ using previously to
 <p>Here's the script:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Sync e-mail from "username@yourdomain.com" to localhost, using IMAP</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">          --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">          --host2 localhost --user2 username
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">          --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">          --ssl1 <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">          --useheader <span class="s1">'Message-Id'</span> --skipsize --allowsizemismatch <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">          --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">          --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">          --regextrans2 <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">          --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">         --host2 localhost --user2 username
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">         --ssl1 <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">         --useheader <span class="s1">'Message-Id'</span> --skipsize --allowsizemismatch <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">         --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">         --split1 100 --split2 100 <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">         --regextrans2 <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
 </div></div></pre></div></figure>
 
 <p>The <code class="highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my

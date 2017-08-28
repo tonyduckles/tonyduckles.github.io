@@ -19,7 +19,7 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?201708261816" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?201708271914" type="text/css">
     <link href='/stylesheets/all-c806af982c74ff2ad55eca2049c8e090.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
@@ -222,9 +222,12 @@ the pre-existing files/folders, so you run the appropriate <code class="highligh
 happily commit those changes to your branch. Once everything is working happily,
 you go to merge these changes into <code class="highlighter-rouge">/trunk</code> and that all works great. After the
 commit, if you run a <code class="highlighter-rouge">svn log -v -l1 /trunk</code> to look at the details of the most
-recent commit to trunk, you'll see something like this:
-    A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
-…which only describes the (top-level) folder rename, not any add/modifications/renames/etc
+recent commit to trunk, you'll see something like this:</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
+</div></div></pre></div></figure>
+
+<p>…which only describes the (top-level) folder rename, not any add/modifications/renames/etc
 that might have happened <em>inside</em> that folder on the branch. At the full repo-level,
 SVN can get away with just doing a "<code class="highlighter-rouge">svn copy</code>" from the branch to trunk, so that
 when you do an "<code class="highlighter-rouge">svn log</code>" on the new "RenamedFolder" path it will walk from trunk

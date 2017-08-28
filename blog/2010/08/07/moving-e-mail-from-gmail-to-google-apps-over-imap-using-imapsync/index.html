@@ -19,7 +19,7 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?201708261816" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?201708271914" type="text/css">
     <link href='/stylesheets/all-c806af982c74ff2ad55eca2049c8e090.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
@@ -196,7 +196,7 @@ to setting up Google Apps for "nynim.org" (i.e. "…@nynim.org"). I had found
 the following article back then which gave me helpful hints on how to use
 <code class="highlighter-rouge">imapsync</code> to push data to my new Google Apps e-mail address:</p>
 
-<p><strong><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></strong></p>
+<p><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></p>
 
 <p>I adapted that script for my own needs, and I was able to successfully copy
 all the mail from my regular Gmail account to my new Google Apps account.</p>
@@ -206,24 +206,24 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 <p>Here is the final script I ended-up with:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c">#!/bin/sh</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> <span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> imapsync <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">   --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">   --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">   --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">   --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">   --useheader <span class="s1">'Message-Id'</span> --skipsize <span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">   --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">   --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">   --maxage 50 <span class="se">\</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">   --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync <span class="se">\</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  --useheader <span class="s1">'Message-Id'</span> --skipsize <span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">  --split1 100 --split2 100 <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  --maxage 50 <span class="se">\</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
 </div></div></pre></div></figure>
 
 <p>The <code class="highlighter-rouge">--syncinternaldates</code>, <code class="highlighter-rouge">--useheader 'Message-Id'</code>,
 and <code class="highlighter-rouge">--skipsize</code> options are all recommended by the imapsync FAQ
 (search for "Gmail"):</p>
 
-<p><strong><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></strong></p>
+<p><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></p>
 
 <p>I opted to use the <code class="highlighter-rouge">--passfile1/passfile2</code> options rather than passing in a
 plain-text password in via a command-line param for two reasons: first because
