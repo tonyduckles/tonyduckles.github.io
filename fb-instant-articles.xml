@@ -255,7 +255,7 @@ local <code class="highlighter-rouge">master</code> branch and work through any 
   <li>Updated <code class="highlighter-rouge">_config.yml</code> to set various <code class="highlighter-rouge">site</code> flags which the Pixyll theme
 respects.</li>
   <li>Updated <code class="highlighter-rouge">_includes/footer.html</code> to include my name and copyright.</li>
-  <li>Updated <code class="highlighter-rouge">_includes/head.html</code> to add the <code class="highlighter-rouge"><span class="p">{</span><span class="err">%</span><span class="w"> </span><span class="err">css_asset_tag</span><span class="w"> </span><span class="err">%</span><span class="p">}</span></code> Liquid tag, which was needed to get the <code class="highlighter-rouge">octopress-solarized</code>
+  <li>Updated <code class="highlighter-rouge">_includes/head.html</code> to add the <code class="highlighter-rouge">{% css_asset_tag %}</code> Liquid tag, which was needed to get the <code class="highlighter-rouge">octopress-solarized</code>
 plugin to take effect (via the <code class="highlighter-rouge">octopress-asset-pipeline</code> plugin).</li>
   <li>Various tweaks to CSS styling.</li>
 </ul>
@@ -291,7 +291,9 @@ process:</p>
                 <content:encoded>
                     <![CDATA[
                     <p><img src="/images/2013/06/happy-retirement-gr.png" alt="Happy Retirement Google Reader!" /></p>
-<blockquote><p>After 8 years on the job, Google Reader is retiring on July 1st. Thank you for being there for us all this time!</p></blockquote>
+<blockquote>
+  <p>After 8 years on the job, Google Reader is retiring on July 1st. Thank you for being there for us all this time!</p>
+</blockquote>
 
 <p>Thanks for being a great friend, Google Reader. And I'm happy to see that there
 will be plenty of worthy alternatives to fill your absence.</p>
@@ -348,18 +350,22 @@ found some interesting blog-posts via Twitter:</p>
 <p>Christian Heilmann wrote "<a href="http://christianheilmann.com/2013/03/14/rip-google-reader-id-have-paid-for-you/">RIP Google Reader - I'd Have Paid For You</a>"
 where we talks about how the social web will never be a replacement for the
 one-stop aggregation service that Google Reader provides:</p>
-<blockquote><p>Yes, RSS has been declared dead many times and people keep banging on about the social web and that Facebook, Twitter, Reddit and others have replaced the old style of blogging and having an own feed. But I don’t buy it, sorry. <b>Every social network is full of senseless chatter and organised advertising.</b> Social media experts and PR folk make sure that information about certain products and celebrities get read and retweeted. I don’t care about that. <b>I don’t want it. The same way I don’t watch public access channels or randomly surf channels but instead plan what I want to see on TV.</b> Random exploration and finding things by chance is fun, but it is not helping you to keep up to date – it is the ADHD of information consumption.</p></blockquote>
+<blockquote>
+  <p>Yes, RSS has been declared dead many times and people keep banging on about the social web and that Facebook, Twitter, Reddit and others have replaced the old style of blogging and having an own feed. But I don’t buy it, sorry. <b>Every social network is full of senseless chatter and organised advertising.</b> Social media experts and PR folk make sure that information about certain products and celebrities get read and retweeted. I don’t care about that. <b>I don’t want it. The same way I don’t watch public access channels or randomly surf channels but instead plan what I want to see on TV.</b> Random exploration and finding things by chance is fun, but it is not helping you to keep up to date – it is the ADHD of information consumption.</p>
+</blockquote>
 
 <h3 id="moving-towards-a-walled-off-web">Moving Towards a Walled-Off Web?</h3>
 <p>Jonathan Poritsky wrote a fantastic blog-post titled "<a href="http://www.candlerblog.com/2013/03/15/google-and-reader/">Reader's End and Google Today</a>",
 where he points out that this could be the start of a disturbing shift in
 Google's priorities:</p>
-<blockquote><p>The biggest issue doesn’t seem to be the loss of Reader itself, but the recognition <b>that Google’s priorities have shifted</b>
+<blockquote>
+  <p>The biggest issue doesn’t seem to be the loss of Reader itself, but the recognition <b>that Google’s priorities have shifted</b>
 …</p>
 
-<p>But walls have sprouted up. Google can’t access the massive amounts of data people pour into Facebook and Twitter, so they built Google+ as their own social walled garden. Twitter is exerting control over how users experience their product, which shuts out competitors like Instagram (which is owned by Facebook), which can no longer display images inline in tweets. <b>The Web is getting smaller, not bigger, with each company working to become the umbrella under which you experience the Internet.</b> So Google has taken steps to make sure that the Web as users know it exists under their company banner, and Reader doesn’t fit in with that plan anymore.</p>
+  <p>But walls have sprouted up. Google can’t access the massive amounts of data people pour into Facebook and Twitter, so they built Google+ as their own social walled garden. Twitter is exerting control over how users experience their product, which shuts out competitors like Instagram (which is owned by Facebook), which can no longer display images inline in tweets. <b>The Web is getting smaller, not bigger, with each company working to become the umbrella under which you experience the Internet.</b> So Google has taken steps to make sure that the Web as users know it exists under their company banner, and Reader doesn’t fit in with that plan anymore.</p>
 
-<p>I was once a Google cheerleader. <b>Like many I believed their goal was to make a better Web for everyone</b>, with the one major tradeoff being that they would sell ads instead of charging users. That may once have been true but the Google of 2013 doesn’t want to build a better Web, it wants to build a better Google. I don’t think that goal is aligned with any of my own.</p></blockquote>
+  <p>I was once a Google cheerleader. <b>Like many I believed their goal was to make a better Web for everyone</b>, with the one major tradeoff being that they would sell ads instead of charging users. That may once have been true but the Google of 2013 doesn’t want to build a better Web, it wants to build a better Google. I don’t think that goal is aligned with any of my own.</p>
+</blockquote>
 
 <p>With this move, Google is seeding a lot of ill-will in the tech community.
 This feels very much against the "Do No Evil" slogan which Google touts.
@@ -551,7 +557,9 @@ for an iPhone cellular plan.  I had heard mention of some of these "pre-paid"
 cellular vendors before but had never really looked into them much or really
 understand what they were:</p>
 
-<blockquote><p>Many of these new options are called Mobile Network Virtual Operators (MNVOs), and they are in fact just re-selling access to the bigger carriers’ networks. So you get the same reception, coverage, and reliability as you had before.</p></blockquote>
+<blockquote>
+  <p>Many of these new options are called Mobile Network Virtual Operators (MNVOs), and they are in fact just re-selling access to the bigger carriers’ networks. So you get the same reception, coverage, and reliability as you had before.</p>
+</blockquote>
 
 <p>I had never realized! Same cellular network/service, you're just paying a
 different middle-man. And there's <a href="http://en.wikipedia.org/wiki/List_of_United_States_mobile_virtual_network_operators">quite a long list</a>
@@ -699,7 +707,9 @@ there.</p>
 
 <p>He's been able to put to clear words what I've been starting to realize lately:</p>
 
-<blockquote><p>The bottom line is this: by focusing on happiness itself, you can lead a much better life than those who focus on convenience, luxury, and following the lead of the financially illiterate herd that is the TV-ad-absorbing Middle Class of the United States today (and most of the other rich countries).  Happiness comes from many sources, but none of these sources involve car or purse upgrades. No matter what the herd or the TV set tells you, this is the truth.</p></blockquote>
+<blockquote>
+  <p>The bottom line is this: by focusing on happiness itself, you can lead a much better life than those who focus on convenience, luxury, and following the lead of the financially illiterate herd that is the TV-ad-absorbing Middle Class of the United States today (and most of the other rich countries).  Happiness comes from many sources, but none of these sources involve car or purse upgrades. No matter what the herd or the TV set tells you, this is the truth.</p>
+</blockquote>
 
 <p>Living within your means and cutting-back on needless spending means lower
 monthly expenses. By cutting those recurring expenses, you're able to save
@@ -1205,7 +1215,10 @@ and explore.</p>
                 <content:encoded>
                     <![CDATA[
                     <p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:</p>
-<blockquote><p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?</p></blockquote>
+<blockquote>
+  <p>Octopress is an obsessively designed framework for Jekyll blogging. It’s easy to configure and easy to deploy. Sweet huh?
+– <cite><a href="https://github.com/imathis/octopress">Octopress</a></cite></p>
+</blockquote>
 
 <p>Sweet indeed! The more I read about it, the more intrigued I became. After a
 few hours spent exploring the code, importing the posts/pages from my Wordpress
@@ -1229,7 +1242,10 @@ that I realized it had huge appeal to my geek-side too.</p>
 <h2 id="why-octopress">Why Octopress?</h2>
 <p>It was Matt Gemmell's "<a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Blogging With Octopress</a>"
 post which resonated the most with me:</p>
-<blockquote><p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.</p></blockquote>
+<blockquote>
+  <p>WordPress is excellent, but it’s over-featured for what I need, and its PHP/MySQL guts are opaque. I don’t really like the idea of all my writing being inside a big database either; it’s a single point of failure, and that makes me uneasy.
+– <cite><a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a></cite></p>
+</blockquote>
 
 <p>For what I do with my website, Wordpress was overkill. It ended-up being
 <em>Yet-Another-Thing-I-Needed-To-Maintain-Security-Patches-On™</em>.</p>
