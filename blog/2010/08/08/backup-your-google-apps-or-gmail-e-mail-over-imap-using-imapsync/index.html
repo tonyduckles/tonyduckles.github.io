@@ -19,7 +19,7 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202007302117" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?202012271626" type="text/css">
     <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
@@ -61,13 +61,13 @@
     
 
     
-    <script type="text/javascript">
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-       ga('create', 'UA-6748678-1', 'auto');
-       ga('send', 'pageview');
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6748678-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-6748678-1');
     </script>
     
 </head>
@@ -198,13 +198,13 @@ Google Apps (and Gmail) e-mail over IMAP, you can do all kinds of things using
 standard tools, e.g. synchronize your Gmail e-mail to a local mailbox using
 IMAP.</p>
 
-<p>I run an Ubuntu box at home and it was easy to install the <code class="highlighter-rouge">dovecot-imapd</code>
+<p>I run an Ubuntu box at home and it was easy to install the <code class="language-plaintext highlighter-rouge">dovecot-imapd</code>
 package to get an IMAP server installed. Since my box is behind my
 router/firewall, I'm wasn't that concerned with tweaking Dovecot's default
 configuration, but I'm sure you could fiddle with the config to ensure that
-Dovecot only binds to <code class="highlighter-rouge">127.0.0.1</code>.</p>
+Dovecot only binds to <code class="language-plaintext highlighter-rouge">127.0.0.1</code>.</p>
 
-<p>From there, it's just a matter of using <code class="highlighter-rouge">imapsync</code>, just like I ended-up
+<p>From there, it's just a matter of using <code class="language-plaintext highlighter-rouge">imapsync</code>, just like I ended-up
 using previously to
 <a href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
 
@@ -225,14 +225,14 @@ using previously to
 </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
 </div></div></pre></div></figure>
 
-<p>The <code class="highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
+<p>The <code class="language-plaintext highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
 local IMAP folder structure can be different than the structure on Gmail's
-server. For example, the top Gmail IMAP folder is <code class="highlighter-rouge">[Gmail]</code> which wasn't all
+server. For example, the top Gmail IMAP folder is <code class="language-plaintext highlighter-rouge">[Gmail]</code> which wasn't all
 that useful for me, so instead I rewrote that top-level folder to be
-<code class="highlighter-rouge">username@somedomain</code> so that the local folder name (e.g. in <code class="highlighter-rouge">~/mail/</code>) would
+<code class="language-plaintext highlighter-rouge">username@somedomain</code> so that the local folder name (e.g. in <code class="language-plaintext highlighter-rouge">~/mail/</code>) would
 match the source e-mail address.</p>
 
-<p>You can also use the <code class="highlighter-rouge">--include</code> option to decide which IMAP folders to copy.
+<p>You can also use the <code class="language-plaintext highlighter-rouge">--include</code> option to decide which IMAP folders to copy.
 I opted to just copy "All Mail" and "Sent Mail", which gives me a copy of all
 my mail but doesn't preserve any information about the labels I might have had
 assigned to those messages in Gmail.</p>

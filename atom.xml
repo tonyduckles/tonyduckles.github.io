@@ -3,7 +3,7 @@
   <title><![CDATA[Nynim.org]]></title>
   <link href="http://nynim.org/atom.xml" rel="self"/>
   <link href="http://nynim.org/"/>
-  <updated>2020-07-30T21:17:11-05:00</updated>
+  <updated>2020-12-27T16:26:12-06:00</updated>
   <id>http://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
@@ -37,7 +37,7 @@ get everything working.</p>
 <p>With <a href="https://github.com/imathis/octopress">Octopress 2</a>, the <a href="http://nynim.org/blog/2011/12/19/hello-octopress/">paradigm I
 used</a> was to fork the canonical
 Octopress Git repository and maintain all my posts and theme files as a branch
-forked off of the Octopress "master" branch. I then periodically ran <code class="highlighter-rouge">git merge
+forked off of the Octopress "master" branch. I then periodically ran <code class="language-plaintext highlighter-rouge">git merge
 octopress/master</code> to pull upstream core Octopress infrastructure changes into
 my custom branch.</p>
 
@@ -73,7 +73,7 @@ features which Octopress added above-and-beyond the default Jekyll scaffolding.<
 
 <h2 id="setup-docker">Setup Docker</h2>
 
-<p>I created a <code class="highlighter-rouge">docker-compose.yml</code> file to compartmentalize Jekyll build
+<p>I created a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file to compartmentalize Jekyll build
 environment:</p>
 
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">docker-compose.yml</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
@@ -94,10 +94,10 @@ environment:</p>
 <p>Some key points:</p>
 
 <ul>
-  <li>Use the standard <code class="highlighter-rouge">jekyll/jekyll:latest</code> <a href="https://hub.docker.com/r/jekyll/jekyll/">Docker
+  <li>Use the standard <code class="language-plaintext highlighter-rouge">jekyll/jekyll:latest</code> <a href="https://hub.docker.com/r/jekyll/jekyll/">Docker
 image</a>.</li>
-  <li>Use a persistent Docker volume as the <code class="highlighter-rouge">$BUNDLE_PATH</code> to avoid needing to
-re-download and re-install all the <code class="highlighter-rouge">Gemfile</code> gems for each <code class="highlighter-rouge">docker-compose
+  <li>Use a persistent Docker volume as the <code class="language-plaintext highlighter-rouge">$BUNDLE_PATH</code> to avoid needing to
+re-download and re-install all the <code class="language-plaintext highlighter-rouge">Gemfile</code> gems for each <code class="language-plaintext highlighter-rouge">docker-compose
 run</code> container.</li>
 </ul>
 
@@ -112,9 +112,9 @@ for the win.</p>
 </div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ cd blog
 </div></div></pre></div></figure>
 
-<p>Copy your <code class="highlighter-rouge">docker-compose.yml</code> file into the new directory.</p>
+<p>Copy your <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file into the new directory.</p>
 
-<p>Use <code class="highlighter-rouge">docker-compose run</code> to start a shell into a new Docker container:</p>
+<p>Use <code class="language-plaintext highlighter-rouge">docker-compose run</code> to start a shell into a new Docker container:</p>
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ docker-compose run --rm --service-ports jekyll /bin/sh
 </div></div></pre></div></figure>
 
@@ -129,7 +129,7 @@ for the win.</p>
 </div></div><div data-line="8" class="code-highlight-row unnumbered"><div class="code-highlight-line">6 gems installed
 </div></div></pre></div></figure>
 
-<p>Use the <code class="highlighter-rouge">octopress new</code> command to create a new Octopress-flavored Jekyll site:</p>
+<p>Use the <code class="language-plaintext highlighter-rouge">octopress new</code> command to create a new Octopress-flavored Jekyll site:</p>
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ octopress new -f .
 </div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">Running bundle install in /srv/jekyll...
 </div></div><div data-line="3" class="code-highlight-row unnumbered"><div class="code-highlight-line">  Bundler: Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
@@ -160,10 +160,10 @@ for the win.</p>
 </div></div><div data-line="28" class="code-highlight-row unnumbered"><div class="code-highlight-line"> +   post
 </div></div></pre></div></figure>
 
-<p>(<em>Tip: You'll need to pass the <code class="highlighter-rouge">-f</code> flag to <code class="highlighter-rouge">octopress new</code> because you're
+<p>(<em>Tip: You'll need to pass the <code class="language-plaintext highlighter-rouge">-f</code> flag to <code class="language-plaintext highlighter-rouge">octopress new</code> because you're
 trying to install into a directory which already exists</em>)</p>
 
-<p>Edit the <code class="highlighter-rouge">Gemfile</code> (created during <code class="highlighter-rouge">octopress new</code>) and minimally add the
+<p>Edit the <code class="language-plaintext highlighter-rouge">Gemfile</code> (created during <code class="language-plaintext highlighter-rouge">octopress new</code>) and minimally add the
 baseline Jekyll and Octopress gem dependencies:</p>
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">Gemfile</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">gem</span> <span class="s1">'jekyll'</span>
@@ -173,18 +173,18 @@ baseline Jekyll and Octopress gem dependencies:</p>
 </div></div></pre></div></figure>
 
 <p>At this point, you have a brand-new empty Jekyll site with a few extra
-Octopress-flavored bits (like the <code class="highlighter-rouge">_templates</code> directory), and you can run
+Octopress-flavored bits (like the <code class="language-plaintext highlighter-rouge">_templates</code> directory), and you can run
 <a href="https://jekyllrb.com/docs/usage/">normal Jekyll commands</a> like 'jekyll serve',
-<code class="highlighter-rouge">jekyll build</code>, etc.</p>
+<code class="language-plaintext highlighter-rouge">jekyll build</code>, etc.</p>
 
 <h2 id="managing-jekyll-plugin-gems">Managing Jekyll Plugin Gems</h2>
 
 <p>Jekyll supports several ways of <a href="https://jekyllrb.com/docs/plugins/">managing gem-based
 plugins</a>.</p>
 
-<p>I opted to manage all my gem plugins via a Bundler group in the <code class="highlighter-rouge">Gemfile</code> file.
+<p>I opted to manage all my gem plugins via a Bundler group in the <code class="language-plaintext highlighter-rouge">Gemfile</code> file.
 This just seemed the most straight-forward approach. It also seemed like a good
-idea to track both the <code class="highlighter-rouge">Gemfile</code> file and counterpart <code class="highlighter-rouge">Gemfile.lock</code> file via
+idea to track both the <code class="language-plaintext highlighter-rouge">Gemfile</code> file and counterpart <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> file via
 source-control (e.g. Git), but your mileage may vary.</p>
 
 <p>There are several neat Octopress 3 gem plugins, but I found that several of the
@@ -193,10 +193,10 @@ plugins haven't been maintained in over a year now</em>). But thanks to the
 community-effect of GitHub, several other folks have fixed the Jekyll
 incompatibility problems and submitted pull requests. You can install the
 patched version of the various Octopress 3 gems by specifying an explicit
-<code class="highlighter-rouge">git:</code> remote URL (and the specific <code class="highlighter-rouge">branch:</code>) for that particular gem in your
-<code class="highlighter-rouge">Gemfile</code>.</p>
+<code class="language-plaintext highlighter-rouge">git:</code> remote URL (and the specific <code class="language-plaintext highlighter-rouge">branch:</code>) for that particular gem in your
+<code class="language-plaintext highlighter-rouge">Gemfile</code>.</p>
 
-<p>Here is the final <code class="highlighter-rouge">Gemfile</code> I ended-up with, with various patched Octopress
+<p>Here is the final <code class="language-plaintext highlighter-rouge">Gemfile</code> I ended-up with, with various patched Octopress
 gems:</p>
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">Gemfile</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">gem</span> <span class="s1">'jekyll'</span>
@@ -222,10 +222,10 @@ gems:</p>
 to your new Octopress 3 site:</p>
 
 <ul>
-  <li>Copy all your posts: <code class="highlighter-rouge">source/_posts</code> -&gt; <code class="highlighter-rouge">_posts</code></li>
+  <li>Copy all your posts: <code class="language-plaintext highlighter-rouge">source/_posts</code> -&gt; <code class="language-plaintext highlighter-rouge">_posts</code></li>
   <li>Copy all your other pages</li>
-  <li>Copy all your images: <code class="highlighter-rouge">source/images</code> -&gt; <code class="highlighter-rouge">images</code></li>
-  <li>Copy any theme files: <code class="highlighter-rouge">source/_includes</code> -&gt; <code class="highlighter-rouge">_includes</code>, etc, etc.</li>
+  <li>Copy all your images: <code class="language-plaintext highlighter-rouge">source/images</code> -&gt; <code class="language-plaintext highlighter-rouge">images</code></li>
+  <li>Copy any theme files: <code class="language-plaintext highlighter-rouge">source/_includes</code> -&gt; <code class="language-plaintext highlighter-rouge">_includes</code>, etc, etc.</li>
 </ul>
 
 <h2 id="installing-a-theme">Installing a Theme</h2>
@@ -255,17 +255,17 @@ commit</a>.</li>
 note of what Git revision # from the Pixyll repo I was forking at) to (in
 theory) make it easier to take and review upstream changes to the Pixyll git
 branch: create a local Git branch off that baseline commit, copy in any
-upstream changes to the Pixyll theme, and then <code class="highlighter-rouge">git merge</code> forward onto my
-local <code class="highlighter-rouge">master</code> branch and work through any merge conflicts.</p>
+upstream changes to the Pixyll theme, and then <code class="language-plaintext highlighter-rouge">git merge</code> forward onto my
+local <code class="language-plaintext highlighter-rouge">master</code> branch and work through any merge conflicts.</p>
 
 <p>Here are some of the customizations &amp; personalizations I made along the way:</p>
 
 <ul>
-  <li>Updated <code class="highlighter-rouge">_config.yml</code> to set various <code class="highlighter-rouge">site</code> flags which the Pixyll theme
+  <li>Updated <code class="language-plaintext highlighter-rouge">_config.yml</code> to set various <code class="language-plaintext highlighter-rouge">site</code> flags which the Pixyll theme
 respects.</li>
-  <li>Updated <code class="highlighter-rouge">_includes/footer.html</code> to include my name and copyright.</li>
-  <li>Updated <code class="highlighter-rouge">_includes/head.html</code> to add the <code class="highlighter-rouge">{% css_asset_tag %}</code> Liquid tag, which was needed to get the <code class="highlighter-rouge">octopress-solarized</code>
-plugin to take effect (via the <code class="highlighter-rouge">octopress-asset-pipeline</code> plugin).</li>
+  <li>Updated <code class="language-plaintext highlighter-rouge">_includes/footer.html</code> to include my name and copyright.</li>
+  <li>Updated <code class="language-plaintext highlighter-rouge">_includes/head.html</code> to add the <code class="language-plaintext highlighter-rouge">{% css_asset_tag %}</code> Liquid tag, which was needed to get the <code class="language-plaintext highlighter-rouge">octopress-solarized</code>
+plugin to take effect (via the <code class="language-plaintext highlighter-rouge">octopress-asset-pipeline</code> plugin).</li>
   <li>Various tweaks to CSS styling.</li>
 </ul>
 
@@ -432,13 +432,13 @@ going with…</p>
     <id>http://nynim.org/blog/2013/03/09/project-level-ackrc-files</id>
     <category term="Coding" />
       <content type="html"><![CDATA[<p><a href="http://betterthangrep.com/">Ack</a> is a fantastic (<em>and portable!</em>) replacement
-for <code class="highlighter-rouge">grep</code>. It's aimed at programmers and by default will only search a
+for <code class="language-plaintext highlighter-rouge">grep</code>. It's aimed at programmers and by default will only search a
 white-list of known file-extensions so that it will only search the "code" in a
 directory.</p>
 
-<p><code class="highlighter-rouge">ack</code> looks at your <code class="highlighter-rouge">~/.ackrc</code> file to get any customized "default" settings
-you want. I use my (<em>user-level</em>) <code class="highlighter-rouge">~/.ackrc</code> to <a href="https://github.com/tonyduckles/dotfiles/blob/master/.ackrc">enable some personalized default options</a>,
-e.g. color-ize output, always use a <code class="highlighter-rouge">$PAGER</code>, sort the output by filename, etc.</p>
+<p><code class="language-plaintext highlighter-rouge">ack</code> looks at your <code class="language-plaintext highlighter-rouge">~/.ackrc</code> file to get any customized "default" settings
+you want. I use my (<em>user-level</em>) <code class="language-plaintext highlighter-rouge">~/.ackrc</code> to <a href="https://github.com/tonyduckles/dotfiles/blob/master/.ackrc">enable some personalized default options</a>,
+e.g. color-ize output, always use a <code class="language-plaintext highlighter-rouge">$PAGER</code>, sort the output by filename, etc.</p>
 
 <p>But sometimes I want to have <strong>directory-level</strong> (or project-level) additional
 settings, namely to always exclude/ignore certain directories when searching at
@@ -456,11 +456,11 @@ build environment:</p>
 </div></div><div data-line="6" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=public
 </div></div></pre></div></figure>
 
-<p>So, I wrote-up a little <code class="highlighter-rouge">ack</code> wrapper script: <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a>.
-It crawls the directory tree looking for an additional "local" <code class="highlighter-rouge">.ackrc</code> file,
+<p>So, I wrote-up a little <code class="language-plaintext highlighter-rouge">ack</code> wrapper script: <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a>.
+It crawls the directory tree looking for an additional "local" <code class="language-plaintext highlighter-rouge">.ackrc</code> file,
 starting from the current working directory crawling up through any parent
-directories until we find a <code class="highlighter-rouge">.ackrc</code> file (<em>or until we reach either <code class="highlighter-rouge">$HOME</code> or
-<code class="highlighter-rouge">/</code></em>).</p>
+directories until we find a <code class="language-plaintext highlighter-rouge">.ackrc</code> file (<em>or until we reach either <code class="language-plaintext highlighter-rouge">$HOME</code> or
+<code class="language-plaintext highlighter-rouge">/</code></em>).</p>
 
 <p>(<strong>Update 2012-03-10:</strong> <em>It looks like <a href="https://github.com/petdance/ack2">Ack v2.0</a>
 supports PWD .ackrc files natively, and has some other neat enhancements to boot!</em>)</p>
@@ -511,12 +511,12 @@ supports PWD .ackrc files natively, and has some other neat enhancements to boot
 
 <ul>
   <li>Grab the latest version of the <a href="https://github.com/tonyduckles/dotfiles/blob/master/bin/ack-wrapper">ack-wrapper</a> script,
-drop it somewhere in your <code class="highlighter-rouge">$PATH</code> (<em>I like having a <code class="highlighter-rouge">~/bin/</code> directory</em>), and
-make sure it's executable (<code class="highlighter-rouge">chmod 755 path/to/ack-wrapper</code>).</li>
-  <li>Update your <code class="highlighter-rouge">.bashrc</code> to <code class="highlighter-rouge">alias ack=ack-wrapper</code>, so that running <code class="highlighter-rouge">ack ...</code>
-will first call the wrapper script, search for any "local" <code class="highlighter-rouge">.ackrc</code> files,
+drop it somewhere in your <code class="language-plaintext highlighter-rouge">$PATH</code> (<em>I like having a <code class="language-plaintext highlighter-rouge">~/bin/</code> directory</em>), and
+make sure it's executable (<code class="language-plaintext highlighter-rouge">chmod 755 path/to/ack-wrapper</code>).</li>
+  <li>Update your <code class="language-plaintext highlighter-rouge">.bashrc</code> to <code class="language-plaintext highlighter-rouge">alias ack=ack-wrapper</code>, so that running <code class="language-plaintext highlighter-rouge">ack ...</code>
+will first call the wrapper script, search for any "local" <code class="language-plaintext highlighter-rouge">.ackrc</code> files,
 insert any additional options found into the original supplied command-line
-arguments, and finally call the (real) <code class="highlighter-rouge">ack</code> executable.</li>
+arguments, and finally call the (real) <code class="language-plaintext highlighter-rouge">ack</code> executable.</li>
 </ul>
 ]]></content>
     </entry>
@@ -614,7 +614,7 @@ I found online (<em>and putting on my arts-and-crafts hat</em>), I trimmed the
 normal-sized SIM card to the micro-SIM size to fit my iPhone SIM card tray.</li>
   <li>Drop the new SIM card into my iPhone. No need to turn-off or power-cycle.
 It connected to the Airvoice Wireless network immediately. You'll notice
-the <code class="highlighter-rouge">AIRVOICE WIRELESS</code> vendor banner on the upper-left of your iPhone screen.</li>
+the <code class="language-plaintext highlighter-rouge">AIRVOICE WIRELESS</code> vendor banner on the upper-left of your iPhone screen.</li>
   <li>To get cellular data working, you need to install the correct Access Point
 Name (APN) settings for Airvoice Wireless. Just connect to Wi-Fi, fire-up
 Mobile Safari on your iPhone, navigate to <a href="http://www.unlockit.co.nz/">http://www.unlockit.co.nz/</a>,
@@ -729,7 +729,7 @@ you may even be able to <a href="http://www.mrmoneymustache.com/2012/01/13/the-s
     <id>http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows</id>
     <category term="UNIX" />
       <content type="html"><![CDATA[<p>On my Windows machines at both work and home, I like to run <a href="http://www.cygwin.com/">Cygwin</a>
-to get a UNIX-like environment on Windows: <code class="highlighter-rouge">screen</code>, <code class="highlighter-rouge">ssh</code>, <code class="highlighter-rouge">grep</code>, etc.
+to get a UNIX-like environment on Windows: <code class="language-plaintext highlighter-rouge">screen</code>, <code class="language-plaintext highlighter-rouge">ssh</code>, <code class="language-plaintext highlighter-rouge">grep</code>, etc.
 I use SSH's <a href="https://hkn.eecs.berkeley.edu/~dhsu/ssh_public_key_howto.html">public key authentication</a>
 pretty extensively to get password-less authentication to make it dead-easy
 (and quick!) to SSH around to different machines.</p>
@@ -750,45 +750,45 @@ figured I'd write up what worked for me in case that helps other people.</p>
 
 <h4 id="step-1---install-the-openssh-package">Step 1 - Install the "openssh" package</h4>
 
-<p>Install the <code class="highlighter-rouge">openssh</code> package. This gets you the OpenSSH client tools, e.g. <code class="highlighter-rouge">ssh</code>,
-<code class="highlighter-rouge">ssh-agent</code>, etc.</p>
+<p>Install the <code class="language-plaintext highlighter-rouge">openssh</code> package. This gets you the OpenSSH client tools, e.g. <code class="language-plaintext highlighter-rouge">ssh</code>,
+<code class="language-plaintext highlighter-rouge">ssh-agent</code>, etc.</p>
 
 <h4 id="step-2---install-the-heimdal-package">Step 2 - Install the "heimdal" package</h4>
 
-<p>Install the <code class="highlighter-rouge">heimdal</code> package, which supplies an implementation of the Kerberos
-tools. This gets you things like <code class="highlighter-rouge">kinit</code>, <code class="highlighter-rouge">klist</code>, etc.</p>
+<p>Install the <code class="language-plaintext highlighter-rouge">heimdal</code> package, which supplies an implementation of the Kerberos
+tools. This gets you things like <code class="language-plaintext highlighter-rouge">kinit</code>, <code class="language-plaintext highlighter-rouge">klist</code>, etc.</p>
 
 <h4 id="step-3---optional-configure-your-krb5conf-file">Step 3 - (Optional) Configure your "krb5.conf" file</h4>
-<p>You may want to configure your <code class="highlighter-rouge">/etc/krb5.conf</code> file to list a default realm
-so that you don't need to specify it when doing the <code class="highlighter-rouge">kinit</code> later on:</p>
+<p>You may want to configure your <code class="language-plaintext highlighter-rouge">/etc/krb5.conf</code> file to list a default realm
+so that you don't need to specify it when doing the <code class="language-plaintext highlighter-rouge">kinit</code> later on:</p>
 
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">/etc/krb5.conf</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="o">[</span>libdefaults]
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">  default_realm <span class="o">=</span> REALM_NAME
 </div></div></pre></div></figure>
 
-<p>Alternatively, rather than fiddling with <code class="highlighter-rouge">/etc/krb5.conf</code> on my Cygwin
-install, I opted to use the <code class="highlighter-rouge">KRB5_CONFIG</code> environment variable (see the
-<code class="highlighter-rouge">kinit</code> manpage) to point to a <code class="highlighter-rouge">~/.krb5.conf</code> file instead to keep my
-Kerberos config confined to my <code class="highlighter-rouge">$HOME</code> directory (since I
+<p>Alternatively, rather than fiddling with <code class="language-plaintext highlighter-rouge">/etc/krb5.conf</code> on my Cygwin
+install, I opted to use the <code class="language-plaintext highlighter-rouge">KRB5_CONFIG</code> environment variable (see the
+<code class="language-plaintext highlighter-rouge">kinit</code> manpage) to point to a <code class="language-plaintext highlighter-rouge">~/.krb5.conf</code> file instead to keep my
+Kerberos config confined to my <code class="language-plaintext highlighter-rouge">$HOME</code> directory (since I
 <a href="http://nynim.org/blog/2011/12/20/home-sweet-home/">keep my $HOME directory under version control</a>).</p>
 
 <h4 id="step-4---modify-your-sshconfig-file">Step 4 - Modify your ".ssh/config" file</h4>
 
-<p>Modify your <code class="highlighter-rouge">~/.ssh/config</code> file to enable GSSAPI authentication:</p>
+<p>Modify your <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> file to enable GSSAPI authentication:</p>
 
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">~/.ssh/config</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">GSSAPIAuthentication yes
 </div></div></pre></div></figure>
 
 <h2 id="usage">Usage</h2>
 <ul>
-  <li>Before you <code class="highlighter-rouge">ssh</code> to a remote machine where you want to use Kerberized credentials,
-simply run <code class="highlighter-rouge">kinit</code> to acquire a new Kerberos ticket. (Pro tip: you can run <code class="highlighter-rouge">klist</code> to
+  <li>Before you <code class="language-plaintext highlighter-rouge">ssh</code> to a remote machine where you want to use Kerberized credentials,
+simply run <code class="language-plaintext highlighter-rouge">kinit</code> to acquire a new Kerberos ticket. (Pro tip: you can run <code class="language-plaintext highlighter-rouge">klist</code> to
 list all your active Kerberos tickets and their expiration dates.)</li>
-  <li>With the <code class="highlighter-rouge">GSSAPIAuthentication</code> directive in your <code class="highlighter-rouge">.ssh/config</code> file, that should
-enable GSSAPI authentication for free. There's also a <code class="highlighter-rouge">-K</code> param to the <code class="highlighter-rouge">ssh</code> command
+  <li>With the <code class="language-plaintext highlighter-rouge">GSSAPIAuthentication</code> directive in your <code class="language-plaintext highlighter-rouge">.ssh/config</code> file, that should
+enable GSSAPI authentication for free. There's also a <code class="language-plaintext highlighter-rouge">-K</code> param to the <code class="language-plaintext highlighter-rouge">ssh</code> command
 which talks about enabling GSSAPI auth and forwarding, which I'm not entirely sure
 what that controls, but my guess is that it's for opting into GSSAPI auth mode if
-you <strong>don't</strong> have that directive in your <code class="highlighter-rouge">.ssh/config</code> file.</li>
+you <strong>don't</strong> have that directive in your <code class="language-plaintext highlighter-rouge">.ssh/config</code> file.</li>
 </ul>
 
 <p>I hope this helps someone else who's trying to get Kerberized SSH working on Cygwin.
@@ -943,11 +943,11 @@ flexibility of VMWare ESXi.</p>
       <content type="html"><![CDATA[<p>I've found myself in a (potentially unique) situation where we have a
 <em>gi-normous</em> <a href="http://subversion.apache.org/">Subversion</a> repository at work and
 we've been exploring ways on how to trim off some of the fat but still keep all
-the logical history so that we could still use things like <code class="highlighter-rouge">svn blame</code> to
+the logical history so that we could still use things like <code class="language-plaintext highlighter-rouge">svn blame</code> to
 drill-down into code-history. Our central SVN repository is some 4-5 years old
 and a whopping 300GB+ on-disk. (Yowza!) What we'd really like to do is dump
-just the <code class="highlighter-rouge">/trunk</code> history out to a new repo and roll forward with that, ditching
-any historical baggage from old topic branches (<code class="highlighter-rouge">/branches</code>). The trouble is,
+just the <code class="language-plaintext highlighter-rouge">/trunk</code> history out to a new repo and roll forward with that, ditching
+any historical baggage from old topic branches (<code class="language-plaintext highlighter-rouge">/branches</code>). The trouble is,
 I haven't been able to find any tools to do this.</p>
 
 <p>So, I ended-up writing my own tool to do this. But, first, some back-story…</p>
@@ -959,18 +959,18 @@ I haven't been able to find any tools to do this.</p>
 of people pointing to the "<a href="http://svnbook.red-bean.com/en/1.7/svn.ref.svndumpfilter.html">svndumpfilter</a>"
 utility as the tool-of-choice. Sadly, it doesn't seem to be quite "smart" enough
 to do what I'd like it to do. It seems to be aimed at (namely) filtering an
-<code class="highlighter-rouge">svnadmin dump</code> stream, taking only certain paths in the SVN "filesystem". That
+<code class="language-plaintext highlighter-rouge">svnadmin dump</code> stream, taking only certain paths in the SVN "filesystem". That
 works fine if you're trying to take an isolated folder/project from the repository,
 but if that folder/project has ever been merged into from any paths <em>outside</em> of
 the target filter path, then things fall apart. The "trouble" are the copy-from's…</p>
 
 <p>For example, say that you have a repo with a typical trunk/tags/branches setup.
-Say you create a new topic branch (e.g. <code class="highlighter-rouge">svn copy /trunk /branches/my-fix &amp;&amp; svn co /branches/my-fix</code>)
+Say you create a new topic branch (e.g. <code class="language-plaintext highlighter-rouge">svn copy /trunk /branches/my-fix &amp;&amp; svn co /branches/my-fix</code>)
 and happily work on your sandboxed branch. Say that you decide to rename some of
-the pre-existing files/folders, so you run the appropriate <code class="highlighter-rouge">svn move</code> commands and
+the pre-existing files/folders, so you run the appropriate <code class="language-plaintext highlighter-rouge">svn move</code> commands and
 happily commit those changes to your branch. Once everything is working happily,
-you go to merge these changes into <code class="highlighter-rouge">/trunk</code> and that all works great. After the
-commit, if you run a <code class="highlighter-rouge">svn log -v -l1 /trunk</code> to look at the details of the most
+you go to merge these changes into <code class="language-plaintext highlighter-rouge">/trunk</code> and that all works great. After the
+commit, if you run a <code class="language-plaintext highlighter-rouge">svn log -v -l1 /trunk</code> to look at the details of the most
 recent commit to trunk, you'll see something like this:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
@@ -978,14 +978,14 @@ recent commit to trunk, you'll see something like this:</p>
 
 <p>…which only describes the (top-level) folder rename, not any add/modifications/renames/etc
 that might have happened <em>inside</em> that folder on the branch. At the full repo-level,
-SVN can get away with just doing a "<code class="highlighter-rouge">svn copy</code>" from the branch to trunk, so that
-when you do an "<code class="highlighter-rouge">svn log</code>" on the new "RenamedFolder" path it will walk from trunk
+SVN can get away with just doing a "<code class="language-plaintext highlighter-rouge">svn copy</code>" from the branch to trunk, so that
+when you do an "<code class="language-plaintext highlighter-rouge">svn log</code>" on the new "RenamedFolder" path it will walk from trunk
 back into that originating topic branch and follow the rename (copy or move) that
 happened within.</p>
 
-<p>The <code class="highlighter-rouge">svnadmin dump</code> will show the same "copy-from" action as <code class="highlighter-rouge">svn log -v</code> did,
+<p>The <code class="language-plaintext highlighter-rouge">svnadmin dump</code> will show the same "copy-from" action as <code class="language-plaintext highlighter-rouge">svn log -v</code> did,
 since the dump stream will need to be able to recreate that same ancestry. When
-<code class="highlighter-rouge">svndumpfilter</code> sees this, it throws up its hands and returns an error because
+<code class="language-plaintext highlighter-rouge">svndumpfilter</code> sees this, it throws up its hands and returns an error because
 it doesn't know how to <em>recreate</em> the logical history that happened between
 when that branch originally forked from trunk versus the final state of that branch.
 That is, assuming the copy-from path even has any ancestry back to trunk…</p>
@@ -999,14 +999,14 @@ to start working on my own solution.</p>
 hosted on Google Code. It had copied parts of the "<a href="https://bitbucket.org/andialbrecht/hgsvn/overview">hgsvn</a>"
 project (<em>sychronizing between Mercurial and Subversion repositories</em>) and
 slapped them together in a way that worked for the original author's needs.
-It used "<code class="highlighter-rouge">svn log</code>" to walk the entire history of a given path in a source
+It used "<code class="language-plaintext highlighter-rouge">svn log</code>" to walk the entire history of a given path in a source
 repository and then manually replayed those changes to a working-copy of
 some path in a target repository. Revision by revision, it would replay
 the delta, recreating the history of just the source path in the target repo.
 This was <em>oh-so-close</em> to what I wanted, except that it also didn't correctly
 handle the copy-from case. And the repository I really wanted to replay was
 <em>littered</em> with copy-from's, since I'm trying to replay just the history from
-<code class="highlighter-rouge">/trunk</code> and we create topic-branches for <em>everything</em>.</p>
+<code class="language-plaintext highlighter-rouge">/trunk</code> and we create topic-branches for <em>everything</em>.</p>
 
 <h2 id="enter-svn2svn">Enter svn2svn</h2>
 <p>So, I started with the <a href="http://code.google.com/p/svn2svn/">svn2svn</a> project,
@@ -1022,10 +1022,10 @@ a project which I'm also calling <strong><a href="http://nynim.org/code/svn2svn/
   <li>
     <p><strong>Full ancestry (copy-from) support.</strong> This was the tricky part. It took
 several different iterations/rewrites to get something which worked for all
-the different edge-cases. The general idea here is that we can use <code class="highlighter-rouge">svn log</code>
+the different edge-cases. The general idea here is that we can use <code class="language-plaintext highlighter-rouge">svn log</code>
 to walk backwards through the ancestry on a copy-from case: if we can trace
-back our ancestry to same source path we're replaying, then we can do an <code class="highlighter-rouge">svn
-copy</code> from that original parent and then do <code class="highlighter-rouge">svn export</code> to update the
+back our ancestry to same source path we're replaying, then we can do an <code class="language-plaintext highlighter-rouge">svn
+copy</code> from that original parent and then do <code class="language-plaintext highlighter-rouge">svn export</code> to update the
 contents of all the files to match the final copy-from version. There's also
 some extra recursion that needs to happen here, to handle cases where child
 files got renamed inside of a parent-renamed folder. There are other
@@ -1034,13 +1034,13 @@ edge-cases like files getting replaced inside a parent-renamed folder.</p>
   <li>
     <p><strong>Use revprops for source-tracking and resume support.</strong> Subversion has
 revision properties, key+value pairs that are associated with a particular
-revision/commit. I'm setting some <code class="highlighter-rouge">svn2svn:*</code> rev-props to track the source
+revision/commit. I'm setting some <code class="language-plaintext highlighter-rouge">svn2svn:*</code> rev-props to track the source
 URL, source repository UUID (i.e. in case source URL now points at a
 physically different repo), and source revision #. This is all needed for
 proper resume support, since for the ancestry support we have to maintain a
 mapping-table of source_rev -&gt; target_rev, so that when we find a copy-from
 from some revision # in the source repo, we can map this to the equivalent
-revision # in the target repo so we can do an equivalent <code class="highlighter-rouge">svn copy</code> command.</p>
+revision # in the target repo so we can do an equivalent <code class="language-plaintext highlighter-rouge">svn copy</code> command.</p>
   </li>
   <li>
     <p><strong>Better verbosity output, and optional debug output.</strong> As I was playing with
@@ -1058,7 +1058,7 @@ scrub the contents of the target working-copy before each commit.</strong> This 
 where the power of doing the manual replay of changes really starts to shine.
 We have full control over the pending changes, which means that if your
 original trunk history had some files which you didn't want to transition
-into the new replayed repo then you could easily <code class="highlighter-rouge">svn rm</code> those files from
+into the new replayed repo then you could easily <code class="language-plaintext highlighter-rouge">svn rm</code> those files from
 the working-copy before the commit happens. That could be as simple as
 excluding certain fixed paths, but it could be a lot more flexible like
 searching the entire working-copy tree and removing any files which match
@@ -1092,7 +1092,7 @@ send me pull-requests for any tweaks you've made.</p>
       <content type="html"><![CDATA[<p><img class="right" src="http://nynim.org/images/2011/12/img_Terminal.png" width="180" height="180" alt="Terminal" />
 About a year and a half ago, I stumbled upon Ryan Tomayko's "<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>"
 repository on Github. The moment I saw it, I thought it was a <em>great</em> idea:
-the idea of managing all your <code class="highlighter-rouge">$HOME</code> directory "dot-files" in a Git repository.
+the idea of managing all your <code class="language-plaintext highlighter-rouge">$HOME</code> directory "dot-files" in a Git repository.
 That single idea led me on a personal crusade to better understand all the
 different configuration files that live in your UNIX (<em>Linux, Mac OSX, etc.</em>)
 home directory, and the end-result was creating my own "<a href="https://github.com/tonyduckles/dotfiles">dotfiles</a>"
@@ -1123,45 +1123,45 @@ brand-new home directory:</p>
 </div></div></pre></div></figure>
 
 <h2 id="bin">~/bin/</h2>
-<p>Ryan has a <code class="highlighter-rouge">~/bin/</code> directory in his dot-files repo with all kinds of nifty
+<p>Ryan has a <code class="language-plaintext highlighter-rouge">~/bin/</code> directory in his dot-files repo with all kinds of nifty
 little utilities.</p>
 
 <p>There's a bunch of great Git-related utilities in there, e.g.:</p>
 
 <ul>
-  <li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-up">git-up</a> - Like <code class="highlighter-rouge">git-pull</code> but show a short and sexy log of changes immediately after merging (git-up) or rebasing (git-reup).</li>
+  <li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-up">git-up</a> - Like <code class="language-plaintext highlighter-rouge">git-pull</code> but show a short and sexy log of changes immediately after merging (git-up) or rebasing (git-reup).</li>
   <li><a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-incoming">git-incoming</a>/<a href="https://github.com/rtomayko/dotfiles/blob/rtomayko/bin/git-outgoing">git-outgoing</a> - Shows difference between the current branch vs. the upstream branch.</li>
 </ul>
 
 <p>And there's also some great general-purpose utilities in there, e.g.:</p>
 
 <ul>
-  <li><a href="http://betterthangrep.com/">ack</a> - A tool like <code class="highlighter-rouge">grep</code>, designed for programmers with large trees of heterogeneous source code. Very handy for recursive file-searching.</li>
+  <li><a href="http://betterthangrep.com/">ack</a> - A tool like <code class="language-plaintext highlighter-rouge">grep</code>, designed for programmers with large trees of heterogeneous source code. Very handy for recursive file-searching.</li>
 </ul>
 
 <h2 id="gitconfig">~/.gitconfig</h2>
-<p>Ryan has lots of nifty tricks in his <code class="highlighter-rouge">.gitconfig</code> file, tying in short-cuts for
-calling the helper utilities in <code class="highlighter-rouge">~/bin/</code>. Also, you can setup Git to use ANSI
+<p>Ryan has lots of nifty tricks in his <code class="language-plaintext highlighter-rouge">.gitconfig</code> file, tying in short-cuts for
+calling the helper utilities in <code class="language-plaintext highlighter-rouge">~/bin/</code>. Also, you can setup Git to use ANSI
 colors for various sub-commands (diff, status), which is <em>very</em> handy.</p>
 
 <h2 id="inputrc">~/.inputrc</h2>
-<p>There's a lot of neat options in the <code class="highlighter-rouge">.inputrc</code> file, for binding key-sequences
+<p>There's a lot of neat options in the <code class="language-plaintext highlighter-rouge">.inputrc</code> file, for binding key-sequences
 to various command-line options. For example:</p>
 <figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">.inputrc snippet</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">C-n: <span class="nb">history</span>-search-forward
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">C-p: <span class="nb">history</span>-search-backward
 </div></div></pre></div></figure>
 <p>…are the <strong>two single-most time-saving key-bindings</strong> that I stumbled upon. This
-lets you type a partial command and then use <code class="highlighter-rouge">Ctrl-n</code> and <code class="highlighter-rouge">Ctrl-p</code> to
+lets you type a partial command and then use <code class="language-plaintext highlighter-rouge">Ctrl-n</code> and <code class="language-plaintext highlighter-rouge">Ctrl-p</code> to
 completion-match the rest of the line based on your command history. Awesome!</p>
 
-<p>I find this incredibly useful to completion-match hostnames for <code class="highlighter-rouge">ssh</code> commands or other
+<p>I find this incredibly useful to completion-match hostnames for <code class="language-plaintext highlighter-rouge">ssh</code> commands or other
 longer commands which I often type. Completion-matching for-the-win!</p>
 
 <h2 id="vim-vimrc-and-vim">Vim: .vimrc and .vim/</h2>
 <p>Before setting out on this project, I had used Vi some but hadn't really explored
 (or understood) the full-power that was <a href="http://www.vim.org/">Vim</a>. Digging
-into the <code class="highlighter-rouge">.vimrc</code> file, reading-up on all the various config options, and
-digging into all the <code class="highlighter-rouge">~/.vim/</code> plugins which Ryan had was an eye-opening
+into the <code class="language-plaintext highlighter-rouge">.vimrc</code> file, reading-up on all the various config options, and
+digging into all the <code class="language-plaintext highlighter-rouge">~/.vim/</code> plugins which Ryan had was an eye-opening
 experience. I came to realize just how much you could extend and customize
 Vim to meet your needs. Simple things like getting syntax-highlighting
 and color-schemes set by default made for an oh-so-much more pleasant
@@ -1212,7 +1212,7 @@ site generator that powers <a href="http://pages.github.com/">Github Pages</a>. 
 for the site is simply a collection of flat text files using
 <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (or Textile) mark-up. You
 can setup either "posts" or "pages", all as you'd expect. When you're ready to
-deploy, you use <code class="highlighter-rouge">Rakefile</code> automation to "generate" the static site files.</p>
+deploy, you use <code class="language-plaintext highlighter-rouge">Rakefile</code> automation to "generate" the static site files.</p>
 
 <p>It also has a great default theme (IMHO) – very clean and simple – which was
 actually my original attraction. It was only after reading more about the project
@@ -1234,7 +1234,7 @@ pages and posts as plain-text text-files, all static files so no security-patche
 or vulnerabilities to worry about, and easily portable and backup-able. It combines
 a lot of things which I have grown to love: I can keep all my content in a Git
 repository so that I can publish from multiple locations (<em>if need be</em>), I can
-work on the site entirely in text (<code class="highlighter-rouge">vim</code> + <code class="highlighter-rouge">screen</code>), and it's dead easy to
+work on the site entirely in text (<code class="language-plaintext highlighter-rouge">vim</code> + <code class="language-plaintext highlighter-rouge">screen</code>), and it's dead easy to
 deploy and backup.</p>
 
 <h2 id="migrating-from-wordpress">Migrating from Wordpress</h2>
@@ -1244,12 +1244,12 @@ deploy and backup.</p>
 Based on the recommendation of others, I used <a href="https://github.com/thomasf/exitwp">exitwp</a>
 to create Jekyll-style posts based on my Wordpress content. This went fine for
 the most part, but there were some parts in the Wordpress export file that I
-needed to fiddle to keep the <code class="highlighter-rouge">exitwp</code> script from crashing. The end result
-was that I had a directory full of simple <code class="highlighter-rouge">*.markdown</code> files which represented
+needed to fiddle to keep the <code class="language-plaintext highlighter-rouge">exitwp</code> script from crashing. The end result
+was that I had a directory full of simple <code class="language-plaintext highlighter-rouge">*.markdown</code> files which represented
 all the content from my Wordpress site. I spent a few hours going through those
 files and cleaning up the Markdown syntax until it matched what I wanted. Some
 of my original Wordpress posts were a mixture of Wordpress mark-up and raw HTML,
-and that threw the <code class="highlighter-rouge">exitwp</code> parser for a loop in some places. It did a great
+and that threw the <code class="language-plaintext highlighter-rouge">exitwp</code> parser for a loop in some places. It did a great
 job overall though.</p>
 
 <p>From there, I spent some time looking through the guts of the Octopress source
@@ -1268,18 +1268,18 @@ extremely well-thought-out and a joy to use and extend.</p>
 
 <h2 id="ending-thoughts">Ending Thoughts</h2>
 <p>This has been a fun pet project for me.  It's the first time I've used a Ruby environment.
-It's also the first time I've played with <a href="http://sass-lang.com/">SASS</a> (<code class="highlighter-rouge">*.scss</code>),
+It's also the first time I've played with <a href="http://sass-lang.com/">SASS</a> (<code class="language-plaintext highlighter-rouge">*.scss</code>),
 and boy is it going to be hard to go back to writing plain-old CSS.
 SASS's <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">color functions</a>
-are ridiculously slick: being able to do things like <code class="highlighter-rouge">desaturate(lighten($nav-bg, 8), 15)</code>
-in a <code class="highlighter-rouge">*.scss</code> file is <em>awesome</em> and makes tweaking a site's color-scheme
+are ridiculously slick: being able to do things like <code class="language-plaintext highlighter-rouge">desaturate(lighten($nav-bg, 8), 15)</code>
+in a <code class="language-plaintext highlighter-rouge">*.scss</code> file is <em>awesome</em> and makes tweaking a site's color-scheme
 oh-so-much easier.</p>
 
 <p>I'm a bit sad to have lost the lifestream (<a href="https://github.com/dcramer/wp-lifestream/">wp-lifestream</a>)
 functionality from my old Wordpress site. But then again I'm already doing
 full exports of most of my lifestream'd websites (Google Reader, Delicious),
 so it might not be too hard to generate static lifestream pages using a
-<code class="highlighter-rouge">cronjob</code> or something. That's a project for another day…</p>
+<code class="language-plaintext highlighter-rouge">cronjob</code> or something. That's a project for another day…</p>
 
 <h2 id="useful-links">Useful Links</h2>
 <ul>
@@ -1292,7 +1292,7 @@ Pointing out some of subtle features of Octopress.</li>
   <li><a href="https://github.com/thomasf/exitwp">exitwp</a> -
 Tool for converting Wordpress export XML to the Jekyll blog engine.</li>
   <li><a href="http://www.vim.org/scripts/script.php?script_id=3835">vim-octopress</a> -
-Vim syntax highlighting mode for Octopress-flavored <code class="highlighter-rouge">*.markdown</code> files.</li>
+Vim syntax highlighting mode for Octopress-flavored <code class="language-plaintext highlighter-rouge">*.markdown</code> files.</li>
 </ul>
 
 ]]></content>
@@ -1345,7 +1345,7 @@ go back in time and recover old-states of files.</li>
 is similar to RAID-5/RAID-6 except without the potentially-fatal
 "<em>RAID-5 write hole</em>" problem, in part thanks to the copy-on-write strategy.</li>
   <li>You can <a href="http://dlc.sun.com/osol/docs/content/ZFSADMIN/gbchx.html">replicate ZFS filesystems</a>
-(<code class="highlighter-rouge">zfs send</code> and <code class="highlighter-rouge">zfs receive</code>), snapshots and all, making it dead-easy to
+(<code class="language-plaintext highlighter-rouge">zfs send</code> and <code class="language-plaintext highlighter-rouge">zfs receive</code>), snapshots and all, making it dead-easy to
 backup ZFS filesystems to remote machines.</li>
 </ul>
 
@@ -1392,13 +1392,13 @@ Google Apps (and Gmail) e-mail over IMAP, you can do all kinds of things using
 standard tools, e.g. synchronize your Gmail e-mail to a local mailbox using
 IMAP.</p>
 
-<p>I run an Ubuntu box at home and it was easy to install the <code class="highlighter-rouge">dovecot-imapd</code>
+<p>I run an Ubuntu box at home and it was easy to install the <code class="language-plaintext highlighter-rouge">dovecot-imapd</code>
 package to get an IMAP server installed. Since my box is behind my
 router/firewall, I'm wasn't that concerned with tweaking Dovecot's default
 configuration, but I'm sure you could fiddle with the config to ensure that
-Dovecot only binds to <code class="highlighter-rouge">127.0.0.1</code>.</p>
+Dovecot only binds to <code class="language-plaintext highlighter-rouge">127.0.0.1</code>.</p>
 
-<p>From there, it's just a matter of using <code class="highlighter-rouge">imapsync</code>, just like I ended-up
+<p>From there, it's just a matter of using <code class="language-plaintext highlighter-rouge">imapsync</code>, just like I ended-up
 using previously to
 <a href="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
 
@@ -1419,14 +1419,14 @@ using previously to
 </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
 </div></div></pre></div></figure>
 
-<p>The <code class="highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
+<p>The <code class="language-plaintext highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
 local IMAP folder structure can be different than the structure on Gmail's
-server. For example, the top Gmail IMAP folder is <code class="highlighter-rouge">[Gmail]</code> which wasn't all
+server. For example, the top Gmail IMAP folder is <code class="language-plaintext highlighter-rouge">[Gmail]</code> which wasn't all
 that useful for me, so instead I rewrote that top-level folder to be
-<code class="highlighter-rouge">username@somedomain</code> so that the local folder name (e.g. in <code class="highlighter-rouge">~/mail/</code>) would
+<code class="language-plaintext highlighter-rouge">username@somedomain</code> so that the local folder name (e.g. in <code class="language-plaintext highlighter-rouge">~/mail/</code>) would
 match the source e-mail address.</p>
 
-<p>You can also use the <code class="highlighter-rouge">--include</code> option to decide which IMAP folders to copy.
+<p>You can also use the <code class="language-plaintext highlighter-rouge">--include</code> option to decide which IMAP folders to copy.
 I opted to just copy "All Mail" and "Sent Mail", which gives me a copy of all
 my mail but doesn't preserve any information about the labels I might have had
 assigned to those messages in Gmail.</p>
@@ -1454,7 +1454,7 @@ via mutt/alpine/etc.</p>
       <content type="html"><![CDATA[<p>Two years ago, I transitioned from using regular Gmail (i.e. "…@gmail.com")
 to setting up Google Apps for "nynim.org" (i.e. "…@nynim.org"). I had found
 the following article back then which gave me helpful hints on how to use
-<code class="highlighter-rouge">imapsync</code> to push data to my new Google Apps e-mail address:</p>
+<code class="language-plaintext highlighter-rouge">imapsync</code> to push data to my new Google Apps e-mail address:</p>
 
 <p><a href="http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/">http://gemal.dk/blog/2008/04/08/completed_the_gmail_migration/</a></p>
 
@@ -1479,15 +1479,15 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 </div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
 </div></div></pre></div></figure>
 
-<p>The <code class="highlighter-rouge">--syncinternaldates</code>, <code class="highlighter-rouge">--useheader 'Message-Id'</code>,
-and <code class="highlighter-rouge">--skipsize</code> options are all recommended by the imapsync FAQ
+<p>The <code class="language-plaintext highlighter-rouge">--syncinternaldates</code>, <code class="language-plaintext highlighter-rouge">--useheader 'Message-Id'</code>,
+and <code class="language-plaintext highlighter-rouge">--skipsize</code> options are all recommended by the imapsync FAQ
 (search for "Gmail"):</p>
 
 <p><a href="http://www.linux-france.org/prj/imapsync/FAQ">http://www.linux-france.org/prj/imapsync/FAQ</a></p>
 
-<p>I opted to use the <code class="highlighter-rouge">--passfile1/passfile2</code> options rather than passing in a
+<p>I opted to use the <code class="language-plaintext highlighter-rouge">--passfile1/passfile2</code> options rather than passing in a
 plain-text password in via a command-line param for two reasons: first because
-anyone with access to your system can use <code class="highlighter-rouge">ps</code> to view active processes and
+anyone with access to your system can use <code class="language-plaintext highlighter-rouge">ps</code> to view active processes and
 hence would see your password plain-as-day; second because it just better
 abstracts the script-logic from the password-text, and we can control the
 file-permissions of those password files.</p>

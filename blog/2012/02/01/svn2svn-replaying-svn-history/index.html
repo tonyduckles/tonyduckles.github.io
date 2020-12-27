@@ -19,7 +19,7 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202007302117" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?202012271626" type="text/css">
     <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
@@ -61,13 +61,13 @@
     
 
     
-    <script type="text/javascript">
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-       ga('create', 'UA-6748678-1', 'auto');
-       ga('send', 'pageview');
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6748678-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-6748678-1');
     </script>
     
 </head>
@@ -194,11 +194,11 @@
   <p>I've found myself in a (potentially unique) situation where we have a
 <em>gi-normous</em> <a href="http://subversion.apache.org/">Subversion</a> repository at work and
 we've been exploring ways on how to trim off some of the fat but still keep all
-the logical history so that we could still use things like <code class="highlighter-rouge">svn blame</code> to
+the logical history so that we could still use things like <code class="language-plaintext highlighter-rouge">svn blame</code> to
 drill-down into code-history. Our central SVN repository is some 4-5 years old
 and a whopping 300GB+ on-disk. (Yowza!) What we'd really like to do is dump
-just the <code class="highlighter-rouge">/trunk</code> history out to a new repo and roll forward with that, ditching
-any historical baggage from old topic branches (<code class="highlighter-rouge">/branches</code>). The trouble is,
+just the <code class="language-plaintext highlighter-rouge">/trunk</code> history out to a new repo and roll forward with that, ditching
+any historical baggage from old topic branches (<code class="language-plaintext highlighter-rouge">/branches</code>). The trouble is,
 I haven't been able to find any tools to do this.</p>
 
 <p>So, I ended-up writing my own tool to do this. But, first, some back-story…</p>
@@ -210,18 +210,18 @@ I haven't been able to find any tools to do this.</p>
 of people pointing to the "<a href="http://svnbook.red-bean.com/en/1.7/svn.ref.svndumpfilter.html">svndumpfilter</a>"
 utility as the tool-of-choice. Sadly, it doesn't seem to be quite "smart" enough
 to do what I'd like it to do. It seems to be aimed at (namely) filtering an
-<code class="highlighter-rouge">svnadmin dump</code> stream, taking only certain paths in the SVN "filesystem". That
+<code class="language-plaintext highlighter-rouge">svnadmin dump</code> stream, taking only certain paths in the SVN "filesystem". That
 works fine if you're trying to take an isolated folder/project from the repository,
 but if that folder/project has ever been merged into from any paths <em>outside</em> of
 the target filter path, then things fall apart. The "trouble" are the copy-from's…</p>
 
 <p>For example, say that you have a repo with a typical trunk/tags/branches setup.
-Say you create a new topic branch (e.g. <code class="highlighter-rouge">svn copy /trunk /branches/my-fix &amp;&amp; svn co /branches/my-fix</code>)
+Say you create a new topic branch (e.g. <code class="language-plaintext highlighter-rouge">svn copy /trunk /branches/my-fix &amp;&amp; svn co /branches/my-fix</code>)
 and happily work on your sandboxed branch. Say that you decide to rename some of
-the pre-existing files/folders, so you run the appropriate <code class="highlighter-rouge">svn move</code> commands and
+the pre-existing files/folders, so you run the appropriate <code class="language-plaintext highlighter-rouge">svn move</code> commands and
 happily commit those changes to your branch. Once everything is working happily,
-you go to merge these changes into <code class="highlighter-rouge">/trunk</code> and that all works great. After the
-commit, if you run a <code class="highlighter-rouge">svn log -v -l1 /trunk</code> to look at the details of the most
+you go to merge these changes into <code class="language-plaintext highlighter-rouge">/trunk</code> and that all works great. After the
+commit, if you run a <code class="language-plaintext highlighter-rouge">svn log -v -l1 /trunk</code> to look at the details of the most
 recent commit to trunk, you'll see something like this:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">A /trunk/Project/RenamedFolder (from /branches/my-fix/Project/RenamedFolder@12345)
@@ -229,14 +229,14 @@ recent commit to trunk, you'll see something like this:</p>
 
 <p>…which only describes the (top-level) folder rename, not any add/modifications/renames/etc
 that might have happened <em>inside</em> that folder on the branch. At the full repo-level,
-SVN can get away with just doing a "<code class="highlighter-rouge">svn copy</code>" from the branch to trunk, so that
-when you do an "<code class="highlighter-rouge">svn log</code>" on the new "RenamedFolder" path it will walk from trunk
+SVN can get away with just doing a "<code class="language-plaintext highlighter-rouge">svn copy</code>" from the branch to trunk, so that
+when you do an "<code class="language-plaintext highlighter-rouge">svn log</code>" on the new "RenamedFolder" path it will walk from trunk
 back into that originating topic branch and follow the rename (copy or move) that
 happened within.</p>
 
-<p>The <code class="highlighter-rouge">svnadmin dump</code> will show the same "copy-from" action as <code class="highlighter-rouge">svn log -v</code> did,
+<p>The <code class="language-plaintext highlighter-rouge">svnadmin dump</code> will show the same "copy-from" action as <code class="language-plaintext highlighter-rouge">svn log -v</code> did,
 since the dump stream will need to be able to recreate that same ancestry. When
-<code class="highlighter-rouge">svndumpfilter</code> sees this, it throws up its hands and returns an error because
+<code class="language-plaintext highlighter-rouge">svndumpfilter</code> sees this, it throws up its hands and returns an error because
 it doesn't know how to <em>recreate</em> the logical history that happened between
 when that branch originally forked from trunk versus the final state of that branch.
 That is, assuming the copy-from path even has any ancestry back to trunk…</p>
@@ -250,14 +250,14 @@ to start working on my own solution.</p>
 hosted on Google Code. It had copied parts of the "<a href="https://bitbucket.org/andialbrecht/hgsvn/overview">hgsvn</a>"
 project (<em>sychronizing between Mercurial and Subversion repositories</em>) and
 slapped them together in a way that worked for the original author's needs.
-It used "<code class="highlighter-rouge">svn log</code>" to walk the entire history of a given path in a source
+It used "<code class="language-plaintext highlighter-rouge">svn log</code>" to walk the entire history of a given path in a source
 repository and then manually replayed those changes to a working-copy of
 some path in a target repository. Revision by revision, it would replay
 the delta, recreating the history of just the source path in the target repo.
 This was <em>oh-so-close</em> to what I wanted, except that it also didn't correctly
 handle the copy-from case. And the repository I really wanted to replay was
 <em>littered</em> with copy-from's, since I'm trying to replay just the history from
-<code class="highlighter-rouge">/trunk</code> and we create topic-branches for <em>everything</em>.</p>
+<code class="language-plaintext highlighter-rouge">/trunk</code> and we create topic-branches for <em>everything</em>.</p>
 
 <h2 id="enter-svn2svn">Enter svn2svn</h2>
 <p>So, I started with the <a href="http://code.google.com/p/svn2svn/">svn2svn</a> project,
@@ -273,10 +273,10 @@ a project which I'm also calling <strong><a href="/code/svn2svn/">svn2svn</a></s
   <li>
     <p><strong>Full ancestry (copy-from) support.</strong> This was the tricky part. It took
 several different iterations/rewrites to get something which worked for all
-the different edge-cases. The general idea here is that we can use <code class="highlighter-rouge">svn log</code>
+the different edge-cases. The general idea here is that we can use <code class="language-plaintext highlighter-rouge">svn log</code>
 to walk backwards through the ancestry on a copy-from case: if we can trace
-back our ancestry to same source path we're replaying, then we can do an <code class="highlighter-rouge">svn
-copy</code> from that original parent and then do <code class="highlighter-rouge">svn export</code> to update the
+back our ancestry to same source path we're replaying, then we can do an <code class="language-plaintext highlighter-rouge">svn
+copy</code> from that original parent and then do <code class="language-plaintext highlighter-rouge">svn export</code> to update the
 contents of all the files to match the final copy-from version. There's also
 some extra recursion that needs to happen here, to handle cases where child
 files got renamed inside of a parent-renamed folder. There are other
@@ -285,13 +285,13 @@ edge-cases like files getting replaced inside a parent-renamed folder.</p>
   <li>
     <p><strong>Use revprops for source-tracking and resume support.</strong> Subversion has
 revision properties, key+value pairs that are associated with a particular
-revision/commit. I'm setting some <code class="highlighter-rouge">svn2svn:*</code> rev-props to track the source
+revision/commit. I'm setting some <code class="language-plaintext highlighter-rouge">svn2svn:*</code> rev-props to track the source
 URL, source repository UUID (i.e. in case source URL now points at a
 physically different repo), and source revision #. This is all needed for
 proper resume support, since for the ancestry support we have to maintain a
 mapping-table of source_rev -&gt; target_rev, so that when we find a copy-from
 from some revision # in the source repo, we can map this to the equivalent
-revision # in the target repo so we can do an equivalent <code class="highlighter-rouge">svn copy</code> command.</p>
+revision # in the target repo so we can do an equivalent <code class="language-plaintext highlighter-rouge">svn copy</code> command.</p>
   </li>
   <li>
     <p><strong>Better verbosity output, and optional debug output.</strong> As I was playing with
@@ -309,7 +309,7 @@ scrub the contents of the target working-copy before each commit.</strong> This 
 where the power of doing the manual replay of changes really starts to shine.
 We have full control over the pending changes, which means that if your
 original trunk history had some files which you didn't want to transition
-into the new replayed repo then you could easily <code class="highlighter-rouge">svn rm</code> those files from
+into the new replayed repo then you could easily <code class="language-plaintext highlighter-rouge">svn rm</code> those files from
 the working-copy before the commit happens. That could be as simple as
 excluding certain fixed paths, but it could be a lot more flexible like
 searching the entire working-copy tree and removing any files which match

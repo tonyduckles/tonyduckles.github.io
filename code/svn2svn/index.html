@@ -19,7 +19,7 @@
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202007302117" type="text/css">
+    <link rel="stylesheet" href="/css/pixyll.css?202012271626" type="text/css">
     <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
@@ -62,13 +62,13 @@
     
 
     
-    <script type="text/javascript">
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-       ga('create', 'UA-6748678-1', 'auto');
-       ga('send', 'pageview');
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-6748678-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-6748678-1');
     </script>
     
 </head>
@@ -186,9 +186,9 @@ an empty target repo or simply an empty folder/branch in the target repo.</li>
   <li><strong>Maintains logical history (ancestry) when possible</strong>, e.g. uses "svn copy"
 for renames.</li>
   <li><strong>Maintains original commit messages</strong>.</li>
-  <li><strong>Optionally maintain source commit authors (<code class="highlighter-rouge">svn:author</code>) and commit timestamps
-(<code class="highlighter-rouge">svn:date</code>)</strong>.  Requires a "pre-revprop-change" hook script in the target
-repo, to be able to change the "<code class="highlighter-rouge">svn:author</code>" and "<code class="highlighter-rouge">svn:date</code>" revprops after
+  <li><strong>Optionally maintain source commit authors (<code class="language-plaintext highlighter-rouge">svn:author</code>) and commit timestamps
+(<code class="language-plaintext highlighter-rouge">svn:date</code>)</strong>.  Requires a "pre-revprop-change" hook script in the target
+repo, to be able to change the "<code class="language-plaintext highlighter-rouge">svn:author</code>" and "<code class="language-plaintext highlighter-rouge">svn:date</code>" revprops after
 target commits have been made.</li>
   <li><strong>Optionally maintain identical revision #'s between source vs. target repo</strong>.
 Effectively requires that you're replaying into an empty target repo,
@@ -228,10 +228,10 @@ revision #'s if desired</em>).</p>
 <p>While this replay process will obviously run faster if you're running between
 both a local source and target repositories, none of this <em>requires</em> direct
 access to the repo server. You could access both the source and target repo's
-over standard <code class="highlighter-rouge">http://</code>, <code class="highlighter-rouge">svn://</code>, <code class="highlighter-rouge">svn+ssh://</code>, etc. methods.</p>
+over standard <code class="language-plaintext highlighter-rouge">http://</code>, <code class="language-plaintext highlighter-rouge">svn://</code>, <code class="language-plaintext highlighter-rouge">svn+ssh://</code>, etc. methods.</p>
 
 <h2 id="usage">Usage</h2>
-<p>See <code class="highlighter-rouge">svnreplay.py --help</code>:</p>
+<p>See <code class="language-plaintext highlighter-rouge">svnreplay.py --help</code>:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">$ ./svnreplay.py --help
 </div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">svn2svn, version 1.7.0
@@ -315,15 +315,15 @@ the optional command-line args, you'll need access to the target repo to
 setup hook scripts, e.g. "pre-revprop-change".</li>
   <li>This script will create some folders off of your current working directory:
     <ul>
-      <li>"<code class="highlighter-rouge">_wc_target</code>": This is the checkout of the target_url, where we replay
+      <li>"<code class="language-plaintext highlighter-rouge">_wc_target</code>": This is the checkout of the target_url, where we replay
 actions into and where we commit to the target repo. You can safely
 remove this directory after a run, and the script will do a fresh
 "svn checkout" (if needed) when starting the next time.</li>
-      <li>"<code class="highlighter-rouge">_wc_target_tmp</code>": This is a temporary folder, which will only be created
-if using <code class="highlighter-rouge">--keep-revnum</code> mode and it should only exist for brief periods
+      <li>"<code class="language-plaintext highlighter-rouge">_wc_target_tmp</code>": This is a temporary folder, which will only be created
+if using <code class="language-plaintext highlighter-rouge">--keep-revnum</code> mode and it should only exist for brief periods
 of time. This is where we commit dummy/padding revisions to the target repo,
 checking out the root folder of the target repo and modifying a
-"<code class="highlighter-rouge">svn2svn:keep-revnum</code>" property, i.e. a small change to trigger a commit
+"<code class="language-plaintext highlighter-rouge">svn2svn:keep-revnum</code>" property, i.e. a small change to trigger a commit
 and in a location that will likely go un-noticed in the final target repo.</li>
     </ul>
   </li>
@@ -338,11 +338,11 @@ and in a location that will likely go un-noticed in the final target repo.</li>
 </div></div></pre></div></figure>
 
 <ol>
-  <li>The <code class="highlighter-rouge">target_url</code> will be checked-out to <code class="highlighter-rouge">./_wc_target</code>.</li>
-  <li>The first commit to <code class="highlighter-rouge">http://server/source/trunk</code> at/after r5000 will be
-exported &amp; added into <code class="highlighter-rouge">_wc_target</code>.</li>
-  <li>All revisions affecting <code class="highlighter-rouge">http://server/source/trunk</code> (starting at r5000)
-will be replayed to <code class="highlighter-rouge">_wc_target</code>. Any add/copy/move/replaces that are
+  <li>The <code class="language-plaintext highlighter-rouge">target_url</code> will be checked-out to <code class="language-plaintext highlighter-rouge">./_wc_target</code>.</li>
+  <li>The first commit to <code class="language-plaintext highlighter-rouge">http://server/source/trunk</code> at/after r5000 will be
+exported &amp; added into <code class="language-plaintext highlighter-rouge">_wc_target</code>.</li>
+  <li>All revisions affecting <code class="language-plaintext highlighter-rouge">http://server/source/trunk</code> (starting at r5000)
+will be replayed to <code class="language-plaintext highlighter-rouge">_wc_target</code>. Any add/copy/move/replaces that are
 copy-from'd some path outside of /trunk (e.g. files renamed on a
 /branch and branch was merged into /trunk) will correctly maintain
 logical ancestry where possible.</li>
@@ -354,11 +354,11 @@ logical ancestry where possible.</li>
 </div></div></pre></div></figure>
 
 <ol>
-  <li>The <code class="highlighter-rouge">target_url</code> will be checked-out to <code class="highlighter-rouge">./_wc_target</code>, if not already
+  <li>The <code class="language-plaintext highlighter-rouge">target_url</code> will be checked-out to <code class="language-plaintext highlighter-rouge">./_wc_target</code>, if not already
 checked-out</li>
-  <li>All new revisions affecting <code class="highlighter-rouge">http://server/source/trunk</code> starting from
-the last replayed revision to <code class="highlighter-rouge">file:///svn/target/trunk</code> (based on the
-"<code class="highlighter-rouge">svn2svn:*</code>" revprops) will be replayed to <code class="highlighter-rouge">_wc_target</code>, maintaining all
+  <li>All new revisions affecting <code class="language-plaintext highlighter-rouge">http://server/source/trunk</code> starting from
+the last replayed revision to <code class="language-plaintext highlighter-rouge">file:///svn/target/trunk</code> (based on the
+"<code class="language-plaintext highlighter-rouge">svn2svn:*</code>" revprops) will be replayed to <code class="language-plaintext highlighter-rouge">_wc_target</code>, maintaining all
 logical ancestry where possible.</li>
 </ol>
 
