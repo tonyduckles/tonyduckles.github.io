@@ -13,13 +13,13 @@
     <meta name="author" content="Tony Duckles">
     
     <meta name="keywords" content="home directory, dotfiles, home directory dotfiles, home directory git, home directory dotfiles git, dotfiles git, home directory bashrc, bashrc, home directory inputrc, inputrc">
-    <link rel="canonical" href="http://nynim.org/blog/2011/12/20/home-sweet-home/">
+    <link rel="canonical" href="https://nynim.org/blog/2011/12/20/home-sweet-home/">
     <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202201162010" type="text/css">
-    <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/pixyll.css?202212071046" type="text/css">
+    <link href='/stylesheets/all-f49bd4c39137df3a8784a016a40612ae.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
     
@@ -43,7 +43,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Home Sweet $HOME">
     <meta property="og:description" content="Exploring and understanding the dot-files in your $HOME directory, and tracking changes to the dot-files in your $HOME directory via Git.">
-    <meta property="og:url" content="http://nynim.org/blog/2011/12/20/home-sweet-home/">
+    <meta property="og:url" content="https://nynim.org/blog/2011/12/20/home-sweet-home/">
     <meta property="og:site_name" content="Nynim.org">
     
 
@@ -55,7 +55,7 @@
     
     <meta name="twitter:title" content="Home Sweet $HOME" />
     <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery" />
-    <meta name="twitter:url" content="http://nynim.org/blog/2011/12/20/home-sweet-home/" />
+    <meta name="twitter:url" content="https://nynim.org/blog/2011/12/20/home-sweet-home/" />
     
 
     
@@ -77,7 +77,7 @@
     <header class="site-header px2 px-responsive">
   <div class="mt2 wrap">
     <div class="measure">
-      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <a href="/" class="site-title">nynim.org</a>
       <nav class="site-nav">
         <a href="/blog/">Blog</a>
     
@@ -217,9 +217,9 @@ brand-new home directory:</p>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">git clone git://github.com/tonyduckles/dotfiles.git dotfiles
 </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Move all the contents (including .git, but excluding the specal "." and ".." directories)</span>
 </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># into ~, overwriting any pre-existing files</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">mv dotfiles/.??<span class="k">*</span> .
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nb">mv </span>dotfiles/.??<span class="k">*</span> <span class="nb">.</span>
 </div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Clean-up the now-orphaned ~/dotfiles/ directory</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">rm -rf dotfiles
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nb">rm</span> <span class="nt">-rf</span> dotfiles
 </div></div></pre></div></figure>
 
 <h2 id="bin">~/bin/</h2>
@@ -247,8 +247,8 @@ colors for various sub-commands (diff, status), which is <em>very</em> handy.</p
 <h2 id="inputrc">~/.inputrc</h2>
 <p>There's a lot of neat options in the <code class="language-plaintext highlighter-rouge">.inputrc</code> file, for binding key-sequences
 to various command-line options. For example:</p>
-<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">.inputrc snippet</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">C-n: <span class="nb">history</span>-search-forward
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">C-p: <span class="nb">history</span>-search-backward
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">.inputrc snippet</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">C-n: history-search-forward
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">C-p: history-search-backward
 </div></div></pre></div></figure>
 <p>…are the <strong>two single-most time-saving key-bindings</strong> that I stumbled upon. This
 lets you type a partial command and then use <code class="language-plaintext highlighter-rouge">Ctrl-n</code> and <code class="language-plaintext highlighter-rouge">Ctrl-p</code> to
@@ -324,7 +324,7 @@ and explore.</p>
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'nynim';
-    var disqus_identifier = 'http://nynim.org/blog/2011/12/20/home-sweet-home/';
+    var disqus_identifier = 'https://nynim.org/blog/2011/12/20/home-sweet-home/';
     var disqus_title      = "Home Sweet $HOME";
 
     (function() {

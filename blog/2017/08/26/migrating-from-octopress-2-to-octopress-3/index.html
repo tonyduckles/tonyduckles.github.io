@@ -13,13 +13,13 @@
     <meta name="author" content="Tony Duckles">
     
     <meta name="keywords" content="octopress, octopress upgrade, octopress3, blog, jekkyl">
-    <link rel="canonical" href="http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/">
+    <link rel="canonical" href="https://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/">
     <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202201162010" type="text/css">
-    <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/pixyll.css?202212071046" type="text/css">
+    <link href='/stylesheets/all-f49bd4c39137df3a8784a016a40612ae.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
     
@@ -43,7 +43,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Migrating From Octopress 2 to Octopress 3">
     <meta property="og:description" content="Migrating from Octopress 2 to Octopress 3">
-    <meta property="og:url" content="http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/">
+    <meta property="og:url" content="https://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/">
     <meta property="og:site_name" content="Nynim.org">
     
 
@@ -55,7 +55,7 @@
     
     <meta name="twitter:title" content="Migrating From Octopress 2 to Octopress 3" />
     <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery" />
-    <meta name="twitter:url" content="http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/" />
+    <meta name="twitter:url" content="https://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/" />
     
 
     
@@ -77,7 +77,7 @@
     <header class="site-header px2 px-responsive">
   <div class="mt2 wrap">
     <div class="measure">
-      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <a href="/" class="site-title">nynim.org</a>
       <nav class="site-nav">
         <a href="/blog/">Blog</a>
     
@@ -242,19 +242,19 @@ features which Octopress added above-and-beyond the default Jekyll scaffolding.<
 <p>I created a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file to compartmentalize Jekyll build
 environment:</p>
 
-<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">docker-compose.yml</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">services</span><span class="pi">:</span>
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s">jekyll</span><span class="pi">:</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">image</span><span class="pi">:</span> <span class="s">jekyll/jekyll:latest</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">environment</span><span class="pi">:</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="s">BUNDLE_PATH</span><span class="pi">:</span> <span class="s">/srv/bundle</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">ports</span><span class="pi">:</span>
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">docker-compose.yml</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="na">services</span><span class="pi">:</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="na">jekyll</span><span class="pi">:</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">image</span><span class="pi">:</span> <span class="s">jekyll/jekyll:latest</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">environment</span><span class="pi">:</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="na">BUNDLE_PATH</span><span class="pi">:</span> <span class="s">/srv/bundle</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">ports</span><span class="pi">:</span>
 </div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">4000:4000</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">volumes</span><span class="pi">:</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">volumes</span><span class="pi">:</span>
 </div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">.:/srv/jekyll</span>
 </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">data-bundle-cache:/srv/bundle</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">volumes</span><span class="pi">:</span>
-</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s">data-bundle-cache</span><span class="pi">:</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="na">volumes</span><span class="pi">:</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="na">data-bundle-cache</span><span class="pi">:</span>
 </div></div></pre></div></figure>
 
 <p>Some key points:</p>
@@ -493,7 +493,7 @@ process:</p>
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'nynim';
-    var disqus_identifier = 'http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/';
+    var disqus_identifier = 'https://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/';
     var disqus_title      = "Migrating From Octopress 2 to Octopress 3";
 
     (function() {

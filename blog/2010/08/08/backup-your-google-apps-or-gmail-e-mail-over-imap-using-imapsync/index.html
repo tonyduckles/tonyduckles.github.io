@@ -13,13 +13,13 @@
     <meta name="author" content="Tony Duckles">
     
     <meta name="keywords" content="backup email, backup mail, backup google email, backup google mail, backup google apps email, backup google apps mail, backup email imap, backup mail imap, backup email imapsync, backup mail imapsync">
-    <link rel="canonical" href="http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">
+    <link rel="canonical" href="https://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">
     <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202201162010" type="text/css">
-    <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/pixyll.css?202212071046" type="text/css">
+    <link href='/stylesheets/all-f49bd4c39137df3a8784a016a40612ae.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
     
@@ -43,7 +43,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync">
     <meta property="og:description" content="Backup your Google Apps or Gmail e-mail over IMAP using imapsync">
-    <meta property="og:url" content="http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">
+    <meta property="og:url" content="https://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/">
     <meta property="og:site_name" content="Nynim.org">
     
 
@@ -55,7 +55,7 @@
     
     <meta name="twitter:title" content="Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync" />
     <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery" />
-    <meta name="twitter:url" content="http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/" />
+    <meta name="twitter:url" content="https://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/" />
     
 
     
@@ -77,7 +77,7 @@
     <header class="site-header px2 px-responsive">
   <div class="mt2 wrap">
     <div class="measure">
-      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <a href="/" class="site-title">nynim.org</a>
       <nav class="site-nav">
         <a href="/blog/">Blog</a>
     
@@ -211,16 +211,16 @@ using previously to
 <p>Here's the script:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Sync e-mail from "username@yourdomain.com" to localhost, using IMAP</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">         --host2 localhost --user2 username
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">         --ssl1 <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">         --useheader <span class="s1">'Message-Id'</span> --skipsize --allowsizemismatch <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">         --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">         --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">         --regextrans2 <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync <span class="nt">--host1</span> imap.gmail.com <span class="nt">--user1</span> username@yourdomain.com
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--passfile1</span> /path/to/gmail_mirror.passfile1 <span class="se">\</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--host2</span> localhost <span class="nt">--user2</span> username
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--passfile2</span> /path/to/gmail_mirror.passfile2 <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--ssl1</span> <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--useheader</span> <span class="s1">'Message-Id'</span> <span class="nt">--skipsize</span> <span class="nt">--allowsizemismatch</span> <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--syncinternaldates</span> <span class="nt">--noauthmd5</span> <span class="nt">-nofoldersizes</span><span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--split1</span> 100 <span class="nt">--split2</span> 100 <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--regextrans2</span> <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--include</span> <span class="s2">"All Mail|Sent Mail"</span> <span class="nt">--delete2</span> <span class="nt">--expunge2</span>
 </div></div></pre></div></figure>
 
 <p>The <code class="language-plaintext highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
@@ -290,7 +290,7 @@ via mutt/alpine/etc.</p>
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'nynim';
-    var disqus_identifier = 'http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/';
+    var disqus_identifier = 'https://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/';
     var disqus_title      = "Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync";
 
     (function() {

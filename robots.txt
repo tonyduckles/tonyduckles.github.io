@@ -1,1 +1,1 @@
-Sitemap: http://nynim.org/sitemap.xml
+Sitemap: https://nynim.org/sitemap.xml

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[Nynim.org]]></title>
-  <link href="http://nynim.org/atom.xml" rel="self"/>
-  <link href="http://nynim.org/"/>
-  <updated>2022-01-16T20:10:43-06:00</updated>
-  <id>http://nynim.org/</id>
+  <link href="https://nynim.org/atom.xml" rel="self"/>
+  <link href="https://nynim.org/"/>
+  <updated>2022-12-07T10:46:08-06:00</updated>
+  <id>https://nynim.org/</id>
   <author>
     <name><![CDATA[Tony Duckles]]></name>
   </author>
@@ -21,7 +21,7 @@
     <title type="html"><![CDATA[Migrating From Octopress 2 to Octopress 3]]></title>
     <link href="/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3/"/>
     <updated>2017-08-26T18:06:26-05:00</updated>
-    <id>http://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3</id>
+    <id>https://nynim.org/blog/2017/08/26/migrating-from-octopress-2-to-octopress-3</id>
     <category term="Blog" />
       <content type="html"><![CDATA[<p>I recently upgraded this blog to <a href="https://github.com/octopress/octopress">Octopress
 3</a>, as part of rebuilding (and
@@ -34,7 +34,7 @@ get everything working.</p>
 
 <h2 id="introduction-to-octopress-3">Introduction to Octopress 3</h2>
 
-<p>With <a href="https://github.com/imathis/octopress">Octopress 2</a>, the <a href="http://nynim.org/blog/2011/12/19/hello-octopress/">paradigm I
+<p>With <a href="https://github.com/imathis/octopress">Octopress 2</a>, the <a href="https://nynim.org/blog/2011/12/19/hello-octopress/">paradigm I
 used</a> was to fork the canonical
 Octopress Git repository and maintain all my posts and theme files as a branch
 forked off of the Octopress "master" branch. I then periodically ran <code class="language-plaintext highlighter-rouge">git merge
@@ -76,19 +76,19 @@ features which Octopress added above-and-beyond the default Jekyll scaffolding.<
 <p>I created a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file to compartmentalize Jekyll build
 environment:</p>
 
-<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">docker-compose.yml</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">services</span><span class="pi">:</span>
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s">jekyll</span><span class="pi">:</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">image</span><span class="pi">:</span> <span class="s">jekyll/jekyll:latest</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">environment</span><span class="pi">:</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="s">BUNDLE_PATH</span><span class="pi">:</span> <span class="s">/srv/bundle</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">ports</span><span class="pi">:</span>
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">docker-compose.yml</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="na">services</span><span class="pi">:</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="na">jekyll</span><span class="pi">:</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">image</span><span class="pi">:</span> <span class="s">jekyll/jekyll:latest</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">environment</span><span class="pi">:</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="na">BUNDLE_PATH</span><span class="pi">:</span> <span class="s">/srv/bundle</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">ports</span><span class="pi">:</span>
 </div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">4000:4000</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s">volumes</span><span class="pi">:</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="na">volumes</span><span class="pi">:</span>
 </div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">.:/srv/jekyll</span>
 </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="pi">-</span> <span class="s">data-bundle-cache:/srv/bundle</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s">volumes</span><span class="pi">:</span>
-</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s">data-bundle-cache</span><span class="pi">:</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="na">volumes</span><span class="pi">:</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="na">data-bundle-cache</span><span class="pi">:</span>
 </div></div></pre></div></figure>
 
 <p>Some key points:</p>
@@ -294,9 +294,9 @@ process:</p>
     <title type="html"><![CDATA[Happy Retirement Google Reader! &rarr;]]></title>
     <link href="http://www.feedly.com/happy.html"/>
     <updated>2013-06-29T12:35:12-05:00</updated>
-    <id>http://nynim.org/blog/2013/06/29/happy-retirement-google-reader</id>
+    <id>https://nynim.org/blog/2013/06/29/happy-retirement-google-reader</id>
     <category term="Web" />
-      <content type="html"><![CDATA[<p><img src="http://nynim.org/images/2013/06/happy-retirement-gr.png" alt="Happy Retirement Google Reader!" /></p>
+      <content type="html"><![CDATA[<p><img src="https://nynim.org/images/2013/06/happy-retirement-gr.png" alt="Happy Retirement Google Reader!" /></p>
 <blockquote>
   <p>After 8 years on the job, Google Reader is retiring on July 1st. Thank you for being there for us all this time!</p>
 </blockquote>
@@ -316,7 +316,7 @@ will be plenty of worthy alternatives to fill your absence.</p>
     <title type="html"><![CDATA[The Death of Google Reader]]></title>
     <link href="/blog/2013/03/17/the-death-of-google-reader/"/>
     <updated>2013-03-17T13:57:22-05:00</updated>
-    <id>http://nynim.org/blog/2013/03/17/the-death-of-google-reader</id>
+    <id>https://nynim.org/blog/2013/03/17/the-death-of-google-reader</id>
     <category term="Web" />
       <content type="html"><![CDATA[<p>So, Google is <a href="http://googlereader.blogspot.com/2013/03/powering-down-google-reader.html">killing Google Reader</a>.</p>
 
@@ -329,7 +329,7 @@ Google Reader ecosystem has.</p>
 
 <!-- more -->
 
-<p>You see, I've been <a href="http://nynim.org/blog/2007/05/19/google-reader/">using Google Reader since 2007</a>.
+<p>You see, I've been <a href="https://nynim.org/blog/2007/05/19/google-reader/">using Google Reader since 2007</a>.
 It's the web-app I use more than any others. I've had a dedicated Google
 Reader pinned-tab open in all my Firefox sessions for as long as I can remember.</p>
 
@@ -429,7 +429,7 @@ going with…</p>
     <title type="html"><![CDATA[Project-Level .ackrc Files]]></title>
     <link href="/blog/2013/03/09/project-level-ackrc-files/"/>
     <updated>2013-03-09T11:56:26-06:00</updated>
-    <id>http://nynim.org/blog/2013/03/09/project-level-ackrc-files</id>
+    <id>https://nynim.org/blog/2013/03/09/project-level-ackrc-files</id>
     <category term="Coding" />
       <content type="html"><![CDATA[<p><a href="http://betterthangrep.com/">Ack</a> is a fantastic (<em>and portable!</em>) replacement
 for <code class="language-plaintext highlighter-rouge">grep</code>. It's aimed at programmers and by default will only search a
@@ -446,7 +446,7 @@ the project-level.</p>
 
 <!-- more -->
 
-<p>For example, here are the exclusions I want for my <a href="http://nynim.org/blog/2011/12/19/hello-octopress/">Octopress</a>
+<p>For example, here are the exclusions I want for my <a href="https://nynim.org/blog/2011/12/19/hello-octopress/">Octopress</a>
 build environment:</p>
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=.gist-cache
 </div></div><div data-line="2" class="code-highlight-row unnumbered"><div class="code-highlight-line">--ignore-dir=.pygments-cache
@@ -473,24 +473,24 @@ supports PWD .ackrc files natively, and has some other neat enhancements to boot
 </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nv">HOME</span><span class="o">=</span>~
 </div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nv">ackrc</span><span class="o">=</span><span class="s2">""</span>
 </div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nv">match</span><span class="o">=</span><span class="s2">""</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">"</span> !<span class="o">=</span> <span class="s2">"/"</span> -a <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">match</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span> <span class="o">]</span>; <span class="k">do</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">    if</span> <span class="o">[</span> -e <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">/.ackrc"</span> <span class="o">]</span>; <span class="k">then</span>
-</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">        if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">"</span> !<span class="o">=</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">HOME</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nb">dir</span><span class="o">=</span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"/"</span> <span class="nt">-a</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">match</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">    if</span> <span class="o">[</span> <span class="nt">-e</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">/.ackrc"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">        if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">HOME</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">            </span><span class="nv">match</span><span class="o">=</span>1
 </div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="nb">echo</span> <span class="s2">"(Include: </span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">/.ackrc)"</span>
-</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="nv">ackrc</span><span class="o">=</span><span class="k">$(</span>egrep <span class="s2">"^[^#]"</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">/.ackrc"</span> | tr <span class="s1">'\n'</span> <span class="s1">' '</span><span class="k">)</span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">            <span class="nv">ackrc</span><span class="o">=</span><span class="si">$(</span>egrep <span class="s2">"^[^#]"</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">/.ackrc"</span> | <span class="nb">tr</span> <span class="s1">'\n'</span> <span class="s1">' '</span><span class="si">)</span>
 </div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">else</span>
 </div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">            </span><span class="nv">match</span><span class="o">=</span>0
 </div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">fi</span>
 </div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">    else</span>
-</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">        </span><span class="nv">dir</span><span class="o">=</span><span class="k">$(</span>dirname <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">"</span><span class="k">)</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">        </span><span class="nb">dir</span><span class="o">=</span><span class="si">$(</span><span class="nb">dirname</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">dir</span><span class="k">&#x7d;</span><span class="s2">"</span><span class="si">)</span>
 </div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">fi</span>
 </div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">done</span>
 </div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Add quote-wrapping for any additional args to ensure proper passing to</span>
 </div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># real 'ack'.</span>
-</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">for </span>arg <span class="k">in</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>; <span class="k">do</span>
-</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">    if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">ackrc</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">for </span>arg <span class="k">in</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="p">;</span> <span class="k">do</span>
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">    if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">ackrc</span><span class="k">&#x7d;</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">        </span><span class="nv">ackrc</span><span class="o">=</span><span class="s2">"'</span><span class="k">$&#x7b;</span><span class="nv">arg</span><span class="k">&#x7d;</span><span class="s2">'"</span>
 </div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">else</span>
 </div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">        </span><span class="nv">ackrc</span><span class="o">=</span><span class="s2">"</span><span class="k">$&#x7b;</span><span class="nv">ackrc</span><span class="k">&#x7d;</span><span class="s2"> '</span><span class="k">$&#x7b;</span><span class="nv">arg</span><span class="k">&#x7d;</span><span class="s2">'"</span>
@@ -498,7 +498,7 @@ supports PWD .ackrc files natively, and has some other neat enhancements to boot
 </div></div><div data-line="33" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">done</span>
 </div></div><div data-line="34" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="35" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Build command to eval</span>
 </div></div><div data-line="36" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nv">cmd</span><span class="o">=</span><span class="s2">"command ack </span><span class="k">$&#x7b;</span><span class="nv">ackrc</span><span class="k">&#x7d;</span><span class="s2">"</span>
-</div></div><div data-line="37" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">if</span> <span class="o">[</span> ! -t 0 <span class="o">]</span>; <span class="k">then</span>
+</div></div><div data-line="37" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-t</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </div></div><div data-line="38" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c"># If stdin is a pipe, use cat to redirect stdin to stdout and pipe</span>
 </div></div><div data-line="39" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c"># that data into ack.</span>
 </div></div><div data-line="40" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="nv">cmd</span><span class="o">=</span><span class="s2">"cat | </span><span class="k">$&#x7b;</span><span class="nv">cmd</span><span class="k">&#x7d;</span><span class="s2">"</span>
@@ -531,7 +531,7 @@ arguments, and finally call the (real) <code class="language-plaintext highlight
     <title type="html"><![CDATA[Switching to Airvoice Wireless: A Cheaper iPhone Cellular Plan]]></title>
     <link href="/blog/2013/03/06/switching-to-airvoice-wireless-a-cheaper-iphone-cellular-plan/"/>
     <updated>2013-03-06T19:41:47-06:00</updated>
-    <id>http://nynim.org/blog/2013/03/06/switching-to-airvoice-wireless-a-cheaper-iphone-cellular-plan</id>
+    <id>https://nynim.org/blog/2013/03/06/switching-to-airvoice-wireless-a-cheaper-iphone-cellular-plan</id>
     <category term="Finance" />
       <content type="html"><![CDATA[<p>For the past two and a half years, I've been rocking my <a href="http://en.wikipedia.org/wiki/IPhone_4">iPhone 4</a>.
 It's held-up well over the years. My previous phone, an <a href="http://en.wikipedia.org/wiki/IPhone_3G">iPhone 3G</a>,
@@ -547,7 +547,7 @@ think twice about the recurring $80+/month phone-bill.</p>
 <!-- more -->
 
 <h2 id="mobile-network-virtual-operators-mvnos">Mobile Network Virtual Operators (MVNOs)</h2>
-<p>While reading though the back-archives of one of my <a href="http://nynim.org/blog/2013/03/03/mr-money-mustache-from-zero-to-hero-in-one-blog-post/">new favorite finance blogs</a>,
+<p>While reading though the back-archives of one of my <a href="https://nynim.org/blog/2013/03/03/mr-money-mustache-from-zero-to-hero-in-one-blog-post/">new favorite finance blogs</a>,
 I came across an interesting article, "<a href="http://www.mrmoneymustache.com/2012/10/11/our-new-10-00-per-month-iphone-plans/">Our New $10.00 Per Month iPhone Plans</a>",
 talking about switching to a monthly pre-paid plan and paying only $10/month
 for an iPhone cellular plan.  I had heard mention of some of these "pre-paid"
@@ -691,7 +691,7 @@ up, etc. I'm just darn excited to have interesting new options/alternatives.</p>
     <title type="html"><![CDATA[Mr. Money Mustache: From Zero to Hero in One Blog Post &rarr;]]></title>
     <link href="http://www.mrmoneymustache.com/2013/02/22/getting-rich-from-zero-to-hero-in-one-blog-post/"/>
     <updated>2013-03-03T15:07:14-06:00</updated>
-    <id>http://nynim.org/blog/2013/03/03/mr-money-mustache-from-zero-to-hero-in-one-blog-post</id>
+    <id>https://nynim.org/blog/2013/03/03/mr-money-mustache-from-zero-to-hero-in-one-blog-post</id>
     <category term="Finance" />
       <content type="html"><![CDATA[<p>A few months ago, one of my friends introduced me to this blog:
 <a href="http://www.mrmoneymustache.com/">Mr. Money Mustache: Early Retirement through Badassity</a>.
@@ -726,7 +726,7 @@ you may even be able to <a href="http://www.mrmoneymustache.com/2012/01/13/the-s
     <title type="html"><![CDATA[Using Kerberos (GSSAPI) Auth with OpenSSH in Cygwin on Windows]]></title>
     <link href="/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows/"/>
     <updated>2012-08-25T17:19:00-05:00</updated>
-    <id>http://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows</id>
+    <id>https://nynim.org/blog/2012/08/25/using-kerberos-gssapi-auth-with-openssh-in-cygwin-on-windows</id>
     <category term="UNIX" />
       <content type="html"><![CDATA[<p>On my Windows machines at both work and home, I like to run <a href="http://www.cygwin.com/">Cygwin</a>
 to get a UNIX-like environment on Windows: <code class="language-plaintext highlighter-rouge">screen</code>, <code class="language-plaintext highlighter-rouge">ssh</code>, <code class="language-plaintext highlighter-rouge">grep</code>, etc.
@@ -770,7 +770,7 @@ so that you don't need to specify it when doing the <code class="language-plaint
 install, I opted to use the <code class="language-plaintext highlighter-rouge">KRB5_CONFIG</code> environment variable (see the
 <code class="language-plaintext highlighter-rouge">kinit</code> manpage) to point to a <code class="language-plaintext highlighter-rouge">~/.krb5.conf</code> file instead to keep my
 Kerberos config confined to my <code class="language-plaintext highlighter-rouge">$HOME</code> directory (since I
-<a href="http://nynim.org/blog/2011/12/20/home-sweet-home/">keep my $HOME directory under version control</a>).</p>
+<a href="https://nynim.org/blog/2011/12/20/home-sweet-home/">keep my $HOME directory under version control</a>).</p>
 
 <h4 id="step-4---modify-your-sshconfig-file">Step 4 - Modify your ".ssh/config" file</h4>
 
@@ -806,7 +806,7 @@ Happy SSH'ing!</p>
     <title type="html"><![CDATA[All-In-One Home File Server: VMware ESXi, OpenIndiana, and ZFS]]></title>
     <link href="/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs/"/>
     <updated>2012-06-04T21:25:00-05:00</updated>
-    <id>http://nynim.org/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs</id>
+    <id>https://nynim.org/blog/2012/06/04/all-in-one-home-file-server-vmware-esxi-openindiana-and-zfs</id>
     <category term="Storage" /><category term="Hardware" />
       <content type="html"><![CDATA[<p>Just over a year ago, I built a new home file-server since I was quickly
 outgrowing my existing storage capacity. Rather than just dropping more HDD's
@@ -835,7 +835,7 @@ hardware (less power consumed, less physical space, etc.) while letting me easil
 tinker with new configurations.</p>
 
 <h2 id="zfs-powered">ZFS-Powered</h2>
-<p>Based on <a href="http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/">previous research</a>,
+<p>Based on <a href="https://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems/">previous research</a>,
 I knew that I really wanted to move to some kind of <strong>ZFS-backed</strong> storage solution,
 to protect/maintain the integrity of my ever-increasing digital collection.</p>
 
@@ -938,7 +938,7 @@ flexibility of VMWare ESXi.</p>
     <title type="html"><![CDATA[svn2svn: Replaying SVN History]]></title>
     <link href="/blog/2012/02/01/svn2svn-replaying-svn-history/"/>
     <updated>2012-02-01T21:00:00-06:00</updated>
-    <id>http://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history</id>
+    <id>https://nynim.org/blog/2012/02/01/svn2svn-replaying-svn-history</id>
     <category term="Coding" />
       <content type="html"><![CDATA[<p>I've found myself in a (potentially unique) situation where we have a
 <em>gi-normous</em> <a href="http://subversion.apache.org/">Subversion</a> repository at work and
@@ -1014,7 +1014,7 @@ got familiar with the code, and started hacking to extend the code to solve my
 problem at hand.</p>
 
 <p>The net-result is my own (nearly completely rewritten) take on the problem,
-a project which I'm also calling <strong><a href="http://nynim.org/code/svn2svn/">svn2svn</a></strong>.</p>
+a project which I'm also calling <strong><a href="https://nynim.org/code/svn2svn/">svn2svn</a></strong>.</p>
 
 <p>I've made several enhancements to the original script:</p>
 
@@ -1069,7 +1069,7 @@ so this opens a lot of interesting options.</p>
   </li>
 </ul>
 
-<p>Check-out the <a href="http://nynim.org/code/svn2svn/">svn2svn project page</a> for more details.</p>
+<p>Check-out the <a href="https://nynim.org/code/svn2svn/">svn2svn project page</a> for more details.</p>
 
 <p>Also, I have the project mirrored on <a href="https://github.com/tonyduckles/svn2svn">Github</a>
 so please feel free to fork the project, send me issues/enhancements, or
@@ -1087,9 +1087,9 @@ send me pull-requests for any tweaks you've made.</p>
     <title type="html"><![CDATA[Home Sweet $HOME]]></title>
     <link href="/blog/2011/12/20/home-sweet-home/"/>
     <updated>2011-12-20T19:35:00-06:00</updated>
-    <id>http://nynim.org/blog/2011/12/20/home-sweet-home</id>
+    <id>https://nynim.org/blog/2011/12/20/home-sweet-home</id>
     <category term="UNIX" />
-      <content type="html"><![CDATA[<p><img class="right" src="http://nynim.org/images/2011/12/img_Terminal.png" width="180" height="180" alt="Terminal" />
+      <content type="html"><![CDATA[<p><img class="right" src="https://nynim.org/images/2011/12/img_Terminal.png" width="180" height="180" alt="Terminal" />
 About a year and a half ago, I stumbled upon Ryan Tomayko's "<a href="https://github.com/rtomayko/dotfiles">dotfiles</a>"
 repository on Github. The moment I saw it, I thought it was a <em>great</em> idea:
 the idea of managing all your <code class="language-plaintext highlighter-rouge">$HOME</code> directory "dot-files" in a Git repository.
@@ -1117,9 +1117,9 @@ brand-new home directory:</p>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">git clone git://github.com/tonyduckles/dotfiles.git dotfiles
 </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Move all the contents (including .git, but excluding the specal "." and ".." directories)</span>
 </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># into ~, overwriting any pre-existing files</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">mv dotfiles/.??<span class="k">*</span> .
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nb">mv </span>dotfiles/.??<span class="k">*</span> <span class="nb">.</span>
 </div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Clean-up the now-orphaned ~/dotfiles/ directory</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">rm -rf dotfiles
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="nb">rm</span> <span class="nt">-rf</span> dotfiles
 </div></div></pre></div></figure>
 
 <h2 id="bin">~/bin/</h2>
@@ -1147,8 +1147,8 @@ colors for various sub-commands (diff, status), which is <em>very</em> handy.</p
 <h2 id="inputrc">~/.inputrc</h2>
 <p>There's a lot of neat options in the <code class="language-plaintext highlighter-rouge">.inputrc</code> file, for binding key-sequences
 to various command-line options. For example:</p>
-<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">.inputrc snippet</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">C-n: <span class="nb">history</span>-search-forward
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">C-p: <span class="nb">history</span>-search-backward
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">.inputrc snippet</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">C-n: history-search-forward
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">C-p: history-search-backward
 </div></div></pre></div></figure>
 <p>…are the <strong>two single-most time-saving key-bindings</strong> that I stumbled upon. This
 lets you type a partial command and then use <code class="language-plaintext highlighter-rouge">Ctrl-n</code> and <code class="language-plaintext highlighter-rouge">Ctrl-p</code> to
@@ -1191,7 +1191,7 @@ and explore.</p>
     <title type="html"><![CDATA[Hello Octopress!]]></title>
     <link href="/blog/2011/12/19/hello-octopress/"/>
     <updated>2011-12-19T21:53:00-06:00</updated>
-    <id>http://nynim.org/blog/2011/12/19/hello-octopress</id>
+    <id>https://nynim.org/blog/2011/12/19/hello-octopress</id>
     <category term="Blog" />
       <content type="html"><![CDATA[<p>A few days ago I stumbled upon a neat project named <strong><a href="http://octopress.org/">Octopress</a></strong>:</p>
 <blockquote>
@@ -1308,7 +1308,7 @@ Vim syntax highlighting mode for Octopress-flavored <code class="language-plaint
     <title type="html"><![CDATA[ZFS: The Last Word in Filesystems]]></title>
     <link href="/blog/2011/03/05/zfs-the-last-word-in-filesystems/"/>
     <updated>2011-03-05T18:56:01-06:00</updated>
-    <id>http://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems</id>
+    <id>https://nynim.org/blog/2011/03/05/zfs-the-last-word-in-filesystems</id>
     <category term="Storage" /><category term="UNIX" />
       <content type="html"><![CDATA[<p>I've been spending a lot of time lately reading-up on different options since
 my current home file-server setup is slowly running out of disk-space. Sure, I
@@ -1383,7 +1383,7 @@ open-sourcing it!</p>
     <title type="html"><![CDATA[Backup your Google Apps (or Gmail) e-mail over IMAP using imapsync]]></title>
     <link href="/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync/"/>
     <updated>2010-08-08T00:35:18-05:00</updated>
-    <id>http://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync</id>
+    <id>https://nynim.org/blog/2010/08/08/backup-your-google-apps-or-gmail-e-mail-over-imap-using-imapsync</id>
     <category term="Storage" /><category term="E-mail" /><category term="UNIX" />
       <content type="html"><![CDATA[<p>I have confidence in Google's ability to keep their e-mail service up-and-
 running and keep proper backups of data, but my e-mail history is <em>my</em> data
@@ -1400,23 +1400,23 @@ Dovecot only binds to <code class="language-plaintext highlighter-rouge">127.0.0
 
 <p>From there, it's just a matter of using <code class="language-plaintext highlighter-rouge">imapsync</code>, just like I ended-up
 using previously to
-<a href="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
+<a href="https://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">initially transfer all my e-mail to my Google Apps account</a>.</p>
 
 <!-- more -->
 
 <p>Here's the script:</p>
 
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Sync e-mail from "username@yourdomain.com" to localhost, using IMAP</span>
-</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync --host1 imap.gmail.com --user1 username@yourdomain.com
-</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile1 /path/to/gmail_mirror.passfile1 <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">         --host2 localhost --user2 username
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">         --passfile2 /path/to/gmail_mirror.passfile2 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">         --ssl1 <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">         --useheader <span class="s1">'Message-Id'</span> --skipsize --allowsizemismatch <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">         --syncinternaldates --noauthmd5 -nofoldersizes<span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">         --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">         --regextrans2 <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         --include <span class="s2">"All Mail|Sent Mail"</span> --delete2 --expunge2
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync <span class="nt">--host1</span> imap.gmail.com <span class="nt">--user1</span> username@yourdomain.com
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--passfile1</span> /path/to/gmail_mirror.passfile1 <span class="se">\</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--host2</span> localhost <span class="nt">--user2</span> username
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--passfile2</span> /path/to/gmail_mirror.passfile2 <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--ssl1</span> <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--useheader</span> <span class="s1">'Message-Id'</span> <span class="nt">--skipsize</span> <span class="nt">--allowsizemismatch</span> <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--syncinternaldates</span> <span class="nt">--noauthmd5</span> <span class="nt">-nofoldersizes</span><span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--split1</span> 100 <span class="nt">--split2</span> 100 <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--regextrans2</span> <span class="s1">'s/\[Gmail\]/username\@somedomain/'</span> <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">         <span class="nt">--include</span> <span class="s2">"All Mail|Sent Mail"</span> <span class="nt">--delete2</span> <span class="nt">--expunge2</span>
 </div></div></pre></div></figure>
 
 <p>The <code class="language-plaintext highlighter-rouge">--regextrans2</code> option rewrites IMAP folder-names on-the-fly, so that my
@@ -1449,7 +1449,7 @@ via mutt/alpine/etc.</p>
     <title type="html"><![CDATA[Moving E-Mail from Gmail to Google Apps over IMAP using imapsync]]></title>
     <link href="/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/"/>
     <updated>2010-08-07T23:31:49-05:00</updated>
-    <id>http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync</id>
+    <id>https://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync</id>
     <category term="Storage" /><category term="E-mail" /><category term="UNIX" />
       <content type="html"><![CDATA[<p>Two years ago, I transitioned from using regular Gmail (i.e. "…@gmail.com")
 to setting up Google Apps for "nynim.org" (i.e. "…@nynim.org"). I had found
@@ -1468,15 +1468,15 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c">#!/bin/sh</span>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
 </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  --useheader <span class="s1">'Message-Id'</span> --skipsize <span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">  --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  --maxage 50 <span class="se">\</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--host1</span> imap.gmail.com <span class="nt">--port1</span> 993 <span class="nt">--user1</span> <span class="nb">source</span>@gmail.com <span class="se">\</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--passfile1</span> /path/to/gmail_mirror.passfile1 <span class="nt">--ssl1</span> <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--host2</span> imap.gmail.com <span class="nt">--port2</span> 993 <span class="nt">--user2</span> target@yourdomain.com <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--passfile2</span> /path/to/gmail_mirror.passfile2 <span class="nt">--ssl2</span> <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--useheader</span> <span class="s1">'Message-Id'</span> <span class="nt">--skipsize</span> <span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--syncinternaldates</span> <span class="nt">--noauthmd5</span> <span class="nt">-nofoldersizes</span> <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--split1</span> 100 <span class="nt">--split2</span> 100 <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--maxage</span> 50 <span class="se">\</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--regexmess</span> <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
 </div></div></pre></div></figure>
 
 <p>The <code class="language-plaintext highlighter-rouge">--syncinternaldates</code>, <code class="language-plaintext highlighter-rouge">--useheader 'Message-Id'</code>,
@@ -1514,9 +1514,9 @@ be looking to do this same thing.</p>
     <title type="html"><![CDATA[What to Wear-a?]]></title>
     <link href="/blog/2009/12/28/what-to-wear-a/"/>
     <updated>2009-12-28T23:20:00-06:00</updated>
-    <id>http://nynim.org/blog/2009/12/28/what-to-wear-a</id>
+    <id>https://nynim.org/blog/2009/12/28/what-to-wear-a</id>
     <category term="Quick Notes" /><category term="Humor" /><category term="Video Games" />
-      <content type="html"><![CDATA[<p><a href="http://kotaku.com/5430723/what-to-wear+a"><img src="http://nynim.org/images/2010/08/500x_marioscloset.jpg" alt="What-To-Wear-a?" /></a></p>
+      <content type="html"><![CDATA[<p><a href="http://kotaku.com/5430723/what-to-wear+a"><img src="https://nynim.org/images/2010/08/500x_marioscloset.jpg" alt="What-To-Wear-a?" /></a></p>
 
 <p>(<em>via <a href="http://kotaku.com/5430723/what-to-wear+a">kotaku.com</a></em>)</p>
 ]]></content>
@@ -1532,9 +1532,9 @@ be looking to do this same thing.</p>
     <title type="html"><![CDATA[Autocomplete Me]]></title>
     <link href="/blog/2009/11/22/autocomplete-me/"/>
     <updated>2009-11-22T23:21:00-06:00</updated>
-    <id>http://nynim.org/blog/2009/11/22/autocomplete-me</id>
+    <id>https://nynim.org/blog/2009/11/22/autocomplete-me</id>
     <category term="Quick Notes" /><category term="Humor" />
-      <content type="html"><![CDATA[<p><a href="http://autocompleteme.com/"><img src="http://nynim.org/images/2010/08/autocompletemecom-howtoraise.jpg" alt="Autocomplete Me" /></a></p>
+      <content type="html"><![CDATA[<p><a href="http://autocompleteme.com/"><img src="https://nynim.org/images/2010/08/autocompletemecom-howtoraise.jpg" alt="Autocomplete Me" /></a></p>
 
 <p>(<em>via <a href="http://autocompleteme.com/">autocompleteme.com</a></em>)</p>
 
@@ -1552,9 +1552,9 @@ be looking to do this same thing.</p>
     <title type="html"><![CDATA[GeoDefense]]></title>
     <link href="/blog/2009/11/13/geodefense/"/>
     <updated>2009-11-13T19:57:00-06:00</updated>
-    <id>http://nynim.org/blog/2009/11/13/geodefense</id>
+    <id>https://nynim.org/blog/2009/11/13/geodefense</id>
     <category term="Quick Notes" /><category term="Video Games" />
-      <content type="html"><![CDATA[<p><a href="http://www.appolicious.com/games/apps/24846-geodefense-lite-critical-thought-games"><img src="http://nynim.org/images/2010/08/geodefense_1250610916.jpg" alt="GeoDefense" /></a></p>
+      <content type="html"><![CDATA[<p><a href="http://www.appolicious.com/games/apps/24846-geodefense-lite-critical-thought-games"><img src="https://nynim.org/images/2010/08/geodefense_1250610916.jpg" alt="GeoDefense" /></a></p>
 
 <p>(<em>via <a href="http://www.appolicious.com/games/apps/24846-geodefense-lite-critical-thought-games">appolicious.com</a></em>)</p>
 
@@ -1575,7 +1575,7 @@ the $2.</p>
     <title type="html"><![CDATA[Nynim.org: New & Improved]]></title>
     <link href="/blog/2008/12/20/nynim-org-new-improved/"/>
     <updated>2008-12-20T12:04:51-06:00</updated>
-    <id>http://nynim.org/blog/2008/12/20/nynim-org-new-improved</id>
+    <id>https://nynim.org/blog/2008/12/20/nynim-org-new-improved</id>
     <category term="Blog" />
       <content type="html"><![CDATA[<p>I've resurrected my nearly abandoned website and breathed new life into it!
 I'm now running <strong><a href="http://www.sweetcron.com/">SweetCron</a></strong>, an open-source
@@ -1608,7 +1608,7 @@ an e-mail!</p>
     <title type="html"><![CDATA[Maintaining Online Identities]]></title>
     <link href="/blog/2007/09/11/maintaining-online-identities/"/>
     <updated>2007-09-11T20:47:44-05:00</updated>
-    <id>http://nynim.org/blog/2007/09/11/maintaining-online-identities</id>
+    <id>https://nynim.org/blog/2007/09/11/maintaining-online-identities</id>
     <category term="Security" />
       <content type="html"><![CDATA[<p>I stumbled across this neat site called <a href="http://www.clipperz.com/">Clipperz</a> a
 few weeks back. On the surface, it's "<em>a free and anonymous online password
@@ -1680,7 +1680,7 @@ webserver. If only Clipperz was a SourceForge project… ;)</p>
     <title type="html"><![CDATA[Simple Off-Site Backups...?]]></title>
     <link href="/blog/2007/09/11/simple-off-site-backups/"/>
     <updated>2007-09-11T20:23:38-05:00</updated>
-    <id>http://nynim.org/blog/2007/09/11/simple-off-site-backups</id>
+    <id>https://nynim.org/blog/2007/09/11/simple-off-site-backups</id>
     <category term="Storage" />
       <content type="html"><![CDATA[<p>Lately I've been consumed with the idea of getting more serious about backing-
 up all the data I have. I tend to be a digital pack-rat: my music collection,

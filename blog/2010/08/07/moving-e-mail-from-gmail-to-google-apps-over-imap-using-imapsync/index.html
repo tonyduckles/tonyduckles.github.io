@@ -13,13 +13,13 @@
     <meta name="author" content="Tony Duckles">
     
     <meta name="keywords" content="google, google apps, imap, imapsync, email">
-    <link rel="canonical" href="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">
+    <link rel="canonical" href="https://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">
     <link rel="alternate" type="application/atom" title="Nynim.org" href="/atom.xml" />
     <link href="/favicon.png" rel="icon">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/pixyll.css?202201162010" type="text/css">
-    <link href='/stylesheets/all-f867fa4ceef95bdecb84c9b0ba644daa.css' media='all' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/pixyll.css?202212071046" type="text/css">
+    <link href='/stylesheets/all-f49bd4c39137df3a8784a016a40612ae.css' media='all' rel='stylesheet' type='text/css'>
 
     <!-- Fonts -->
     
@@ -43,7 +43,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Moving E-Mail from Gmail to Google Apps over IMAP using imapsync">
     <meta property="og:description" content="Moving e-mail from Gmail to Google Apps for your domain over IMAP using imapsync">
-    <meta property="og:url" content="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">
+    <meta property="og:url" content="https://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/">
     <meta property="og:site_name" content="Nynim.org">
     
 
@@ -55,7 +55,7 @@
     
     <meta name="twitter:title" content="Moving E-Mail from Gmail to Google Apps over IMAP using imapsync" />
     <meta name="twitter:description" content="Tony Duckles on programming, photography, and general geekery" />
-    <meta name="twitter:url" content="http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/" />
+    <meta name="twitter:url" content="https://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/" />
     
 
     
@@ -77,7 +77,7 @@
     <header class="site-header px2 px-responsive">
   <div class="mt2 wrap">
     <div class="measure">
-      <a href="http://nynim.org" class="site-title">nynim.org</a>
+      <a href="/" class="site-title">nynim.org</a>
       <nav class="site-nav">
         <a href="/blog/">Blog</a>
     
@@ -206,15 +206,15 @@ all the mail from my regular Gmail account to my new Google Apps account.</p>
 <figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c">#!/bin/sh</span>
 </div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c"># Copy all e-mail from source@gmail.com to target@yourdomain.com (Google Apps)</span>
 </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">imapsync <span class="se">\</span>
-</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  --host1 imap.gmail.com --port1 993 --user1 <span class="nb">source</span>@gmail.com <span class="se">\</span>
-</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile1 /path/to/gmail_mirror.passfile1 --ssl1 <span class="se">\</span>
-</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  --host2 imap.gmail.com --port2 993 --user2 target@yourdomain.com <span class="se">\</span>
-</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  --passfile2 /path/to/gmail_mirror.passfile2 --ssl2 <span class="se">\</span>
-</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  --useheader <span class="s1">'Message-Id'</span> --skipsize <span class="se">\</span>
-</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  --syncinternaldates --noauthmd5 -nofoldersizes <span class="se">\</span>
-</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">  --split1 100 --split2 100 <span class="se">\</span>
-</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  --maxage 50 <span class="se">\</span>
-</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  --regexmess <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--host1</span> imap.gmail.com <span class="nt">--port1</span> 993 <span class="nt">--user1</span> <span class="nb">source</span>@gmail.com <span class="se">\</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--passfile1</span> /path/to/gmail_mirror.passfile1 <span class="nt">--ssl1</span> <span class="se">\</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--host2</span> imap.gmail.com <span class="nt">--port2</span> 993 <span class="nt">--user2</span> target@yourdomain.com <span class="se">\</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--passfile2</span> /path/to/gmail_mirror.passfile2 <span class="nt">--ssl2</span> <span class="se">\</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--useheader</span> <span class="s1">'Message-Id'</span> <span class="nt">--skipsize</span> <span class="se">\</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--syncinternaldates</span> <span class="nt">--noauthmd5</span> <span class="nt">-nofoldersizes</span> <span class="se">\</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--split1</span> 100 <span class="nt">--split2</span> 100 <span class="se">\</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--maxage</span> 50 <span class="se">\</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">--regexmess</span> <span class="s1">'s/Delivered-To: source\@gmail.com/Delivered-To: target\@yourdomain.com/g'</span>
 </div></div></pre></div></figure>
 
 <p>The <code class="language-plaintext highlighter-rouge">--syncinternaldates</code>, <code class="language-plaintext highlighter-rouge">--useheader 'Message-Id'</code>,
@@ -289,7 +289,7 @@ be looking to do this same thing.</p>
   <div id="disqus_thread"></div>
   <script type="text/javascript">
     var disqus_shortname  = 'nynim';
-    var disqus_identifier = 'http://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/';
+    var disqus_identifier = 'https://nynim.org/blog/2010/08/07/moving-e-mail-from-gmail-to-google-apps-over-imap-using-imapsync/';
     var disqus_title      = "Moving E-Mail from Gmail to Google Apps over IMAP using imapsync";
 
     (function() {
